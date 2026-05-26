@@ -16,26 +16,18 @@
 
         /* ── HERO CLEAN ── */
         .hero-clean {
-            background: linear-gradient(170deg, #FAF6F2 0%, #F3EAE3 55%, #EAE0D8 100%);
+            background: url('scentlog1.png') center/cover no-repeat;
             min-height: 100vh;
             display: flex; align-items: center; justify-content: center;
             text-align: center; position: relative; overflow: hidden;
         }
-        /* 배경 핑크 블롭 */
         .hero-clean::before {
             content: '';
-            position: absolute; top: -15%; right: -10%;
-            width: 55%; height: 70%;
-            background: radial-gradient(ellipse, rgba(212,160,152,.3) 0%, transparent 65%);
-            filter: blur(60px); pointer-events: none;
+            position: absolute; inset: 0;
+            background: rgba(250, 246, 241, 0.58);
+            pointer-events: none;
         }
-        .hero-clean::after {
-            content: '';
-            position: absolute; bottom: -10%; left: -8%;
-            width: 40%; height: 55%;
-            background: radial-gradient(ellipse, rgba(212,160,152,.18) 0%, transparent 65%);
-            filter: blur(50px); pointer-events: none;
-        }
+        .hero-clean::after { display: none; }
         .hero-clean-inner {
             position: relative; z-index: 1;
             padding: 0 2rem;
