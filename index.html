@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scent Log | 일상을 향에 담다</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <style>
+        /* ── 폰트 전체 교체 ── */
+        h1, h2, h3, h4, .serif {
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+
+        /* ── HERO CLEAN ── */
+        .hero-clean {
+            background: linear-gradient(170deg, #FAF6F2 0%, #F3EAE3 55%, #EAE0D8 100%);
+            min-height: 100vh;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; position: relative; overflow: hidden;
+        }
+        /* 배경 핑크 블롭 */
+        .hero-clean::before {
+            content: '';
+            position: absolute; top: -15%; right: -10%;
+            width: 55%; height: 70%;
+            background: radial-gradient(ellipse, rgba(212,160,152,.3) 0%, transparent 65%);
+            filter: blur(60px); pointer-events: none;
+        }
+        .hero-clean::after {
+            content: '';
+            position: absolute; bottom: -10%; left: -8%;
+            width: 40%; height: 55%;
+            background: radial-gradient(ellipse, rgba(212,160,152,.18) 0%, transparent 65%);
+            filter: blur(50px); pointer-events: none;
+        }
+        .hero-clean-inner {
+            position: relative; z-index: 1;
+            padding: 0 2rem;
+            animation: heroFadeUp .9s .15s both;
+        }
+        .hero-eyebrow {
+            display: block;
+            font-family: 'Raleway', sans-serif;
+            font-size: .7rem; font-weight: 600;
+            letter-spacing: .5em; text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 2.2rem;
+        }
+        .hero-clean-title {
+            font-family: 'Playfair Display', 'Noto Serif KR', serif;
+            line-height: 1.1; margin-bottom: 2rem;
+        }
+        .hero-en {
+            display: block;
+            font-size: clamp(3.5rem, 8vw, 8rem);
+            font-weight: 800; font-style: italic;
+            color: var(--cream);
+            letter-spacing: -.01em;
+        }
+        .hero-kr {
+            display: block;
+            font-size: clamp(2.8rem, 6.5vw, 6.5rem);
+            font-weight: 300;
+            color: var(--muted);
+            letter-spacing: .05em;
+            font-style: normal;
+        }
+        .hero-clean-sub {
+            font-family: 'Raleway', sans-serif;
+            font-size: clamp(.9rem, 1.4vw, 1.05rem);
+            font-weight: 300; color: var(--muted);
+            line-height: 2.1; margin-bottom: 2.4rem;
+            letter-spacing: .03em;
+        }
+        .hero-clean-line {
+            width: 40px; height: 1px;
+            background: var(--gold);
+            margin: 0 auto 2.4rem;
+        }
+        .btn-hero-primary {
+            font-family: 'Raleway', sans-serif; font-weight: 600;
+            font-size: .75rem; letter-spacing: .2em; text-transform: uppercase;
+            padding: 1.1rem 2.8rem;
+            background: var(--cream); color: var(--bg);
+            border: none; cursor: pointer;
+            transition: background .3s, color .3s;
+            text-decoration: none; display: inline-block;
+        }
+        .btn-hero-primary:hover { background: var(--gold); color: #fff; }
+        .btn-hero-ghost {
+            font-family: 'Raleway', sans-serif; font-weight: 500;
+            font-size: .75rem; letter-spacing: .2em; text-transform: uppercase;
+            padding: 1.1rem 2rem;
+            background: transparent; color: var(--muted);
+            border: none; cursor: pointer; text-decoration: none;
+            display: inline-block;
+            transition: color .3s;
+        }
+        .btn-hero-ghost:hover { color: var(--cream); }
+        .hero-scroll-hint {
+            position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: .8rem;
+        }
+        .hero-scroll-hint span {
+            font-family: 'Raleway', sans-serif; font-size: .6rem;
+            font-weight: 500; letter-spacing: .35em; text-transform: uppercase;
+            color: var(--dim);
+        }
+        .scroll-bar {
+            width: 1px; height: 40px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+        @keyframes scrollPulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+        /* ── NAV ── */
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            letter-spacing: .18em;
+            color: var(--cream);
+            transition: color .3s;
+        }
+        nav.scrolled .logo-text { color: var(--cream); }
+        nav .nav-links a { font-weight: 500; letter-spacing: .14em; }
+
+        /* ── HERO ── */
+        .hero {
+            background: none;
+            height: 100vh; min-height: 700px;
+            position: relative;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute; inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1616171046673-69c26cbef84d?w=1600&q=80');
+            background-size: cover; background-position: center;
+            transform: scale(1.05);
+            animation: heroZoom 8s ease-out forwards;
+        }
+        @keyframes heroZoom {
+            from { transform: scale(1.08); }
+            to   { transform: scale(1.0); }
+        }
+        .hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to bottom,
+                rgba(20,18,15,.55) 0%,
+                rgba(20,18,15,.3) 50%,
+                rgba(20,18,15,.7) 100%);
+        }
+        .hero-content {
+            position: relative; z-index: 2;
+            padding: 0 2rem;
+        }
+        .hero-eyebrow {
+            display: block;
+            font-family: 'Raleway', sans-serif;
+            font-size: .72rem; font-weight: 600;
+            letter-spacing: .45em; text-transform: uppercase;
+            color: rgba(255,255,255,.7);
+            margin-bottom: 1.4rem;
+            animation: fadeUp .9s .2s both;
+        }
+        .hero h1 {
+            font-size: clamp(4rem, 10vw, 9rem);
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.0;
+            letter-spacing: -.01em;
+            margin-bottom: 1.8rem;
+            animation: fadeUp .9s .4s both;
+        }
+        .hero h1 em {
+            font-style: italic;
+            font-weight: 600;
+            color: rgba(255,255,255,.75);
+        }
+        .hero-sub {
+            font-family: 'Raleway', sans-serif;
+            font-size: clamp(1rem, 1.6vw, 1.15rem);
+            font-weight: 300;
+            color: rgba(255,255,255,.78);
+            line-height: 2;
+            margin-bottom: 3rem;
+            animation: fadeUp .9s .6s both;
+        }
+        .hero-btns {
+            display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+            animation: fadeUp .9s .75s both;
+        }
+        .btn-hero-primary {
+            font-family: 'Raleway', sans-serif; font-weight: 600;
+            font-size: .78rem; letter-spacing: .2em; text-transform: uppercase;
+            padding: 1.1rem 2.8rem;
+            background: #fff; color: var(--cream);
+            border: none; cursor: pointer;
+            transition: background .3s, color .3s;
+            text-decoration: none;
+        }
+        .btn-hero-primary:hover { background: var(--gold); color: #fff; }
+        .btn-hero-outline {
+            font-family: 'Raleway', sans-serif; font-weight: 500;
+            font-size: .78rem; letter-spacing: .2em; text-transform: uppercase;
+            padding: 1.1rem 2.8rem;
+            background: transparent; color: #fff;
+            border: 1.5px solid rgba(255,255,255,.6); cursor: pointer;
+            transition: border-color .3s;
+            text-decoration: none;
+        }
+        .btn-hero-outline:hover { border-color: #fff; }
+        .hero-scroll-hint {
+            position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: .6rem;
+            animation: fadeUp .9s .95s both;
+        }
+        .hero-scroll-hint span {
+            font-family: 'Raleway', sans-serif; font-size: .6rem;
+            font-weight: 500; letter-spacing: .35em; text-transform: uppercase;
+            color: rgba(255,255,255,.5);
+        }
+        .scroll-bar { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(255,255,255,.6), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+        @keyframes scrollPulse { 0%,100%{opacity:1;transform:scaleY(1)} 50%{opacity:.35;transform:scaleY(.5)} }
+
+        /* ── MARQUEE ── */
+        .marquee-wrap {
+            background: var(--cream);
+            padding: 1.2rem 0;
+            overflow: hidden;
+            border-top: none;
+        }
+        .marquee-track {
+            display: flex;
+            white-space: nowrap;
+            animation: marqueeScroll 22s linear infinite;
+        }
+        .marquee-track span {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: .25em;
+            text-transform: uppercase;
+            color: var(--bg);
+            padding: 0 2.5rem;
+            opacity: .85;
+        }
+        .marquee-track span.dot {
+            color: var(--gold); opacity: 1; padding: 0; font-size: .6rem;
+        }
+        @keyframes marqueeScroll {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
+
+        /* ── WHY 1 — 이미지 + 텍스트 ── */
+        .why-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 80vh;
+        }
+        .why-img {
+            position: relative; overflow: hidden;
+        }
+        .why-img img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform .8s ease-out;
+        }
+        .why-img:hover img { transform: scale(1.04); }
+        .why-img-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(184,117,106,.2) 0%, transparent 60%);
+        }
+        .why-text-block {
+            display: flex; flex-direction: column; justify-content: center;
+            padding: 6rem 5rem;
+            background: var(--bg);
+        }
+        .why-text-block.right { background: var(--bg2); }
+        .why-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 7rem; font-weight: 900;
+            color: rgba(184,117,106,.1);
+            line-height: 1;
+            margin-bottom: -1.5rem;
+        }
+        .why-label {
+            font-family: 'Raleway', sans-serif;
+            font-size: .7rem; font-weight: 600;
+            letter-spacing: .4em; text-transform: uppercase;
+            color: var(--gold); margin-bottom: 1.2rem;
+        }
+        .why-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 3.5vw, 3.4rem);
+            font-weight: 800;
+            color: #1A1614;
+            line-height: 1.15;
+            margin-bottom: 1.2rem;
+        }
+        .why-sub {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+            font-weight: 600;
+            font-style: italic;
+            color: #3A3530;
+            line-height: 1.5;
+            margin-bottom: 1.6rem;
+        }
+        .why-body {
+            font-family: 'Raleway', sans-serif;
+            font-size: .97rem; font-weight: 400;
+            color: #5A5450; line-height: 2.1;
+        }
+        .why-line {
+            width: 0; height: 2px; background: var(--gold);
+            margin: 1.8rem 0;
+            transition: width .9s cubic-bezier(.16,1,.3,1) .3s;
+        }
+        .slide-left.active .why-line,
+        .slide-right.active .why-line { width: 52px; }
+
+        /* ── FULL BLEED QUOTE ── */
+        .full-quote {
+            position: relative; min-height: 55vh;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; overflow: hidden;
+        }
+        .full-quote-bg {
+            position: absolute; inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80');
+            background-size: cover; background-position: center 40%;
+        }
+        .full-quote-overlay {
+            position: absolute; inset: 0;
+            background: rgba(20,18,15,.72);
+        }
+        .full-quote-content {
+            position: relative; z-index: 1;
+            padding: 4rem 2rem;
+        }
+        .full-quote-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 3.5rem);
+            font-weight: 700; font-style: italic;
+            color: #fff;
+            line-height: 1.45;
+            max-width: 760px; margin: 0 auto 1.4rem;
+        }
+        .full-quote-attr {
+            font-family: 'Raleway', sans-serif;
+            font-size: .75rem; font-weight: 500;
+            letter-spacing: .3em; text-transform: uppercase;
+            color: rgba(255,255,255,.5);
+        }
+
+        /* ── ANIMATIONS ── */
+        .slide-left  { opacity:0; transform:translateX(-50px); transition:opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); }
+        .slide-right { opacity:0; transform:translateX(50px);  transition:opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); }
+        .slide-up    { opacity:0; transform:translateY(40px);  transition:opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); }
+        .slide-img   { opacity:0; transform:scale(1.04);        transition:opacity 1s ease-out, transform 1s ease-out; }
+        .slide-left.active, .slide-right.active, .slide-up.active { opacity:1; transform:none; }
+        .slide-img.active { opacity:1; transform:scale(1); }
+
+        @keyframes fadeUp { from{opacity:0;transform:translateY(36px)} to{opacity:1;transform:none} }
+
+        /* ── RESPONSIVE ── */
+        @media(max-width:900px){
+            .why-split { grid-template-columns:1fr; }
+            .why-img { min-height: 45vw; }
+            .why-text-block { padding: 4rem 2rem; }
+            .why-num { font-size: 5rem; }
+            .full-quote-text { font-size: clamp(1.5rem, 5vw, 2.5rem); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+    <div class="container nav-content">
+        <a href="index.html" class="logo">
+            <svg class="logo-svg" viewBox="0 0 260 64" fill="none">
+                <rect x="0" y="6" width="260" height="38" fill="#B8C4B0" opacity="0.45"/>
+                <text x="6" y="36" font-family="Playfair Display,Georgia,serif" font-size="32" font-weight="700" letter-spacing="4" fill="#ffffff">SCENT:LOG</text>
+                <text x="46" y="56" font-family="Raleway,sans-serif" font-size="9.5" letter-spacing="5" fill="#ffffff" opacity="0.65">FRAGRANCE JOURNAL</text>
+            </svg>
+        </a>
+        <ul class="nav-links">
+            <li><a href="about.html">About</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero hero-clean">
+    <div class="hero-clean-inner">
+        <span class="hero-eyebrow">Fragrance Journal · Est. 2025</span>
+
+        <h1 class="hero-clean-title">
+            <span class="hero-en">Log Your</span><br>
+            <span class="hero-kr">일상의 향</span>
+        </h1>
+
+        <p class="hero-clean-sub">
+            Your daily routine, translated into scent.<br>
+            오전 · 오후 · 저녁, 시간대별로 설계된 나만의 향기 시나리오.
+        </p>
+
+        <div class="hero-clean-line"></div>
+
+        <div class="hero-btns">
+            <a href="services.html#diagnosis" class="btn-hero-primary">Start Diagnosis — 무료 진단</a>
+            <a href="shop.html" class="btn-hero-ghost">View Collection →</a>
+        </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+        <div class="scroll-bar"></div>
+        <span>Scroll</span>
+    </div>
+</header>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+    <div class="marquee-track">
+        <span>SCENT</span><span class="dot">✦</span>
+        <span>TIME</span><span class="dot">✦</span>
+        <span>RITUAL</span><span class="dot">✦</span>
+        <span>MORNING</span><span class="dot">✦</span>
+        <span>AFTERNOON</span><span class="dot">✦</span>
+        <span>EVENING</span><span class="dot">✦</span>
+        <span>FRAGRANCE</span><span class="dot">✦</span>
+        <span>LOG</span><span class="dot">✦</span>
+        <span>SCENT</span><span class="dot">✦</span>
+        <span>TIME</span><span class="dot">✦</span>
+        <span>RITUAL</span><span class="dot">✦</span>
+        <span>MORNING</span><span class="dot">✦</span>
+        <span>AFTERNOON</span><span class="dot">✦</span>
+        <span>EVENING</span><span class="dot">✦</span>
+        <span>FRAGRANCE</span><span class="dot">✦</span>
+        <span>LOG</span><span class="dot">✦</span>
+    </div>
+</div>
+
+<!-- WHY 1 : 이미지 왼쪽 -->
+<div class="why-split">
+    <div class="why-img slide-img">
+        <img src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=900&q=80" alt="향수 이미지" loading="lazy">
+        <div class="why-img-overlay"></div>
+    </div>
+    <div class="why-text-block slide-right">
+        <div class="why-num">01</div>
+        <div class="why-label">Why Time-Based?</div>
+        <h2 class="why-heading">You change outfits.<br>Why not your scent?</h2>
+        <div class="why-line"></div>
+        <p class="why-sub">아침의 나와 저녁의 나는<br>전혀 다른 에너지를 가집니다.</p>
+        <p class="why-body">Fragrance moves from top note to base — just like your day moves from morning clarity to evening calm. We design a scent for each moment of your routine.</p>
+    </div>
+</div>
+
+<!-- FULL BLEED QUOTE -->
+<div class="full-quote">
+    <div class="full-quote-bg"></div>
+    <div class="full-quote-overlay"></div>
+    <div class="full-quote-content slide-up">
+        <p class="full-quote-text">"What people wanted wasn't a perfume —<br>it was a guide to the right moment."</p>
+        <span class="full-quote-attr">— Scent Log, Brand Story</span>
+    </div>
+</div>
+
+<!-- WHY 2 : 텍스트 왼쪽 -->
+<div class="why-split">
+    <div class="why-text-block right slide-left">
+        <div class="why-num">02</div>
+        <div class="why-label">Why Scent Log?</div>
+        <h2 class="why-heading">No expertise needed.<br>Just your routine.</h2>
+        <div class="why-line"></div>
+        <p class="why-sub">향수 지식 없이도 시작할 수 있습니다.<br>루틴만 알려주세요.</p>
+        <p class="why-body">Korea's only morning / afternoon / evening 3-scent lifestyle system. Tell us your day, and we'll design the scent that fits every chapter of it.</p>
+    </div>
+    <div class="why-img slide-img" style="transition-delay:.15s">
+        <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=900&q=80" alt="조향 이미지" loading="lazy">
+        <div class="why-img-overlay"></div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-main">
+                <div class="footer-logo">
+                    <svg viewBox="0 0 260 64" fill="none" style="height:44px;width:auto">
+                        <rect x="0" y="6" width="260" height="38" fill="#B8C4B0" opacity="0.35"/>
+                        <text x="6" y="36" font-family="Playfair Display,Georgia,serif" font-size="32" font-weight="700" letter-spacing="4" fill="#F2EFE9">SCENT:LOG</text>
+                        <text x="46" y="56" font-family="Raleway,sans-serif" font-size="9.5" letter-spacing="5" fill="#F2EFE9" opacity="0.6">FRAGRANCE JOURNAL</text>
+                    </svg>
+                </div>
+                <p>당신의 하루를 향으로 기록하는 플랫폼</p>
+            </div>
+            <div class="footer-info">
+                <h4>Studio L'art</h4>
+                <p>대표자: 안애진</p>
+                <p>사업자등록번호: 000-00-00000</p>
+                <p>주소: 서울특별시 성동구 성수동</p>
+            </div>
+            <div class="footer-contact">
+                <h4>CONTACT</h4>
+                <p>Email: contact@scentlog.com</p>
+                <p><a href="https://www.instagram.com/scentlog_official/" target="_blank" style="color:inherit">Instagram: @scentlog_official</a></p>
+            </div>
+        </div>
+        <div class="footer-copy">&copy; 2026 SCENT LOG. All Rights Reserved.</div>
+    </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Scent Log</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+        nav { background: rgba(242,239,233,.96); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-lt); }
+        nav .logo-svg { filter: none !important; }
+        nav .nav-links a { color: var(--muted); }
+
+        .page-hero { padding: 10rem 0 5rem; background: linear-gradient(160deg, #EEE9E0 0%, #E8E2D6 60%, #DDD8CC 100%); text-align: center; position: relative; overflow: hidden; }
+        .page-hero::before { content: ''; position: absolute; top: -20%; right: -5%; width: 50%; height: 80%; background: radial-gradient(ellipse, rgba(212,160,152,.22) 0%, transparent 70%); filter: blur(40px); }
+        .page-hero-eyebrow { display: block; font-size: .75rem; letter-spacing: .4em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; font-family: 'Raleway', sans-serif; }
+        .page-hero h1 { font-family: 'Bodoni Moda', serif; font-size: clamp(2.8rem, 6vw, 5.5rem); font-weight: 300; color: var(--cream); letter-spacing: .04em; }
+        .page-hero p { font-size: 1rem; color: var(--muted); margin-top: 1.2rem; letter-spacing: .04em; font-family: 'Raleway', sans-serif; }
+
+        .brand-story { padding: 8rem 0; background: var(--bg); }
+        .story-intro { text-align: center; max-width: 640px; margin: 0 auto 7rem; }
+        .story-intro h2 { font-family: 'Bodoni Moda', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; color: var(--cream); margin-bottom: 1.4rem; }
+        .story-intro p { font-size: 1rem; color: var(--muted); line-height: 2; }
+
+        .timeline { position: relative; max-width: 800px; margin: 0 auto; }
+        .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--gold), rgba(184,117,106,.1)); }
+        .tl-item { padding: 0 0 5rem 3.5rem; position: relative; }
+        .tl-item:last-child { padding-bottom: 0; }
+        .tl-dot { position: absolute; left: -5px; top: 8px; width: 10px; height: 10px; border-radius: 50%; background: var(--gold); border: 2px solid var(--bg); }
+        .tl-phase { font-size: .65rem; letter-spacing: .35em; text-transform: uppercase; color: var(--gold); margin-bottom: .8rem; font-family: 'Raleway', sans-serif; }
+        .tl-brand { font-family: 'Bodoni Moda', serif; font-size: 1.9rem; font-weight: 400; color: var(--cream); margin-bottom: .3rem; }
+        .tl-sub { font-size: .82rem; color: var(--dim); letter-spacing: .08em; margin-bottom: 1.2rem; }
+        .tl-desc { font-size: .98rem; color: var(--muted); line-height: 2; max-width: 580px; }
+        .tl-lesson { margin-top: 1.2rem; padding: 1.2rem 1.5rem; border-left: 2px solid var(--gold); background: var(--bg2); font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem; color: var(--cream); line-height: 1.8; }
+
+        .values-about { padding: 8rem 0; background: var(--bg3); border-top: 1px solid var(--border-lt); }
+        .values-about h2 { font-family: 'Bodoni Moda', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; color: var(--cream); text-align: center; margin-bottom: 5rem; }
+        .values-about .values-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+
+        .vision { padding: 8rem 0; background: var(--bg2); }
+        .vision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+        .vision-text h2 { font-family: 'Bodoni Moda', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; color: var(--cream); margin-bottom: 1.6rem; }
+        .vision-text p { font-size: 1rem; color: var(--muted); line-height: 2; }
+        .vision-items { display: flex; flex-direction: column; gap: 1.6rem; }
+        .vision-item { padding: 1.8rem 2rem; background: var(--bg); border: 1px solid var(--border-lt); transition: border-color .3s; }
+        .vision-item:hover { border-color: var(--gold); }
+        .vision-item strong { font-family: 'Bodoni Moda', serif; font-size: 1.1rem; color: var(--gold); display: block; margin-bottom: .6rem; }
+        .vision-item p { font-size: .92rem; color: var(--muted); line-height: 1.85; }
+
+        .history-section { padding: 8rem 0; background: var(--bg); border-top: 1px solid var(--border-lt); }
+        .history-section h2 { font-family: 'Bodoni Moda', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; color: var(--cream); margin-bottom: 4rem; }
+        .history-list { list-style: none; max-width: 700px; }
+        .history-list li { display: flex; gap: 2.5rem; padding: 1.2rem 0; border-bottom: 1px solid var(--border-lt); font-size: .95rem; color: var(--muted); line-height: 1.8; }
+        .history-list li:last-child { border-bottom: none; }
+        .hy { min-width: 52px; font-family: 'Bodoni Moda', serif; font-size: 1rem; color: var(--gold); }
+
+        @media(max-width:900px){ .values-about .values-grid { grid-template-columns:1fr; } .vision-grid { grid-template-columns:1fr; gap:3rem; } }
+    </style>
+</head>
+<body>
+
+<nav id="navbar">
+    <div class="container nav-content">
+        <a href="index.html" class="logo">
+            <svg class="logo-svg" viewBox="0 0 260 64" fill="none">
+                <rect x="0" y="6" width="260" height="38" fill="#D4A098" opacity="0.45"/>
+                <text x="6" y="36" font-family="Bodoni Moda,Georgia,serif" font-size="32" font-weight="600" letter-spacing="4" fill="#1A1614">SCENT:LOG</text>
+                <text x="46" y="56" font-family="Raleway,sans-serif" font-size="9.5" letter-spacing="5" fill="#1A1614" opacity="0.7">FRAGRANCE JOURNAL</text>
+            </svg>
+        </a>
+        <ul class="nav-links">
+            <li><a href="about.html" style="color:var(--gold)">About</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="page-hero">
+    <span class="page-hero-eyebrow">Our Story</span>
+    <h1>센로그에 대하여</h1>
+    <p>실패에서 태어난 브랜드, 경험에서 완성된 철학</p>
+</div>
+
+<section class="brand-story">
+    <div class="container">
+        <div class="story-intro reveal">
+            <span class="section-eyebrow">Brand Story</span>
+            <h2>센로그는<br>처음부터 완벽하지 않았습니다</h2>
+            <p>두 번의 실험, 두 번의 교훈. 그리고 하나의 진실을 발견했습니다.<br>사람들이 원한 건 향수가 아니라 타이밍의 가이드였습니다.</p>
+        </div>
+        <div class="timeline">
+            <div class="tl-item reveal">
+                <div class="tl-dot"></div>
+                <div class="tl-phase">Phase 01</div>
+                <div class="tl-brand">Odorable</div>
+                <div class="tl-sub">Odor + Adorable — 제품 중심 향수 브랜드</div>
+                <p class="tl-desc">좋은 향이면 팔릴 거라 믿었습니다. 대량 생산 제품으로 론칭했지만 재고가 쌓이고 자금이 묶였습니다. 개인의 TPO를 담지 못하는 구조였습니다.</p>
+                <div class="tl-lesson">"사람들이 원한 건 향수가 아니라 타이밍의 가이드였다."</div>
+            </div>
+            <div class="tl-item reveal" style="transition-delay:.1s">
+                <div class="tl-dot"></div>
+                <div class="tl-phase">Phase 02</div>
+                <div class="tl-brand">Studio L'art</div>
+                <div class="tl-sub">L'art (예술) — 프라이빗 조향 아틀리에, 현재 운영 중</div>
+                <p class="tl-desc">실패 후 1:1 방식으로 전환했습니다. 그 사람의 스타일, 라이프, 하루 패턴을 듣고 향을 조합하면서 핵심 인사이트를 얻었습니다. 지금도 운영 중인 전문 공방으로 센로그 조향 방법론의 원점입니다.</p>
+                <div class="tl-lesson">"사람의 하루를 먼저 파악해야 한다."</div>
+            </div>
+            <div class="tl-item reveal" style="transition-delay:.2s">
+                <div class="tl-dot" style="background:var(--gold-lt)"></div>
+                <div class="tl-phase">Phase 03 — Now</div>
+                <div class="tl-brand">Scent Log</div>
+                <div class="tl-sub">Scent + Log — 시간대별 맞춤 향 설계 플랫폼</div>
+                <p class="tl-desc">오도어블의 재고 리스크를 구조적으로 해결하고, 스튜디오 라르의 1:1 전문성을 전국으로 확장합니다. 제품 판매가 아닌 "시간대별 맞춤 향 설계"로의 전환, 이것이 센로그입니다.</p>
+                <div class="tl-lesson">"실패가 없었다면, 센로그도 없었습니다."</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="values-about">
+    <div class="container">
+        <h2 class="reveal">CORE VALUES</h2>
+        <div class="values-grid">
+            <div class="value-card reveal"><h3 class="serif">LOG</h3><p>하루의 모든 순간을<br>향기로 기록(Archive)하다</p></div>
+            <div class="value-card reveal" style="transition-delay:.1s"><h3 class="serif">SCENT</h3><p>진정으로 나를 대변하는<br>향 취향을 발견(Find)하다</p></div>
+            <div class="value-card reveal" style="transition-delay:.2s"><h3 class="serif">MATCH</h3><p>발견한 취향과 숙련된<br>조향사를 잇다(Connect)</p></div>
+        </div>
+    </div>
+</section>
+
+<section class="vision">
+    <div class="container">
+        <div class="vision-grid">
+            <div class="vision-text reveal">
+                <span class="section-eyebrow">Vision & Mission</span>
+                <h2>이념과 비전</h2>
+                <p style="margin-top:1.2rem">향수 산업의 진입장벽을 낮추고, 모든 사람이 자신만의 향 정체성을 찾을 수 있도록 돕는 것. 그것이 센로그의 존재 이유입니다.</p>
+            </div>
+            <div class="vision-items reveal" style="transition-delay:.12s">
+                <div class="vision-item"><strong>진입장벽 제로</strong><p>향수 지식 없이 하루 루틴만 이야기하면 맞춤 향 설계가 가능합니다.</p></div>
+                <div class="vision-item"><strong>업계 유일 3향 조합</strong><p>오전·오후·저녁, 하루 전체를 설계하는 유일한 서비스입니다.</p></div>
+                <div class="vision-item"><strong>지속 가능한 구조</strong><p>선주문 펀딩 방식으로 재고 없이 운영하는 구조적 안정성을 갖춥니다.</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="history-section">
+    <div class="container">
+        <span class="section-eyebrow reveal">History</span>
+        <h2 class="reveal">연혁</h2>
+        <ul class="history-list">
+            <li class="reveal"><span class="hy">2020</span>Odorable 브랜드 론칭 · 제품 중심 향수 브랜드 실험</li>
+            <li class="reveal" style="transition-delay:.05s"><span class="hy">2021</span>Studio L'art 설립 · 프라이빗 조향 아틀리에로 전환</li>
+            <li class="reveal" style="transition-delay:.1s"><span class="hy">2022</span>1:1 조향 클래스 운영 시작 · 취향 인터뷰 방법론 정립</li>
+            <li class="reveal" style="transition-delay:.15s"><span class="hy">2023</span>4-Notes 알고리즘 개발 · 시간대별 취향 진단 프레임 완성</li>
+            <li class="reveal" style="transition-delay:.2s"><span class="hy">2024</span>Scent Log 플랫폼 구상 · 전국 공방 파트너십 구축 시작</li>
+            <li class="reveal" style="transition-delay:.25s"><span class="hy">2025</span>센로그 정식 론칭</li>
+        </ul>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-main">
+                <div class="footer-logo"><svg viewBox="0 0 260 64" fill="none" style="height:44px;width:auto"><rect x="0" y="6" width="260" height="38" fill="#D4A098" opacity="0.35"/><text x="6" y="36" font-family="Bodoni Moda,Georgia,serif" font-size="32" font-weight="600" letter-spacing="4" fill="#F2EFE9">SCENT:LOG</text><text x="46" y="56" font-family="Raleway,sans-serif" font-size="9.5" letter-spacing="5" fill="#F2EFE9" opacity="0.6">FRAGRANCE JOURNAL</text></svg></div>
+                <p>당신의 하루를 향으로 기록하는 플랫폼</p>
+            </div>
+            <div class="footer-info"><h4>Studio L'art</h4><p>대표자: 안애진</p><p>사업자등록번호: 000-00-00000</p><p>주소: 서울특별시 성동구 성수동</p></div>
+            <div class="footer-contact"><h4>Contact</h4><p>Email: contact@scentlog.com</p><p><a href="https://www.instagram.com/scentlog_official/" target="_blank" style="color:inherit">Instagram: @scentlog_official</a></p></div>
+        </div>
+        <div class="footer-copy">&copy; 2026 SCENT LOG. All Rights Reserved.</div>
+    </div>
+</footer>
+<script src="main.js"></script>
+</body>
+</html>

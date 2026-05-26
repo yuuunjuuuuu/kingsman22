@@ -1,0 +1,43 @@
+document.addEventListener('DOMContentLoaded', () => {
+
+    // ── 스크롤 리빌 (reveal + slide-left/right/up 모두 처리) ──
+    const animEls = document.querySelectorAll('.reveal, .slide-left, .slide-right, .slide-up');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+
+    animEls.forEach(el => observer.observe(el));
+
+    // ── 네비바 스크롤 효과 ──
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // ── 부드러운 앵커 스크롤 ──
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
+    // ── 히어로 텍스트 패럴랙스 ──
+    const heroContent = document.querySelector('.hero-content');
+    if (heroContent) {
+        window.addEventListener('scroll', () => {
+            const y = window.scrollY;
+            heroContent.style.transform = `translateY(${y * 0.25}px)`;
+            heroContent.style.opacity = 1 - y / 500;
+        }, { passive: true });
+    }
+});

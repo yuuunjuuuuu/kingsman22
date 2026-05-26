@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop — Scent Log</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+        nav { background: rgba(242,239,233,.96); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-lt); }
+        nav .logo-svg { filter: none !important; }
+        nav .nav-links a { color: var(--muted); }
+
+        .page-hero {
+            padding: 10rem 0 5rem;
+            background: linear-gradient(160deg, #EEE9E0 0%, #E8E2D6 60%, #DDD8CC 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: -20%; right: -5%;
+            width: 50%; height: 80%;
+            background: radial-gradient(ellipse, rgba(212,160,152,.22) 0%, transparent 70%);
+            filter: blur(40px);
+        }
+        .page-hero-eyebrow { display: block; font-size: .75rem; letter-spacing: .4em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; font-family: 'Raleway', sans-serif; }
+        .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 6vw, 5.5rem); font-weight: 700; color: var(--cream); letter-spacing: .02em; }
+        .page-hero p { font-size: 1rem; color: var(--muted); margin-top: 1.2rem; letter-spacing: .04em; font-family: 'Raleway', sans-serif; }
+
+        /* Product grid */
+        .shop-full { padding: 7rem 0 8rem; background: var(--bg2); }
+        .shop-full .shop-grid { grid-template-columns: repeat(3,1fr); }
+
+        /* Photo replaces SVG */
+        .product-img-photo {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform .7s cubic-bezier(.16,1,.3,1);
+        }
+        .product-card:not(.sold-out):not(.coming) .product-img-wrap:hover .product-img-photo {
+            transform: scale(1.05);
+        }
+
+        /* ── Stories section ── */
+        .scent-stories {
+            padding: 8rem 0 9rem;
+            background: var(--bg);
+            border-top: 1px solid var(--border-lt);
+        }
+        .stories-header { text-align: center; max-width: 580px; margin: 0 auto 5.5rem; }
+        .stories-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem,3.5vw,3.2rem); font-weight: 700; color: var(--cream); margin-bottom: 1rem; }
+        .stories-header p { font-size: 1rem; color: var(--muted); line-height: 1.9; }
+
+        .stories-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+        .story-card { background: var(--bg2); border: 1px solid var(--border-lt); overflow: hidden; transition: border-color .3s; }
+        .story-card:hover { border-color: var(--gold-lt); }
+
+        .story-photo { aspect-ratio: 4/3; overflow: hidden; }
+        .story-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.16,1,.3,1); }
+        .story-card:hover .story-photo img { transform: scale(1.04); }
+
+        .story-body { padding: 2rem 2rem 2.5rem; }
+        .story-scent {
+            font-size: .62rem; letter-spacing: .32em; text-transform: uppercase;
+            color: var(--gold); margin-bottom: 1.1rem; font-family: 'Raleway', sans-serif;
+        }
+        .story-body blockquote {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.05rem;
+            color: var(--cream);
+            line-height: 1.75;
+            margin: 0 0 1.6rem;
+            padding-left: 1rem;
+            border-left: 2px solid var(--gold-lt);
+        }
+        .story-name { font-size: .78rem; color: var(--muted); letter-spacing: .06em; line-height: 1.7; }
+        .story-name strong { color: var(--cream); display: block; }
+
+        /* Scent Story section */
+        .product-story {
+            padding: 7rem 0 8rem;
+            background: var(--bg2);
+            border-top: 1px solid var(--border-lt);
+        }
+        .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+        .story-text h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700; color: var(--cream); margin-bottom: 1.6rem; }
+        .story-text p { font-size: 1rem; color: var(--muted); line-height: 2; letter-spacing: .02em; }
+        .story-photo-lg { aspect-ratio: 4/3; overflow: hidden; }
+        .story-photo-lg img { width: 100%; height: 100%; object-fit: cover; }
+        .story-quote-block {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.5rem;
+            color: var(--cream);
+            line-height: 1.7;
+            padding: 2.5rem;
+            border-left: 2px solid var(--gold);
+            background: var(--bg);
+        }
+
+        @media(max-width:900px) {
+            .story-grid { grid-template-columns:1fr; gap:3rem; }
+            .shop-full .shop-grid { grid-template-columns: repeat(2,1fr); }
+            .stories-grid { grid-template-columns: 1fr; gap: 2rem; }
+        }
+        @media(max-width:560px) { .shop-full .shop-grid { grid-template-columns:1fr; } }
+    </style>
+</head>
+<body>
+
+<nav id="navbar">
+    <div class="container nav-content">
+        <a href="index.html" class="logo">
+            <svg class="logo-svg" viewBox="0 0 260 64" fill="none">
+                <rect x="0" y="6" width="260" height="38" fill="#D4A098" opacity="0.45"/>
+                <text x="6" y="36" font-family="Bodoni Moda,Georgia,serif" font-size="32" font-weight="600" letter-spacing="4" fill="#1A1614">SCENT:LOG</text>
+                <text x="46" y="56" font-family="Raleway,sans-serif" font-size="9.5" letter-spacing="5" fill="#1A1614" opacity="0.7">FRAGRANCE JOURNAL</text>
+            </svg>
+        </a>
+        <ul class="nav-links">
+            <li><a href="about.html">About</a></li>
+            <li><a href="shop.html" style="color:var(--gold)">Shop</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="page-hero">
+    <span class="page-hero-eyebrow">The Collection</span>
+    <h1>The Scent of Time</h1>
+    <p>The Scent Log collection, designed for each moment of your day</p>
+</div>
+
+<!-- Product Grid -->
+<section class="shop-full">
+    <div class="container">
+        <div class="shop-grid">
+
+            <!-- SOLD OUT · Dawn -->
+            <div class="product-card sold-out reveal">
+                <div class="product-img-wrap">
+                    <span class="product-badge badge-soldout">Sold Out</span>
+                    <img
+                        class="product-img-photo"
+                        src="https://images.unsplash.com/photo-1504630083234-14187a9df0f5?w=600&q=80&auto=format&fit=crop"
+                        alt="Dawn — First Light">
+                    <div class="sold-out-overlay">SOLD OUT</div>
+                </div>
+                <div class="product-info">
+                    <span class="product-time">06 : 00 — Dawn</span>
+                    <h3 class="product-name">Dawn <em>First Light</em></h3>
+                    <p class="product-notes">Bergamot · Yuzu · White Tea · Cedarwood</p>
+                    <p class="product-price soldout-price">₩ 148,000</p>
+                </div>
+            </div>
+
+            <!-- SOLD OUT · Focus -->
+            <div class="product-card sold-out reveal" style="transition-delay:.1s">
+                <div class="product-img-wrap">
+                    <span class="product-badge badge-soldout">Sold Out</span>
+                    <img
+                        class="product-img-photo"
+                        src="https://images.unsplash.com/photo-1455543371561-be3de362ab4a?w=600&q=80&auto=format&fit=crop"
+                        alt="Focus — Clarity">
+                    <div class="sold-out-overlay">SOLD OUT</div>
+                </div>
+                <div class="product-info">
+                    <span class="product-time">10 : 00 — Morning</span>
+                    <h3 class="product-name">Focus <em>Clarity</em></h3>
+                    <p class="product-notes">Green Tea · Peppermint · Iris · Amber</p>
+                    <p class="product-price soldout-price">₩ 158,000</p>
+                </div>
+            </div>
+
+            <!-- Coming Soon · Dusk -->
+            <div class="product-card coming reveal" style="transition-delay:.2s">
+                <div class="product-img-wrap">
+                    <span class="product-badge badge-coming">Coming Soon</span>
+                    <img
+                        class="product-img-photo"
+                        src="https://images.unsplash.com/photo-1490750967868-88df5691cc96?w=600&q=80&auto=format&fit=crop"
+                        alt="Dusk — Golden Hour">
+                </div>
+                <div class="product-info">
+                    <span class="product-time">17 : 00 — Dusk</span>
+                    <h3 class="product-name">Dusk <em>Golden Hour</em></h3>
+                    <p class="product-notes">Rose · Peony · Musk · Patchouli</p>
+                    <p class="product-price coming-price">Coming Soon</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Human Stories -->
+<section class="scent-stories">
+    <div class="container">
+        <div class="stories-header reveal">
+            <span class="section-eyebrow">Real People. Real Routines.</span>
+            <h2>The Scents People Carry</h2>
+            <p>Scent Log was built on a simple truth: the right fragrance at the right moment changes how you move through your day. These are the people who proved it.</p>
+        </div>
+
+        <div class="stories-grid">
+
+            <div class="story-card reveal">
+                <div class="story-photo">
+                    <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=700&q=80&auto=format&fit=crop" alt="Ji-yeon">
+                </div>
+                <div class="story-body">
+                    <div class="story-scent">Dawn — First Light</div>
+                    <blockquote>"Before the city wakes, I spray Dawn. That 30 seconds belongs only to me — nothing else does."</blockquote>
+                    <div class="story-name">
+                        <strong>Ji-yeon, 28</strong>
+                        Graphic Designer · Seoul
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-card reveal" style="transition-delay:.1s">
+                <div class="story-photo">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&q=80&auto=format&fit=crop" alt="Minho">
+                </div>
+                <div class="story-body">
+                    <div class="story-scent">Focus — Clarity</div>
+                    <blockquote>"I used to rely on three coffees to get through a morning. Now I just open Focus. The peppermint cuts through everything."</blockquote>
+                    <div class="story-name">
+                        <strong>Minho, 34</strong>
+                        Architect · Busan
+                    </div>
+                </div>
+            </div>
+
+            <div class="story-card reveal" style="transition-delay:.2s">
+                <div class="story-photo">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=700&q=80&auto=format&fit=crop" alt="Sohee">
+                </div>
+                <div class="story-body">
+                    <div class="story-scent">Dusk — Golden Hour</div>
+                    <blockquote>"5 PM is when I stop performing and start existing. The rose and musk remind me the day was mine all along."</blockquote>
+                    <div class="story-name">
+                        <strong>Sohee, 31</strong>
+                        Art Director · Seoul
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Scent Story editorial -->
+<section class="product-story">
+    <div class="container">
+        <div class="story-grid">
+            <div class="story-text reveal">
+                <span class="section-eyebrow">Scent Story</span>
+                <h2>Deeper with<br>Every Hour</h2>
+                <p style="margin-top:1.4rem">
+                    Every Scent Log fragrance is designed for a specific time of day.
+                    The crispness of dawn, the sharp clarity of a morning in motion,
+                    the turning point of dusk — each scent holds the energy of that moment.
+                </p>
+                <p style="margin-top:1rem">
+                    As top notes fade and the base blooms,
+                    your day builds, layer by layer, into something complete.
+                </p>
+            </div>
+            <div class="reveal" style="transition-delay:.15s">
+                <div class="story-photo-lg">
+                    <img src="https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=800&q=80&auto=format&fit=crop" alt="Scent Story">
+                </div>
+                <div class="story-quote-block" style="margin-top:1.5rem">
+                    "What people wanted wasn't a perfume —<br>it was a guide to the right moment."
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-main">
+                <div class="footer-logo">
+                    <svg viewBox="0 0 260 64" fill="none" style="height:44px;width:auto">
+                        <rect x="0" y="6" width="260" height="38" fill="#D4A098" opacity="0.35"/>
+                        <text x="6" y="36" font-family="Bodoni Moda,Georgia,serif" font-size="32" font-weight="600" letter-spacing="4" fill="#F2EFE9">SCENT:LOG</text>
+                        <text x="46" y="56" font-family="Raleway,sans-serif" font-size="9.5" letter-spacing="5" fill="#F2EFE9" opacity="0.6">FRAGRANCE JOURNAL</text>
+                    </svg>
+                </div>
+                <p>Record your day through scent</p>
+            </div>
+            <div class="footer-info">
+                <h4>Studio L'art</h4>
+                <p>CEO: Ahn Ae-jin</p>
+                <p>Business No.: 000-00-00000</p>
+                <p>Address: Seongsu-dong, Seongdong-gu, Seoul</p>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact</h4>
+                <p>Email: contact@scentlog.com</p>
+                <p><a href="https://www.instagram.com/scentlog_official/" target="_blank" style="color:inherit">Instagram: @scentlog_official</a></p>
+            </div>
+        </div>
+        <div class="footer-copy">&copy; 2026 SCENT LOG. All Rights Reserved.</div>
+    </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

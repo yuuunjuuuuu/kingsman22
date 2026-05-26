@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services — Scent Log</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+        nav { background: transparent; border-bottom: 1px solid rgba(242,239,233,.15); }
+        nav.scrolled { background: rgba(242,239,233,.96); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-lt); }
+        nav.scrolled .logo-svg { filter: none !important; }
+        nav .logo-svg { filter: brightness(0) invert(1); }
+        nav .nav-links a { color: rgba(242,239,233,.75); }
+        nav.scrolled .nav-links a { color: var(--muted); }
+        nav.scrolled .nav-links a[style] { color: var(--gold) !important; }
+
+        /* ── Hero with image ── */
+        .page-hero {
+            padding: 14rem 0 8rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero-bg {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        .hero-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(20,14,12,.62) 0%,
+                rgba(20,14,12,.45) 60%,
+                rgba(20,14,12,.65) 100%
+            );
+        }
+        .hero-content { position: relative; z-index: 2; }
+        .page-hero-eyebrow {
+            display: block; font-size: .72rem; letter-spacing: .48em;
+            text-transform: uppercase; color: var(--gold-lt);
+            margin-bottom: 1.4rem; font-family: 'Raleway', sans-serif;
+        }
+        .page-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.2rem, 7vw, 6.5rem);
+            font-weight: 700; color: #F2EFE9;
+            letter-spacing: .02em; line-height: 1.1;
+        }
+        .page-hero h1 em {
+            font-style: italic; font-weight: 400;
+            display: block; font-size: .6em;
+            letter-spacing: .06em; margin-top: .3em;
+            color: rgba(242,239,233,.7);
+        }
+        .page-hero p {
+            font-size: 1rem; color: rgba(242,239,233,.65);
+            margin-top: 1.8rem; letter-spacing: .06em;
+            font-family: 'Raleway', sans-serif;
+        }
+        .hero-scroll-hint {
+            position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+            font-size: .62rem; letter-spacing: .35em; text-transform: uppercase;
+            color: rgba(242,239,233,.4); font-family: 'Raleway', sans-serif;
+            display: flex; flex-direction: column; align-items: center; gap: .7rem;
+            z-index: 2;
+        }
+        .hero-scroll-hint::after {
+            content: '';
+            width: 1px; height: 40px;
+            background: linear-gradient(to bottom, rgba(242,239,233,.4), transparent);
+        }
+
+        /* ── Services grid ── */
+        .services-full { padding: 9rem 0 8rem; background: var(--bg2); }
+        .services-full .section-intro { text-align: center; max-width: 600px; margin: 0 auto 6rem; }
+        .services-full .section-intro h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 3.5vw, 3.2rem);
+            font-weight: 700; color: var(--cream); margin-bottom: 1.2rem;
+        }
+        .services-full .section-intro p { font-size: 1rem; color: var(--muted); line-height: 2; }
+
+        .svc-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1px; background: var(--border-lt); border: 1px solid var(--border-lt); }
+        .svc-card { background: var(--bg); padding: 4rem 3.5rem; transition: background .3s; }
+        .svc-card:hover { background: var(--bg2); }
+        .svc-num { font-size: .62rem; letter-spacing: .38em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; font-family: 'Raleway', sans-serif; }
+        .svc-title { font-family: 'Playfair Display', serif; font-size: 1.7rem; font-weight: 700; color: var(--cream); margin-bottom: .4rem; }
+        .svc-title-en { font-size: .72rem; letter-spacing: .22em; color: var(--dim); margin-bottom: 1.6rem; font-family: 'Raleway', sans-serif; text-transform: uppercase; }
+        .svc-desc { font-size: .95rem; color: var(--muted); line-height: 2.1; }
+        .svc-tags { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 2rem; }
+        .svc-tag { font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--border); padding: 5px 14px; font-family: 'Raleway', sans-serif; }
+
+        /* ── Process ── */
+        .process { padding: 8rem 0; background: var(--bg); border-top: 1px solid var(--border-lt); }
+        .process h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem,3.5vw,3rem);
+            font-weight: 700; color: var(--cream);
+            text-align: center; margin-bottom: 5rem;
+        }
+        .process-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 2rem; }
+        .process-step { text-align: center; padding: 2.5rem 1.5rem; }
+        .step-num {
+            font-family: 'Playfair Display', serif; font-size: 3rem;
+            color: rgba(184,117,106,.18); line-height: 1; margin-bottom: 1.2rem;
+        }
+        .step-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--cream); margin-bottom: .8rem; }
+        .step-desc { font-size: .87rem; color: var(--muted); line-height: 1.95; }
+
+        /* ── Pre-registration ── */
+        .prereserve {
+            padding: 9rem 0 10rem;
+            background: var(--bg2);
+            border-top: 1px solid var(--border-lt);
+            position: relative; overflow: hidden;
+        }
+        .prereserve::before {
+            content: '';
+            position: absolute; top: -10%; left: -5%;
+            width: 50%; height: 80%;
+            background: radial-gradient(ellipse, rgba(212,160,152,.14) 0%, transparent 70%);
+            filter: blur(60px); pointer-events: none;
+        }
+        .prereserve-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 8rem; align-items: start; }
+        .prereserve-info { padding-top: .5rem; }
+        .prereserve-badge {
+            display: inline-block; font-size: .62rem; letter-spacing: .35em;
+            text-transform: uppercase; color: #fff; background: var(--gold);
+            padding: 5px 14px; margin-bottom: 2rem; font-family: 'Raleway', sans-serif;
+        }
+        .prereserve-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 700; color: var(--cream);
+            line-height: 1.2; margin-bottom: 1.6rem;
+        }
+        .prereserve-info p { font-size: .96rem; color: var(--muted); line-height: 2.1; margin-bottom: 1rem; }
+        .prereserve-perks { margin-top: 2.4rem; display: flex; flex-direction: column; gap: .9rem; }
+        .perk-item {
+            display: flex; align-items: flex-start; gap: 1rem;
+            font-size: .87rem; color: var(--muted); line-height: 1.7;
+        }
+        .perk-item::before { content: '—'; color: var(--gold); flex-shrink: 0; }
+
+        .prereserve-form-wrap { background: var(--bg); border: 1px solid var(--border-lt); padding: 3.5rem; }
+        .prereserve-form-wrap h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem; font-weight: 700;
+            color: var(--cream); margin-bottom: 2.5rem;
+        }
+        .pr-form-group { margin-bottom: 1.6rem; }
+        .pr-form-group label {
+            display: block; font-size: .67rem; letter-spacing: .28em;
+            text-transform: uppercase; color: var(--gold);
+            margin-bottom: .75rem; font-family: 'Raleway', sans-serif;
+        }
+        .pr-form-group input {
+            width: 100%; padding: .95rem 1.1rem;
+            background: var(--bg2); border: 1px solid var(--border-lt);
+            color: var(--cream); font-family: 'Raleway', sans-serif;
+            font-size: .92rem; outline: none;
+            transition: border-color .3s, background .3s;
+            -webkit-appearance: none;
+        }
+        .pr-form-group input:focus { border-color: var(--gold); background: var(--bg); }
+        .pr-form-group input::placeholder { color: var(--dim); }
+        .pr-submit {
+            width: 100%; padding: 1.1rem;
+            background: var(--gold); color: #fff; border: none;
+            font-family: 'Raleway', sans-serif; font-size: .75rem;
+            letter-spacing: .22em; text-transform: uppercase;
+            cursor: pointer; transition: background .3s; margin-top: .4rem;
+        }
+        .pr-submit:hover { background: var(--gold-dk); }
+
+        .prereserve-success { display: none; text-align: center; padding: 4rem 2rem; }
+        .success-icon {
+            width: 52px; height: 52px; border: 1.5px solid var(--gold); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1.8rem; font-size: 1.2rem; color: var(--gold);
+        }
+        .prereserve-success h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem; font-weight: 700;
+            color: var(--cream); margin-bottom: 1rem;
+        }
+        .prereserve-success p { font-size: .9rem; color: var(--muted); line-height: 1.9; }
+
+        @media(max-width:900px) {
+            .svc-grid { grid-template-columns:1fr; }
+            .process-steps { grid-template-columns: repeat(2,1fr); }
+            .prereserve-grid { grid-template-columns:1fr; gap:4rem; }
+            .page-hero { min-height: 75vh; }
+        }
+        @media(max-width:540px) {
+            .process-steps { grid-template-columns:1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<nav id="navbar">
+    <div class="container nav-content">
+        <a href="index.html" class="logo">
+            <svg class="logo-svg" viewBox="0 0 260 64" fill="none">
+                <rect x="0" y="6" width="260" height="38" fill="#D4A098" opacity="0.45"/>
+                <text x="6" y="36" font-family="Bodoni Moda,Georgia,serif" font-size="32" font-weight="600" letter-spacing="4" fill="#1A1614">SCENT:LOG</text>
+                <text x="46" y="56" font-family="Raleway,sans-serif" font-size="9.5" letter-spacing="5" fill="#1A1614" opacity="0.7">FRAGRANCE JOURNAL</text>
+            </svg>
+        </a>
+        <ul class="nav-links">
+            <li><a href="about.html">About</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="services.html" style="color:var(--gold-lt)">Services</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero with full-bleed image -->
+<div class="page-hero">
+    <img class="hero-bg"
+        src="https://images.unsplash.com/photo-1541643600914-78b084683702?w=1800&q=85&auto=format&fit=crop"
+        alt="Services">
+    <div class="hero-overlay"></div>
+    <div class="hero-content container">
+        <span class="page-hero-eyebrow">Our Services</span>
+        <h1>Designed for<br><em>Your Every Moment</em></h1>
+        <p>No fragrance expertise required — just your daily routine.</p>
+    </div>
+    <div class="hero-scroll-hint">Scroll</div>
+</div>
+
+<!-- Services Grid -->
+<section id="diagnosis" class="services-full">
+    <div class="container">
+        <div class="section-intro reveal">
+            <h2>Everything We Offer</h2>
+            <p>From diagnosis to creation. Tell us your daily routine — we design the rest.</p>
+        </div>
+        <div class="svc-grid">
+            <div class="svc-card reveal">
+                <div class="svc-num">Service 01</div>
+                <div class="svc-title">4-Notes Diagnosis</div>
+                <div class="svc-title-en">Preference Diagnosis</div>
+                <p class="svc-desc">Tell us your daily routine and our algorithm maps your ideal scent combination for morning, afternoon, and evening. In just 5 minutes, discover you're a citrus morning / floral afternoon / woody evening type. No fragrance knowledge needed — just honesty.</p>
+                <div class="svc-tags">
+                    <span class="svc-tag">Free</span>
+                    <span class="svc-tag">5-Min</span>
+                    <span class="svc-tag">Instant Results</span>
+                </div>
+            </div>
+            <div class="svc-card reveal" style="transition-delay:.1s">
+                <div class="svc-num">Service 02</div>
+                <div class="svc-title">Workshop Matching</div>
+                <div class="svc-title-en">O2O Studio Match</div>
+                <p class="svc-desc">Based on your diagnosis, we connect you with the best studio nationwide. Your taste profile is sent automatically to the perfumer, so the scent work begins from the moment you book. Reservation and payment — all within the app.</p>
+                <div class="svc-tags">
+                    <span class="svc-tag">Nationwide</span>
+                    <span class="svc-tag">Auto-Match</span>
+                    <span class="svc-tag">In-App Payment</span>
+                </div>
+            </div>
+            <div class="svc-card reveal" style="transition-delay:.15s">
+                <div class="svc-num">Service 03</div>
+                <div class="svc-title">1:1 Bespoke</div>
+                <div class="svc-title-en">Custom Fragrance</div>
+                <p class="svc-desc">A premium line personally blended and delivered by Studio L'art's creative director. One fragrance that exists only for you. A 1:1 video consultation based on your diagnosis result — your bespoke blend follows.</p>
+                <div class="svc-tags">
+                    <span class="svc-tag">Premium</span>
+                    <span class="svc-tag">1:1 Consult</span>
+                    <span class="svc-tag">Direct Delivery</span>
+                </div>
+            </div>
+            <div class="svc-card reveal" style="transition-delay:.2s">
+                <div class="svc-num">Service 04</div>
+                <div class="svc-title">Scent Drop</div>
+                <div class="svc-title-en">Limited Edition Funding</div>
+                <p class="svc-desc">Limited-edition perfumer funding. Special-concept fragrances made exclusively by pre-order. Production begins only when the goal is met — zero inventory, zero waste. Each drop opens a new world of scent.</p>
+                <div class="svc-tags">
+                    <span class="svc-tag">Limited</span>
+                    <span class="svc-tag">Pre-Order</span>
+                    <span class="svc-tag">Perfumer Collab</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section class="process">
+    <div class="container">
+        <h2 class="reveal">How It Works</h2>
+        <div class="process-steps">
+            <div class="process-step reveal">
+                <div class="step-num">01</div>
+                <div class="step-title">Scent Diagnosis</div>
+                <p class="step-desc">A 5-minute routine interview reveals your morning, afternoon, and evening scent type</p>
+            </div>
+            <div class="process-step reveal" style="transition-delay:.1s">
+                <div class="step-num">02</div>
+                <div class="step-title">See Your Results</div>
+                <p class="step-desc">Receive three time-based scent combinations and recommended notes tailored to you</p>
+            </div>
+            <div class="process-step reveal" style="transition-delay:.2s">
+                <div class="step-num">03</div>
+                <div class="step-title">Studio Match</div>
+                <p class="step-desc">Get paired with a perfumer at a studio nationwide who already has your taste profile</p>
+            </div>
+            <div class="process-step reveal" style="transition-delay:.3s">
+                <div class="step-num">04</div>
+                <div class="step-title">Your Signature Scent</div>
+                <p class="step-desc">Make it yourself or have it crafted bespoke — then wear it as part of your daily ritual</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pre-registration -->
+<section class="prereserve" id="prereserve">
+    <div class="container">
+        <div class="prereserve-grid">
+
+            <div class="prereserve-info reveal">
+                <span class="prereserve-badge">Opening Soon</span>
+                <h2>Be the First<br>to Experience It</h2>
+                <p>Scent Log is preparing for its official launch. Pre-register and we'll reach out the moment we open — along with exclusive early-bird benefits reserved just for you.</p>
+                <div class="prereserve-perks">
+                    <div class="perk-item">Free scent diagnosis on opening day</div>
+                    <div class="perk-item">10% off your first order, for pre-registrants only</div>
+                    <div class="perk-item">Priority booking for 1:1 bespoke consultation</div>
+                    <div class="perk-item">Early access invitation to the first Scent Drop</div>
+                </div>
+            </div>
+
+            <div class="prereserve-form-wrap reveal" style="transition-delay:.12s">
+                <h3>Early Access Registration</h3>
+
+                <form id="prereserveForm">
+                    <div class="pr-form-group">
+                        <label>Name</label>
+                        <input type="text" name="name" placeholder="Your full name" required>
+                    </div>
+                    <div class="pr-form-group">
+                        <label>Date of Birth</label>
+                        <input type="date" name="dob" required>
+                    </div>
+                    <div class="pr-form-group">
+                        <label>Phone</label>
+                        <input type="tel" name="phone" placeholder="010-0000-0000" required>
+                    </div>
+                    <div class="pr-form-group">
+                        <label>Address</label>
+                        <input type="text" name="addr" placeholder="Street address" required style="margin-bottom:.7rem">
+                        <input type="text" name="addr_detail" placeholder="Apartment, unit, floor, etc.">
+                    </div>
+                    <button type="submit" class="pr-submit">Reserve My Spot</button>
+                </form>
+
+                <div class="prereserve-success" id="prereserveSuccess">
+                    <div class="success-icon">✓</div>
+                    <h4>You're In</h4>
+                    <p>Thank you for registering early.<br>We'll reach out the moment Scent Log opens.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-main">
+                <div class="footer-logo">
+                    <svg viewBox="0 0 260 64" fill="none" style="height:44px;width:auto">
+                        <rect x="0" y="6" width="260" height="38" fill="#D4A098" opacity="0.35"/>
+                        <text x="6" y="36" font-family="Bodoni Moda,Georgia,serif" font-size="32" font-weight="600" letter-spacing="4" fill="#F2EFE9">SCENT:LOG</text>
+                        <text x="46" y="56" font-family="Raleway,sans-serif" font-size="9.5" letter-spacing="5" fill="#F2EFE9" opacity="0.6">FRAGRANCE JOURNAL</text>
+                    </svg>
+                </div>
+                <p>Record your day through scent</p>
+            </div>
+            <div class="footer-info">
+                <h4>Studio L'art</h4>
+                <p>CEO: Ahn Ae-jin</p>
+                <p>Business No.: 000-00-00000</p>
+                <p>Address: Seongsu-dong, Seongdong-gu, Seoul</p>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact</h4>
+                <p>Email: contact@scentlog.com</p>
+                <p><a href="https://www.instagram.com/scentlog_official/" target="_blank" style="color:inherit">Instagram: @scentlog_official</a></p>
+            </div>
+        </div>
+        <div class="footer-copy">&copy; 2026 SCENT LOG. All Rights Reserved.</div>
+    </div>
+</footer>
+
+<script>
+document.getElementById('prereserveForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    this.style.display = 'none';
+    document.getElementById('prereserveSuccess').style.display = 'block';
+});
+</script>
+<script src="main.js"></script>
+</body>
+</html>
