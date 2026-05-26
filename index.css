@@ -340,8 +340,8 @@ nav.scrolled {
 
 /* Sold Out state */
 .product-card.sold-out .product-img-wrap {
-    filter: grayscale(.2);
-    opacity: .82;
+    filter: grayscale(0);
+    opacity: 1;
 }
 .product-card.sold-out .bottle { color: var(--dim); }
 

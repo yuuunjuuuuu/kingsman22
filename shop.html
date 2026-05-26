@@ -204,7 +204,7 @@
             </div>
 
             <!-- Coming Soon · Dusk -->
-            <div class="product-card coming reveal" style="transition-delay:.2s">
+            <div class="product-card coming reveal" style="transition-delay:.2s; cursor:pointer;" onclick="document.getElementById('duskModal').style.display='flex'">
                 <div class="product-img-wrap">
                     <span class="product-badge badge-coming">Coming Soon</span>
                     <div class="coming-placeholder">
@@ -215,13 +215,57 @@
                     <span class="product-time">17 : 00 — Dusk</span>
                     <h3 class="product-name">Dusk <em>Golden Hour</em></h3>
                     <p class="product-notes">Rose · Peony · Musk · Patchouli</p>
-                    <p class="product-price coming-price">Coming Soon</p>
+                    <p class="product-price coming-price" style="color:var(--gold);">사전예약 신청 →</p>
                 </div>
             </div>
 
         </div>
     </div>
 </section>
+
+<!-- Dusk 사전예약 모달 -->
+<div id="duskModal" style="display:none; position:fixed; inset:0; background:rgba(26,22,20,.65); z-index:9999; align-items:center; justify-content:center; padding:1.5rem;">
+    <div style="background:var(--bg); max-width:520px; width:100%; padding:3rem 2.8rem; position:relative; border:1px solid var(--border-lt);">
+        <button onclick="document.getElementById('duskModal').style.display='none'" style="position:absolute; top:1.2rem; right:1.4rem; background:none; border:none; font-size:1.4rem; color:var(--muted); cursor:pointer;">✕</button>
+        <p style="font-size:.68rem; letter-spacing:.35em; text-transform:uppercase; color:var(--gold); font-family:'Raleway',sans-serif; margin-bottom:.8rem;">Dusk — Golden Hour</p>
+        <h3 style="font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:700; font-style:italic; color:var(--cream); margin-bottom:.6rem;">사전예약 신청</h3>
+        <p style="font-size:.88rem; color:var(--muted); margin-bottom:2rem; line-height:1.8;">출시 전 가장 먼저 만나보세요. 사전예약 고객에게 우선 안내를 드립니다.</p>
+        <div id="duskSuccess" style="display:none; text-align:center; padding:2rem 0;">
+            <p style="font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--cream); margin-bottom:.6rem;">신청이 완료되었습니다.</p>
+            <p style="font-size:.88rem; color:var(--muted);">출시 소식을 가장 먼저 전해드릴게요.</p>
+        </div>
+        <form id="duskForm" onsubmit="document.getElementById('duskForm').style.display='none';document.getElementById('duskSuccess').style.display='block';return false;">
+            <div style="margin-bottom:1.4rem;">
+                <label style="display:block; font-size:.68rem; letter-spacing:.25em; text-transform:uppercase; color:var(--gold); margin-bottom:.6rem; font-family:'Raleway',sans-serif;">이름</label>
+                <input type="text" required placeholder="홍길동" style="width:100%; padding:.9rem 1rem; background:var(--bg2); border:1px solid var(--border-lt); color:var(--cream); font-family:'Raleway',sans-serif; font-size:.92rem; outline:none; box-sizing:border-box;">
+            </div>
+            <div style="margin-bottom:1.4rem; display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                <div>
+                    <label style="display:block; font-size:.68rem; letter-spacing:.25em; text-transform:uppercase; color:var(--gold); margin-bottom:.6rem; font-family:'Raleway',sans-serif;">성별</label>
+                    <select required style="width:100%; padding:.9rem 1rem; background:var(--bg2); border:1px solid var(--border-lt); color:var(--cream); font-family:'Raleway',sans-serif; font-size:.92rem; outline:none; -webkit-appearance:none;">
+                        <option value="">선택</option>
+                        <option>여성</option>
+                        <option>남성</option>
+                        <option>기타</option>
+                    </select>
+                </div>
+                <div>
+                    <label style="display:block; font-size:.68rem; letter-spacing:.25em; text-transform:uppercase; color:var(--gold); margin-bottom:.6rem; font-family:'Raleway',sans-serif;">생년월일</label>
+                    <input type="date" required style="width:100%; padding:.9rem 1rem; background:var(--bg2); border:1px solid var(--border-lt); color:var(--cream); font-family:'Raleway',sans-serif; font-size:.92rem; outline:none; box-sizing:border-box;">
+                </div>
+            </div>
+            <div style="margin-bottom:1.4rem;">
+                <label style="display:block; font-size:.68rem; letter-spacing:.25em; text-transform:uppercase; color:var(--gold); margin-bottom:.6rem; font-family:'Raleway',sans-serif;">전화번호</label>
+                <input type="tel" required placeholder="010-0000-0000" style="width:100%; padding:.9rem 1rem; background:var(--bg2); border:1px solid var(--border-lt); color:var(--cream); font-family:'Raleway',sans-serif; font-size:.92rem; outline:none; box-sizing:border-box;">
+            </div>
+            <div style="margin-bottom:2rem;">
+                <label style="display:block; font-size:.68rem; letter-spacing:.25em; text-transform:uppercase; color:var(--gold); margin-bottom:.6rem; font-family:'Raleway',sans-serif;">주소</label>
+                <input type="text" required placeholder="서울특별시 성동구 성수동" style="width:100%; padding:.9rem 1rem; background:var(--bg2); border:1px solid var(--border-lt); color:var(--cream); font-family:'Raleway',sans-serif; font-size:.92rem; outline:none; box-sizing:border-box;">
+            </div>
+            <button type="submit" style="width:100%; padding:1.1rem; background:var(--gold); color:#fff; border:none; font-family:'Raleway',sans-serif; font-size:.78rem; letter-spacing:.2em; text-transform:uppercase; cursor:pointer; transition:background .3s;">사전예약 신청하기</button>
+        </form>
+    </div>
+</div>
 
 <footer>
     <div class="container">
