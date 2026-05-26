@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // ── 스크롤 리빌 (reveal + slide-left/right/up 모두 처리) ──
-    const animEls = document.querySelectorAll('.reveal, .slide-left, .slide-right, .slide-up');
+    const animEls = document.querySelectorAll('.reveal, .slide-left, .slide-right, .slide-up, .slide-img');
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
