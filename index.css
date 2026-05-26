@@ -354,8 +354,14 @@ nav.scrolled {
     font-size: .65rem;
     letter-spacing: .35em;
     text-transform: uppercase;
-    color: var(--muted);
-    background: rgba(247,243,238,.45);
+    color: var(--cream);
+    background: rgba(247,243,238,.0);
+    opacity: 0;
+    transition: opacity .35s ease, background .35s ease;
+}
+.product-img-wrap:hover .sold-out-overlay {
+    opacity: 1;
+    background: rgba(247,243,238,.55);
 }
 
 /* Coming Soon state */
