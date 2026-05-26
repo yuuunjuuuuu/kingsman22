@@ -103,6 +103,25 @@
             background: var(--bg);
         }
 
+        /* Coming Soon placeholder */
+        .coming-placeholder {
+            position: absolute; inset: 0;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            background: linear-gradient(160deg, #EEE9E0 0%, #E2D9D0 100%);
+            gap: .8rem;
+        }
+        .coming-placeholder-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem; font-weight: 300;
+            color: var(--gold); letter-spacing: .1em;
+        }
+        .coming-placeholder-sub {
+            font-size: .68rem; letter-spacing: .35em;
+            text-transform: uppercase; color: var(--dim);
+            font-family: 'Raleway', sans-serif;
+        }
+
         @media(max-width:900px) {
             .story-grid { grid-template-columns:1fr; gap:3rem; }
             .shop-full .shop-grid { grid-template-columns: repeat(2,1fr); }
@@ -148,7 +167,7 @@
                     <span class="product-badge badge-soldout">Sold Out</span>
                     <img
                         class="product-img-photo"
-                        src="scentlog1.png"
+                        src="sea.png"
                         alt="Dawn — First Light">
                     <div class="sold-out-overlay">SOLD OUT</div>
                 </div>
@@ -166,7 +185,7 @@
                     <span class="product-badge badge-soldout">Sold Out</span>
                     <img
                         class="product-img-photo"
-                        src="scentlog1.png"
+                        src="picnic_2.png"
                         alt="Focus — Clarity">
                     <div class="sold-out-overlay">SOLD OUT</div>
                 </div>
@@ -182,10 +201,10 @@
             <div class="product-card coming reveal" style="transition-delay:.2s">
                 <div class="product-img-wrap">
                     <span class="product-badge badge-coming">Coming Soon</span>
-                    <img
-                        class="product-img-photo"
-                        src="scentlog1.png"
-                        alt="Dusk — Golden Hour">
+                    <div class="coming-placeholder">
+                        <span class="coming-placeholder-text">17 : 00</span>
+                        <span class="coming-placeholder-sub">Dusk — Golden Hour</span>
+                    </div>
                 </div>
                 <div class="product-info">
                     <span class="product-time">17 : 00 — Dusk</span>
