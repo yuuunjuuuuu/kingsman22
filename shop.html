@@ -32,6 +32,7 @@
         /* Product grid */
         .shop-full { padding: 7rem 0 8rem; background: var(--bg2); }
         .shop-full .shop-grid { grid-template-columns: repeat(3,1fr); }
+        .shop-full .product-img-wrap { aspect-ratio: 3/4; }
 
         /* Photo replaces SVG */
         .product-img-photo {
@@ -39,11 +40,16 @@
             top: 0; left: 0;
             width: 100%; height: 100%;
             object-fit: cover;
+            object-position: center 20%;
             transition: transform .7s cubic-bezier(.16,1,.3,1);
         }
         .product-card:not(.sold-out):not(.coming) .product-img-wrap:hover .product-img-photo {
             transform: scale(1.05);
         }
+        /* Dawn: 바다 배경이 위쪽에 펼쳐지도록 */
+        .dawn-photo { object-position: center 15%; }
+        /* Focus: 피크닉 소품들이 함께 보이도록 */
+        .focus-photo { object-position: center 30%; }
 
         /* ── Stories section ── */
         .scent-stories {
@@ -166,7 +172,7 @@
                 <div class="product-img-wrap">
                     <span class="product-badge badge-soldout">Sold Out</span>
                     <img
-                        class="product-img-photo"
+                        class="product-img-photo dawn-photo"
                         src="sea.png"
                         alt="Dawn — First Light">
                     <div class="sold-out-overlay">SOLD OUT</div>
@@ -184,7 +190,7 @@
                 <div class="product-img-wrap">
                     <span class="product-badge badge-soldout">Sold Out</span>
                     <img
-                        class="product-img-photo"
+                        class="product-img-photo focus-photo"
                         src="picnic_2.png"
                         alt="Focus — Clarity">
                     <div class="sold-out-overlay">SOLD OUT</div>
