@@ -31,6 +31,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // ── 햄버거 메뉴 ──
+    const hamburger = document.getElementById('navHamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const navOverlay = document.getElementById('navOverlay');
+    if (hamburger) {
+        const closeMenu = () => {
+            hamburger.classList.remove('open');
+            navLinks.classList.remove('open');
+            navOverlay.classList.remove('open');
+        };
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            navLinks.classList.toggle('open');
+            navOverlay.classList.toggle('open');
+        });
+        navOverlay.addEventListener('click', closeMenu);
+        navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    }
+
     // ── 히어로 텍스트 패럴랙스 ──
     const heroContent = document.querySelector('.hero-content');
     if (heroContent) {
