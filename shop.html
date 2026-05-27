@@ -226,9 +226,9 @@
 </section>
 
 <!-- Dusk 사전예약 모달 -->
-<div id="duskModal" style="display:none; position:fixed; inset:0; background:rgba(26,22,20,.65); z-index:9999; align-items:center; justify-content:center; padding:1.5rem;">
-    <div style="background:var(--bg); max-width:520px; width:100%; padding:3rem 2.8rem; position:relative; border:1px solid var(--border-lt);">
-        <button onclick="document.getElementById('duskModal').style.display='none'" style="position:absolute; top:1.2rem; right:1.4rem; background:none; border:none; font-size:1.4rem; color:var(--muted); cursor:pointer;">✕</button>
+<div id="duskModal" style="display:none; position:fixed; inset:0; background:rgba(26,22,20,.65); z-index:9999; align-items:flex-start; justify-content:center; padding:1.5rem; overflow-y:auto;">
+    <div style="background:var(--bg); max-width:520px; width:100%; padding:3rem 2.8rem; position:relative; border:1px solid var(--border-lt); margin:auto;">
+        <button onclick="document.getElementById('duskModal').style.display='none'" style="position:absolute; top:1rem; right:1.2rem; background:none; border:none; font-size:1.6rem; color:var(--cream); cursor:pointer; line-height:1;">✕</button>
         <p style="font-size:.68rem; letter-spacing:.35em; text-transform:uppercase; color:var(--gold); font-family:'Raleway',sans-serif; margin-bottom:.8rem;">Dusk — Golden Hour</p>
         <h3 style="font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:700; font-style:italic; color:var(--cream); margin-bottom:.6rem;">사전예약 신청</h3>
         <p style="font-size:.88rem; color:var(--muted); margin-bottom:1rem; line-height:1.8;">출시 전 가장 먼저 만나보세요. 사전예약 고객에게 우선 안내를 드립니다.</p>
