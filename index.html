@@ -99,7 +99,7 @@
 </div>
 
 <!-- NEW ARRIVALS SECTION -->
-<section class="home-section">
+<section class="home-section" data-section="new">
     <div class="container">
         <div class="section-head reveal">
             <h2>NEW ARRIVALS</h2>
@@ -107,7 +107,7 @@
         </div>
         <div class="product-grid">
 
-            <div class="product-card reveal">
+            <div class="product-card reveal" data-tags="new best keyring">
                 <div class="product-img-wrap">
                     <span class="product-badge badge-new">NEW</span>
                     <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8D0,#FFD0B0);">🥟</div>
@@ -120,7 +120,7 @@
                 </div>
             </div>
 
-            <div class="product-card reveal" style="transition-delay:.07s">
+            <div class="product-card reveal" style="transition-delay:.07s" data-tags="new keyring">
                 <div class="product-img-wrap">
                     <span class="product-badge badge-new">NEW</span>
                     <div class="product-placeholder" style="background:linear-gradient(135deg,#E8F0FF,#CCE0FF);">⭐</div>
@@ -133,7 +133,7 @@
                 </div>
             </div>
 
-            <div class="product-card reveal" style="transition-delay:.14s">
+            <div class="product-card reveal" style="transition-delay:.14s" data-tags="new keyring">
                 <div class="product-img-wrap">
                     <div class="product-placeholder" style="background:linear-gradient(135deg,#E8FFE8,#C2F5CA);">🐻</div>
                     <button class="heart-btn" aria-label="찜하기">♡</button>
@@ -145,7 +145,7 @@
                 </div>
             </div>
 
-            <div class="product-card reveal" style="transition-delay:.21s">
+            <div class="product-card reveal" style="transition-delay:.21s" data-tags="new keyring">
                 <div class="product-img-wrap">
                     <span class="product-badge badge-coming">Coming Soon</span>
                     <div class="product-placeholder" style="background:linear-gradient(135deg,#F0E8FF,#E0D0FF);">🐰</div>
@@ -163,7 +163,7 @@
 </section>
 
 <!-- BEST SECTION -->
-<section class="home-section">
+<section class="home-section" data-section="best">
     <div class="container">
         <div class="section-head reveal">
             <h2>BEST</h2>
@@ -171,7 +171,7 @@
         </div>
         <div class="product-grid">
 
-            <div class="product-card reveal">
+            <div class="product-card reveal" data-tags="best keyring">
                 <div class="product-img-wrap">
                     <span class="product-badge badge-best">BEST</span>
                     <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8D0,#FFD0B0);">🥟</div>
@@ -184,7 +184,7 @@
                 </div>
             </div>
 
-            <div class="product-card reveal" style="transition-delay:.07s">
+            <div class="product-card reveal" style="transition-delay:.07s" data-tags="best goods">
                 <div class="product-img-wrap">
                     <span class="product-badge badge-best">BEST</span>
                     <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8F0,#FFD0E0);">🩷</div>
@@ -197,7 +197,7 @@
                 </div>
             </div>
 
-            <div class="product-card reveal" style="transition-delay:.14s">
+            <div class="product-card reveal" style="transition-delay:.14s" data-tags="best keyring">
                 <div class="product-img-wrap">
                     <div class="product-placeholder" style="background:linear-gradient(135deg,#E8F0FF,#CCE0FF);">⭐</div>
                     <button class="heart-btn" aria-label="찜하기">♡</button>
@@ -209,7 +209,7 @@
                 </div>
             </div>
 
-            <div class="product-card reveal" style="transition-delay:.21s">
+            <div class="product-card reveal" style="transition-delay:.21s" data-tags="best keyring">
                 <div class="product-img-wrap">
                     <span class="product-badge badge-coming">Coming Soon</span>
                     <div class="product-placeholder" style="background:linear-gradient(135deg,#FFF8D0,#FFE8A0);">🍋</div>
@@ -281,11 +281,47 @@
 <script src="main.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+        const tabs     = document.querySelectorAll('.cat-tab');
+        const sections = document.querySelectorAll('.home-section');
+        const cards    = document.querySelectorAll('.product-card');
+
+        function applyFilter(filter) {
+            if (filter === 'all') {
+                sections.forEach(s => s.style.display = '');
+                cards.forEach(c => { c.style.display = ''; c.style.opacity = ''; c.style.transform = ''; });
+
+            } else if (filter === 'new' || filter === 'best') {
+                sections.forEach(s => {
+                    s.style.display = s.dataset.section === filter ? '' : 'none';
+                });
+                cards.forEach(c => { c.style.display = ''; });
+
+            } else if (filter === '스쿱마켓' || filter.includes('스쿱')) {
+                document.querySelector('.market-banner').scrollIntoView({ behavior: 'smooth' });
+                return;
+
+            } else {
+                // 키링 or 굿즈
+                sections.forEach(s => s.style.display = '');
+                cards.forEach(c => {
+                    const tags = c.dataset.tags || '';
+                    c.style.display = tags.includes(filter) ? '' : 'none';
+                });
+                // 빈 섹션 숨기기
+                sections.forEach(section => {
+                    const hasVisible = [...section.querySelectorAll('.product-card')].some(c => c.style.display !== 'none');
+                    section.style.display = hasVisible ? '' : 'none';
+                });
+            }
+        }
+
         // Category tab click
-        document.querySelectorAll('.cat-tab').forEach(tab => {
+        tabs.forEach(tab => {
             tab.addEventListener('click', () => {
-                document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+                tabs.forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
+                const label = tab.textContent.trim().toLowerCase();
+                applyFilter(label);
             });
         });
 
