@@ -1,139 +1,64 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop — Gallery</title>
+    <title>Shop — ZEN</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
     <style>
-        nav { background: rgba(250,246,242,.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-lt); }
-        nav .logo-svg { filter: none !important; }
-        nav .nav-links a { color: var(--muted); }
+        nav { background: rgba(255,255,255,.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-lt); }
 
         .page-hero {
             padding: 10rem 0 5rem;
-            background: linear-gradient(160deg, #EEE9E0 0%, #E8E2D6 60%, #DDD8CC 100%);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+            background: linear-gradient(160deg, #FFF0F5 0%, #FFE4EF 60%, #F8E8FF 100%);
+            text-align: center; position: relative; overflow: hidden;
         }
         .page-hero::before {
-            content: '';
-            position: absolute;
-            top: -20%; right: -5%;
+            content: ''; position: absolute; top: -20%; right: -5%;
             width: 50%; height: 80%;
-            background: radial-gradient(ellipse, rgba(212,160,152,.22) 0%, transparent 70%);
+            background: radial-gradient(ellipse, rgba(255,123,163,.18) 0%, transparent 70%);
             filter: blur(40px);
         }
-        .page-hero-eyebrow { display: block; font-size: .75rem; letter-spacing: .4em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; font-family: 'Raleway', sans-serif; }
-        .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 6vw, 5.5rem); font-weight: 700; font-style: italic; color: var(--cream); letter-spacing: .02em; }
-        .page-hero p { font-size: 1rem; color: var(--muted); margin-top: 1.2rem; letter-spacing: .04em; font-family: 'Raleway', sans-serif; }
-
-        /* Product grid */
-        .shop-full { padding: 7rem 0 8rem; background: var(--bg2); }
-        .shop-full .shop-grid { grid-template-columns: repeat(3,1fr); }
-        .shop-full .product-img-wrap { aspect-ratio: 4/5; }
-
-        /* Photo replaces SVG */
-        .product-img-photo {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            object-fit: cover;
-            object-position: center 20%;
-            transition: transform .7s cubic-bezier(.16,1,.3,1);
+        .page-hero-eyebrow {
+            display: block; font-size: .72rem; letter-spacing: .4em; text-transform: uppercase;
+            color: var(--gold); margin-bottom: 1.2rem; font-family: 'Nunito', sans-serif; font-weight: 700;
         }
-        .product-card:not(.sold-out):not(.coming) .product-img-wrap:hover .product-img-photo {
-            transform: scale(1.05);
+        .page-hero h1 {
+            font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 800; font-style: italic; color: var(--cream); letter-spacing: -.01em;
         }
-        /* Dawn: 바다 배경이 위쪽에 펼쳐지도록 */
-        .dawn-photo { object-position: center 15%; }
-        /* Focus: 피크닉 장면이 넓게 보이도록 */
-        .focus-photo { object-position: center 35%; }
-
-        /* ── Stories section ── */
-        .scent-stories {
-            padding: 8rem 0 9rem;
-            background: var(--bg);
-            border-top: 1px solid var(--border-lt);
-        }
-        .stories-header { text-align: center; max-width: 580px; margin: 0 auto 5.5rem; }
-        .stories-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem,3.5vw,3.2rem); font-weight: 700; color: var(--cream); margin-bottom: 1rem; }
-        .stories-header p { font-size: 1rem; color: var(--muted); line-height: 1.9; }
-
-        .stories-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
-        .story-card { background: var(--bg2); border: 1px solid var(--border-lt); overflow: hidden; transition: border-color .3s; }
-        .story-card:hover { border-color: var(--gold-lt); }
-
-        .story-photo { aspect-ratio: 4/3; overflow: hidden; }
-        .story-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.16,1,.3,1); }
-        .story-card:hover .story-photo img { transform: scale(1.04); }
-
-        .story-body { padding: 2rem 2rem 2.5rem; }
-        .story-scent {
-            font-size: .62rem; letter-spacing: .32em; text-transform: uppercase;
-            color: var(--gold); margin-bottom: 1.1rem; font-family: 'Raleway', sans-serif;
-        }
-        .story-body blockquote {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 1.05rem;
-            color: var(--cream);
-            line-height: 1.75;
-            margin: 0 0 1.6rem;
-            padding-left: 1rem;
-            border-left: 2px solid var(--gold-lt);
-        }
-        .story-name { font-size: .78rem; color: var(--muted); letter-spacing: .06em; line-height: 1.7; }
-        .story-name strong { color: var(--cream); display: block; }
-
-        /* Scent Story section */
-        .product-story {
-            padding: 7rem 0 8rem;
-            background: var(--bg2);
-            border-top: 1px solid var(--border-lt);
-        }
-        .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
-        .story-text h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700; color: var(--cream); margin-bottom: 1.6rem; }
-        .story-text p { font-size: 1rem; color: var(--muted); line-height: 2; letter-spacing: .02em; }
-        .story-photo-lg { aspect-ratio: 4/3; overflow: hidden; }
-        .story-photo-lg img { width: 100%; height: 100%; object-fit: cover; }
-        .story-quote-block {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 1.5rem;
-            color: var(--cream);
-            line-height: 1.7;
-            padding: 2.5rem;
-            border-left: 2px solid var(--gold);
-            background: var(--bg);
+        .page-hero p {
+            font-size: 1rem; color: var(--muted); margin-top: 1.2rem;
+            letter-spacing: .02em; font-family: 'Nunito', sans-serif; font-weight: 500;
         }
 
-        /* Coming Soon placeholder */
-        .coming-placeholder {
-            position: absolute; inset: 0;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            background: linear-gradient(160deg, #EEE9E0 0%, #E2D9D0 100%);
-            gap: .8rem;
+        /* FILTER TABS */
+        .filter-bar { padding: 3rem 0 2rem; background: var(--bg); border-bottom: 1px solid var(--border-lt); }
+        .filter-tabs { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .filter-tab {
+            font-family: 'Nunito', sans-serif; font-weight: 700; font-size: .8rem;
+            letter-spacing: .1em; text-transform: uppercase; padding: .7rem 1.8rem;
+            border-radius: 100px; border: 2px solid var(--border);
+            color: var(--muted); cursor: pointer; transition: all .25s; background: var(--bg);
         }
-        .coming-placeholder-text {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem; font-weight: 300;
-            color: var(--gold); letter-spacing: .1em;
-        }
-        .coming-placeholder-sub {
-            font-size: .68rem; letter-spacing: .35em;
-            text-transform: uppercase; color: var(--dim);
-            font-family: 'Raleway', sans-serif;
-        }
+        .filter-tab:hover { border-color: var(--gold); color: var(--gold); }
+        .filter-tab.active { background: var(--gold); color: #fff; border-color: var(--gold); }
 
-        @media(max-width:900px) {
-            .story-grid { grid-template-columns:1fr; gap:3rem; }
-            .shop-full .shop-grid { grid-template-columns: repeat(2,1fr); }
-            .stories-grid { grid-template-columns: 1fr; gap: 2rem; }
+        /* SHOP SECTION */
+        .shop-section { padding: 6rem 0 10rem; background: var(--bg); }
+
+        /* CATEGORY LABEL */
+        .cat-label {
+            font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.4rem);
+            font-weight: 800; font-style: italic; color: var(--cream);
+            margin-bottom: 2.5rem; padding-top: 1rem;
         }
-        @media(max-width:560px) { .shop-full .shop-grid { grid-template-columns:1fr; } }
+        .cat-label span { color: var(--gold); }
+
+        .section-divider { border: none; border-top: 1px solid var(--border-lt); margin: 5rem 0; }
     </style>
 </head>
 <body>
@@ -141,16 +66,15 @@
 <nav id="navbar">
     <div class="container nav-content">
         <a href="index.html" class="logo">
-            <svg class="logo-svg" viewBox="0 0 260 64" fill="none">
-                <rect x="0" y="6" width="260" height="38" fill="#D4A098" opacity="0.45"/>
-                <text x="6" y="36" font-family="Playfair Display,Georgia,serif" font-size="32" font-weight="700" letter-spacing="4" fill="#1A1614">GALLERY</text>
-                <text x="46" y="56" font-family="Raleway,sans-serif" font-size="9.5" letter-spacing="5" fill="#1A1614" opacity="0.7">FRAGRANCE JOURNAL</text>
+            <svg class="logo-svg" viewBox="0 0 190 52" fill="none">
+                <circle cx="10" cy="24" r="8" fill="#FF7BA3" opacity=".85"/>
+                <text x="26" y="36" font-family="Playfair Display,Georgia,serif" font-size="32" font-weight="800" font-style="italic" fill="#1E1E2E">ZEN</text>
+                <text x="27" y="49" font-family="Nunito,sans-serif" font-size="7.5" letter-spacing="3.5" fill="#FF7BA3" font-weight="700">KEYRING STUDIO</text>
             </svg>
         </a>
         <ul class="nav-links">
             <li><a href="about.html">About</a></li>
             <li><a href="shop.html" style="color:var(--gold)">Shop</a></li>
-            <li><a href="services.html">Services</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
         <div id="navOverlay" class="nav-overlay"></div>
@@ -159,65 +83,135 @@
 </nav>
 
 <div class="page-hero">
-    <span class="page-hero-eyebrow">The Collection</span>
-    <h1>The Scent of Time</h1>
-    <p>The Gallery collection, designed for each moment of your day</p>
+    <span class="page-hero-eyebrow">✦ ZEN Collection</span>
+    <h1>Shop</h1>
+    <p>하나하나 정성껏 만든 키링과 굿즈를 만나보세요</p>
 </div>
 
-<!-- Product Grid -->
-<section class="shop-full">
+<div class="filter-bar">
     <div class="container">
+        <div class="filter-tabs">
+            <button class="filter-tab active">ALL</button>
+            <button class="filter-tab">키링</button>
+            <button class="filter-tab">굿즈</button>
+            <button class="filter-tab">SALE</button>
+        </div>
+    </div>
+</div>
+
+<section class="shop-section">
+    <div class="container">
+
+        <!-- 키링 -->
+        <h2 class="cat-label reveal">키링 <span>Keyrings</span></h2>
         <div class="shop-grid">
 
-            <!-- SOLD OUT · Dawn -->
-            <div class="product-card sold-out reveal">
+            <div class="product-card reveal">
                 <div class="product-img-wrap">
-                    <span class="product-badge badge-soldout">Sold Out</span>
-                    <img
-                        class="product-img-photo dawn-photo"
-                        src="sea.png"
-                        alt="Dawn — First Light">
-                    <div class="sold-out-overlay">SOLD OUT</div>
+                    <span class="product-badge badge-new">NEW</span>
+                    <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8D0,#FFD0B0);">🥟</div>
                 </div>
                 <div class="product-info">
-                    <span class="product-time">06 : 00 — Dawn</span>
-                    <h3 class="product-name">Dawn <em>First Light</em></h3>
-                    <p class="product-notes">Bergamot · Yuzu · White Tea · Cedarwood</p>
-                    <p class="product-price soldout-price">₩ 148,000</p>
+                    <span class="product-time">꿈꿀만두</span>
+                    <div class="product-name">Dreaming Mandu</div>
+                    <p class="product-notes">귀엽고 포근한 만두 캐릭터 키링<br>당신의 가방을 특별하게 만들어줍니다</p>
+                    <p class="product-price">₩ 18,000</p>
                 </div>
             </div>
 
-            <!-- SOLD OUT · Focus -->
-            <div class="product-card sold-out reveal" style="transition-delay:.1s">
+            <div class="product-card reveal" style="transition-delay:.08s">
                 <div class="product-img-wrap">
-                    <span class="product-badge badge-soldout">Sold Out</span>
-                    <img
-                        class="product-img-photo focus-photo"
-                        src="picnic_1.png"
-                        alt="Focus — Clarity">
-                    <div class="sold-out-overlay">SOLD OUT</div>
+                    <div class="product-placeholder" style="background:linear-gradient(135deg,#E8F0FF,#CCE0FF);">⭐</div>
                 </div>
                 <div class="product-info">
-                    <span class="product-time">10 : 00 — Morning</span>
-                    <h3 class="product-name">Focus <em>Clarity</em></h3>
-                    <p class="product-notes">Green Tea · Peppermint · Iris · Amber</p>
-                    <p class="product-price soldout-price">₩ 158,000</p>
+                    <span class="product-time">구름 별</span>
+                    <div class="product-name">Cloud Star</div>
+                    <p class="product-notes">맑은 날 하늘을 닮은 키링<br>반짝이는 별 모양 참 장식</p>
+                    <p class="product-price">₩ 16,000</p>
                 </div>
             </div>
 
-            <!-- Coming Soon · Dusk -->
-            <div class="product-card coming reveal" style="transition-delay:.2s; cursor:pointer;" onclick="document.getElementById('duskModal').style.display='flex'">
+            <div class="product-card reveal" style="transition-delay:.16s">
+                <div class="product-img-wrap">
+                    <div class="product-placeholder" style="background:linear-gradient(135deg,#E8FFE8,#C2F5CA);">🐻</div>
+                </div>
+                <div class="product-info">
+                    <span class="product-time">봄날의 곰</span>
+                    <div class="product-name">Spring Bear</div>
+                    <p class="product-notes">포근한 봄날을 닮은 곰 키링<br>파스텔 그린 컬러</p>
+                    <p class="product-price">₩ 17,000</p>
+                </div>
+            </div>
+
+            <div class="product-card coming reveal" style="transition-delay:.24s">
                 <div class="product-img-wrap">
                     <span class="product-badge badge-coming">Coming Soon</span>
-                    <div class="coming-placeholder">
-                        <span class="coming-placeholder-sub">Dusk — Golden Hour</span>
-                    </div>
+                    <div class="product-placeholder" style="background:linear-gradient(135deg,#F0E8FF,#E0D0FF);">🐰</div>
                 </div>
                 <div class="product-info">
-                    <span class="product-time">17 : 00 — Dusk</span>
-                    <h3 class="product-name">Dusk <em>Golden Hour</em></h3>
-                    <p class="product-notes">Rose · Peony · Musk · Patchouli</p>
-                    <p class="product-price coming-price" style="color:var(--gold);">사전예약 신청 →</p>
+                    <span class="product-time">달빛 토끼</span>
+                    <div class="product-name">Moon Bunny</div>
+                    <p class="product-notes">조용한 밤하늘을 닮은 토끼 키링<br>라벤더 컬러, 출시 예정</p>
+                    <p class="coming-price">Coming Soon →</p>
+                </div>
+            </div>
+
+            <div class="product-card coming reveal" style="transition-delay:.32s">
+                <div class="product-img-wrap">
+                    <span class="product-badge badge-coming">Coming Soon</span>
+                    <div class="product-placeholder" style="background:linear-gradient(135deg,#FFF8D0,#FFE8A0);">🍋</div>
+                </div>
+                <div class="product-info">
+                    <span class="product-time">레몬 드롭</span>
+                    <div class="product-name">Lemon Drop</div>
+                    <p class="product-notes">상큼하고 귀여운 레몬 키링<br>여름 한정 출시 예정</p>
+                    <p class="coming-price">Coming Soon →</p>
+                </div>
+            </div>
+
+        </div>
+
+        <hr class="section-divider">
+
+        <!-- 굿즈 -->
+        <h2 class="cat-label reveal">굿즈 <span>Goods</span></h2>
+        <div class="shop-grid">
+
+            <div class="product-card reveal">
+                <div class="product-img-wrap">
+                    <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8F0,#FFD0E0);">🩷</div>
+                </div>
+                <div class="product-info">
+                    <span class="product-time">스티커 팩</span>
+                    <div class="product-name">ZEN Sticker Pack</div>
+                    <p class="product-notes">꿈꿀만두 외 ZEN 캐릭터 스티커<br>20매 구성</p>
+                    <p class="product-price">₩ 5,000</p>
+                </div>
+            </div>
+
+            <div class="product-card coming reveal" style="transition-delay:.1s">
+                <div class="product-img-wrap">
+                    <span class="product-badge badge-coming">Coming Soon</span>
+                    <div class="product-placeholder" style="background:linear-gradient(135deg,#F0F4FF,#E0E8FF);">📓</div>
+                </div>
+                <div class="product-info">
+                    <span class="product-time">미니 노트</span>
+                    <div class="product-name">ZEN Mini Note</div>
+                    <p class="product-notes">캐릭터 일러스트 커버 미니 노트<br>출시 예정</p>
+                    <p class="coming-price">Coming Soon →</p>
+                </div>
+            </div>
+
+            <div class="product-card coming reveal" style="transition-delay:.2s">
+                <div class="product-img-wrap">
+                    <span class="product-badge badge-coming">Coming Soon</span>
+                    <div class="product-placeholder" style="background:linear-gradient(135deg,#E8FFF4,#C0F0D8);">🛍️</div>
+                </div>
+                <div class="product-info">
+                    <span class="product-time">캐릭터 파우치</span>
+                    <div class="product-name">Mandu Pouch</div>
+                    <p class="product-notes">꿈꿀만두 캐릭터 파우치<br>출시 예정</p>
+                    <p class="coming-price">Coming Soon →</p>
                 </div>
             </div>
 
@@ -225,81 +219,33 @@
     </div>
 </section>
 
-<!-- Dusk 사전예약 모달 -->
-<div id="duskModal" style="display:none; position:fixed; inset:0; background:rgba(26,22,20,.65); z-index:9999; align-items:flex-start; justify-content:center; padding:1.5rem; overflow-y:auto;">
-    <div style="background:var(--bg); max-width:520px; width:100%; padding:3rem 2.8rem; position:relative; border:1px solid var(--border-lt); margin:auto;">
-        <button onclick="document.getElementById('duskModal').style.display='none'" style="position:absolute; top:1rem; right:1.2rem; background:none; border:none; font-size:1.6rem; color:var(--cream); cursor:pointer; line-height:1;">✕</button>
-        <p style="font-size:.68rem; letter-spacing:.35em; text-transform:uppercase; color:var(--gold); font-family:'Raleway',sans-serif; margin-bottom:.8rem;">Dusk — Golden Hour</p>
-        <h3 style="font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:700; font-style:italic; color:var(--cream); margin-bottom:.6rem;">사전예약 신청</h3>
-        <p style="font-size:.88rem; color:var(--muted); margin-bottom:1rem; line-height:1.8;">출시 전 가장 먼저 만나보세요. 사전예약 고객에게 우선 안내를 드립니다.</p>
-        <p style="font-size:.78rem; color:var(--gold); font-family:'Raleway',sans-serif; letter-spacing:.04em; margin-bottom:2rem; padding:.7rem 1rem; border:1px solid var(--border-lt); background:var(--bg2);">※ 1인 1개 한정 수량입니다.</p>
-        <div id="duskSuccess" style="display:none; text-align:center; padding:2rem 0;">
-            <p style="font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--cream); margin-bottom:.6rem;">신청이 완료되었습니다.</p>
-            <p style="font-size:.88rem; color:var(--muted);">출시 소식을 가장 먼저 전해드릴게요.</p>
-        </div>
-        <form id="duskForm" onsubmit="document.getElementById('duskForm').style.display='none';document.getElementById('duskSuccess').style.display='block';return false;">
-            <div style="margin-bottom:1.4rem;">
-                <label style="display:block; font-size:.68rem; letter-spacing:.25em; text-transform:uppercase; color:var(--gold); margin-bottom:.6rem; font-family:'Raleway',sans-serif;">이름</label>
-                <input type="text" required placeholder="홍길동" style="width:100%; padding:.9rem 1rem; background:var(--bg2); border:1px solid var(--border-lt); color:var(--cream); font-family:'Raleway',sans-serif; font-size:.92rem; outline:none; box-sizing:border-box;">
-            </div>
-            <div style="margin-bottom:1.4rem; display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
-                <div>
-                    <label style="display:block; font-size:.68rem; letter-spacing:.25em; text-transform:uppercase; color:var(--gold); margin-bottom:.6rem; font-family:'Raleway',sans-serif;">성별</label>
-                    <select required style="width:100%; padding:.9rem 1rem; background:var(--bg2); border:1px solid var(--border-lt); color:var(--cream); font-family:'Raleway',sans-serif; font-size:.92rem; outline:none; -webkit-appearance:none;">
-                        <option value="">선택</option>
-                        <option>여성</option>
-                        <option>남성</option>
-                        <option>기타</option>
-                    </select>
-                </div>
-                <div>
-                    <label style="display:block; font-size:.68rem; letter-spacing:.25em; text-transform:uppercase; color:var(--gold); margin-bottom:.6rem; font-family:'Raleway',sans-serif;">생년월일</label>
-                    <input type="date" required style="width:100%; padding:.9rem 1rem; background:var(--bg2); border:1px solid var(--border-lt); color:var(--cream); font-family:'Raleway',sans-serif; font-size:.92rem; outline:none; box-sizing:border-box;">
-                </div>
-            </div>
-            <div style="margin-bottom:1.4rem;">
-                <label style="display:block; font-size:.68rem; letter-spacing:.25em; text-transform:uppercase; color:var(--gold); margin-bottom:.6rem; font-family:'Raleway',sans-serif;">전화번호</label>
-                <input type="tel" required placeholder="010-0000-0000" style="width:100%; padding:.9rem 1rem; background:var(--bg2); border:1px solid var(--border-lt); color:var(--cream); font-family:'Raleway',sans-serif; font-size:.92rem; outline:none; box-sizing:border-box;">
-            </div>
-            <div style="margin-bottom:2rem;">
-                <label style="display:block; font-size:.68rem; letter-spacing:.25em; text-transform:uppercase; color:var(--gold); margin-bottom:.6rem; font-family:'Raleway',sans-serif;">주소</label>
-                <input type="text" required placeholder="서울특별시 성동구 성수동" style="width:100%; padding:.9rem 1rem; background:var(--bg2); border:1px solid var(--border-lt); color:var(--cream); font-family:'Raleway',sans-serif; font-size:.92rem; outline:none; box-sizing:border-box;">
-            </div>
-            <button type="submit" style="width:100%; padding:1.1rem; background:var(--gold); color:#fff; border:none; font-family:'Raleway',sans-serif; font-size:.78rem; letter-spacing:.2em; text-transform:uppercase; cursor:pointer; transition:background .3s;">사전예약 신청하기</button>
-        </form>
-    </div>
-</div>
-
 <footer>
     <div class="container">
         <div class="footer-content">
             <div class="footer-main">
                 <div class="footer-logo">
-                    <svg viewBox="0 0 260 64" fill="none" style="height:44px;width:auto">
-                        <rect x="0" y="6" width="260" height="38" fill="#D4A098" opacity="0.35"/>
-                        <text x="6" y="36" font-family="Playfair Display,Georgia,serif" font-size="32" font-weight="700" letter-spacing="4" fill="#F2EFE9">GALLERY</text>
-                        <text x="46" y="56" font-family="Raleway,sans-serif" font-size="9.5" letter-spacing="5" fill="#F2EFE9" opacity="0.6">FRAGRANCE JOURNAL</text>
+                    <svg viewBox="0 0 190 52" fill="none" style="height:44px;width:auto">
+                        <circle cx="10" cy="24" r="8" fill="#FF7BA3" opacity=".7"/>
+                        <text x="26" y="36" font-family="Playfair Display,Georgia,serif" font-size="32" font-weight="800" font-style="italic" fill="#FFFFFF">ZEN</text>
+                        <text x="27" y="49" font-family="Nunito,sans-serif" font-size="7.5" letter-spacing="3.5" fill="#FF7BA3" font-weight="700">KEYRING STUDIO</text>
                     </svg>
                 </div>
-                <p>Record your day through scent</p>
+                <p>일상 속 작은 행복을 만드는<br>키링 스튜디오</p>
             </div>
             <div class="footer-info">
-                <h4>Studio L'art</h4>
-                <p>CEO: Ahn Ae-jin</p>
-                
-                
+                <h4>ZEN Studio</h4>
+                <p>대표자: 안애진</p>
             </div>
             <div class="footer-contact">
                 <h4>Contact</h4>
                 <p>Email: scentlog@gmail.com</p>
-                <p><a href="https://www.instagram.com/scentlog_official/" target="_blank" style="color:inherit">Instagram: @scentlog_official</a></p>
+                <p><a href="https://www.instagram.com/dreaming_mandu/" target="_blank" style="color:inherit">Instagram: @dreaming_mandu</a></p>
             </div>
         </div>
-        <div class="footer-copy">&copy; 2026 GALLERY. All Rights Reserved.</div>
+        <div class="footer-copy">&copy; 2026 ZEN Keyring Studio. All Rights Reserved.</div>
     </div>
 </footer>
 
 <script src="main.js"></script>
 </body>
 </html>
-

@@ -1,59 +1,83 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About — Gallery</title>
+    <title>About — ZEN</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
     <style>
-        nav { background: rgba(250,246,242,.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-lt); }
-        nav .logo-svg { filter: none !important; }
-        nav .nav-links a { color: var(--muted); }
+        nav { background: rgba(255,255,255,.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-lt); }
 
-        .page-hero { padding: 10rem 0 5rem; background: linear-gradient(160deg, #EEE9E0 0%, #E8E2D6 60%, #DDD8CC 100%); text-align: center; position: relative; overflow: hidden; }
-        .page-hero::before { content: ''; position: absolute; top: -20%; right: -5%; width: 50%; height: 80%; background: radial-gradient(ellipse, rgba(212,160,152,.22) 0%, transparent 70%); filter: blur(40px); }
-        .page-hero-eyebrow { display: block; font-size: .75rem; letter-spacing: .4em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; font-family: 'Raleway', sans-serif; }
-        .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 6vw, 5.5rem); font-weight: 700; font-style: italic; color: var(--cream); letter-spacing: .02em; }
-        .page-hero p { font-size: 1rem; color: var(--muted); margin-top: 1.2rem; letter-spacing: .04em; font-family: 'Raleway', sans-serif; }
+        .page-hero {
+            padding: 10rem 0 5rem;
+            background: linear-gradient(160deg, #FFF0F5 0%, #FFE4EF 60%, #F8E8FF 100%);
+            text-align: center; position: relative; overflow: hidden;
+        }
+        .page-hero::before {
+            content: ''; position: absolute; top: -20%; right: -5%;
+            width: 50%; height: 80%;
+            background: radial-gradient(ellipse, rgba(255,123,163,.18) 0%, transparent 70%);
+            filter: blur(40px);
+        }
+        .page-hero-eyebrow {
+            display: block; font-size: .72rem; letter-spacing: .4em; text-transform: uppercase;
+            color: var(--gold); margin-bottom: 1.2rem; font-family: 'Nunito', sans-serif; font-weight: 700;
+        }
+        .page-hero h1 {
+            font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 800; font-style: italic; color: var(--cream);
+        }
+        .page-hero p { font-size: 1rem; color: var(--muted); margin-top: 1.2rem; font-family: 'Nunito', sans-serif; font-weight: 500; }
 
+        /* BRAND STORY */
         .brand-story { padding: 8rem 0; background: var(--bg); }
         .story-intro { text-align: center; max-width: 640px; margin: 0 auto 7rem; }
-        .story-intro h2 { font-family: 'Bodoni Moda', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; color: var(--cream); margin-bottom: 1.4rem; }
-        .story-intro p { font-size: 1rem; color: var(--muted); line-height: 2; }
+        .story-intro h2 { font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 800; font-style: italic; color: var(--cream); margin-bottom: 1.4rem; }
+        .story-intro p { font-size: 1rem; color: var(--muted); line-height: 2.1; }
 
+        /* TIMELINE */
         .timeline { position: relative; max-width: 800px; margin: 0 auto; }
-        .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--gold), rgba(184,117,106,.1)); }
+        .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--gold), rgba(255,123,163,.1)); border-radius: 2px; }
         .tl-item { padding: 0 0 5rem 3.5rem; position: relative; }
         .tl-item:last-child { padding-bottom: 0; }
-        .tl-dot { position: absolute; left: -5px; top: 8px; width: 10px; height: 10px; border-radius: 50%; background: var(--gold); border: 2px solid var(--bg); }
-        .tl-phase { font-size: .65rem; letter-spacing: .35em; text-transform: uppercase; color: var(--gold); margin-bottom: .8rem; font-family: 'Raleway', sans-serif; }
-        .tl-brand { font-family: 'Bodoni Moda', serif; font-size: 1.9rem; font-weight: 400; color: var(--cream); margin-bottom: .3rem; }
-        .tl-sub { font-size: .82rem; color: var(--dim); letter-spacing: .08em; margin-bottom: 1.2rem; }
-        .tl-desc { font-size: .98rem; color: var(--muted); line-height: 2; max-width: 580px; }
-        .tl-lesson { margin-top: 1.2rem; padding: 1.2rem 1.5rem; border-left: 2px solid var(--gold); background: var(--bg2); font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem; color: var(--cream); line-height: 1.8; }
+        .tl-dot { position: absolute; left: -6px; top: 8px; width: 14px; height: 14px; border-radius: 50%; background: var(--gold); border: 3px solid var(--bg); box-shadow: 0 0 0 2px var(--gold-lt); }
+        .tl-phase { font-size: .65rem; letter-spacing: .35em; text-transform: uppercase; color: var(--gold); margin-bottom: .8rem; font-family: 'Nunito', sans-serif; font-weight: 700; }
+        .tl-brand { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 800; font-style: italic; color: var(--cream); margin-bottom: .3rem; }
+        .tl-sub { font-size: .82rem; color: var(--muted); letter-spacing: .06em; margin-bottom: 1.2rem; font-weight: 600; }
+        .tl-desc { font-size: .98rem; color: var(--muted); line-height: 2.1; max-width: 580px; }
+        .tl-lesson {
+            margin-top: 1.2rem; padding: 1.2rem 1.6rem;
+            border-left: 3px solid var(--gold); background: var(--bg2); border-radius: 0 12px 12px 0;
+            font-family: 'Playfair Display', serif; font-style: italic;
+            font-size: 1.05rem; color: var(--cream); line-height: 1.8;
+        }
 
-        .values-about { padding: 8rem 0; background: var(--bg3); border-top: 1px solid var(--border-lt); }
-        .values-about h2 { font-family: 'Bodoni Moda', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; color: var(--cream); text-align: center; margin-bottom: 5rem; }
-        .values-about .values-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+        /* FOUNDER */
+        .founder-section { padding: 8rem 0; background: var(--bg2); }
+        .founder-wrap { max-width: 700px; margin-left: auto; text-align: right; }
 
-        .vision { padding: 8rem 0; background: var(--bg2); }
+        /* VISION */
+        .vision { padding: 8rem 0; background: var(--bg); }
         .vision-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
-        .vision-text h2 { font-family: 'Bodoni Moda', serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 300; color: var(--cream); margin-bottom: 1.6rem; }
-        .vision-text p { font-size: 1rem; color: var(--muted); line-height: 2; }
-        .vision-items { display: flex; flex-direction: column; gap: 1.6rem; }
-        .vision-item { padding: 1.8rem 2rem; background: var(--bg); border: 1px solid var(--border-lt); transition: border-color .3s; }
-        .vision-item:hover { border-color: var(--gold); }
-        .vision-item strong { font-family: 'Bodoni Moda', serif; font-size: 1.1rem; color: var(--gold); display: block; margin-bottom: .6rem; }
-        .vision-item p { font-size: .92rem; color: var(--muted); line-height: 1.85; }
+        .vision-text h2 { font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 800; font-style: italic; color: var(--cream); margin-bottom: 1.6rem; }
+        .vision-text p { font-size: 1rem; color: var(--muted); line-height: 2.1; }
+        .vision-items { display: flex; flex-direction: column; gap: 1.4rem; }
+        .vision-item { padding: 1.8rem 2rem; background: var(--bg2); border-radius: 16px; transition: transform .3s, box-shadow .3s; }
+        .vision-item:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(255,123,163,.12); }
+        .vision-item strong { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--gold); display: block; margin-bottom: .5rem; font-style: italic; }
+        .vision-item p { font-size: .9rem; color: var(--muted); line-height: 1.85; }
 
-        .history-section { padding: 8rem 0; background: var(--bg); border-top: 1px solid var(--border-lt); }
-        .history-section h2 { font-family: 'Bodoni Moda', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; color: var(--cream); margin-bottom: 4rem; }
+        /* HISTORY */
+        .history-section { padding: 8rem 0; background: var(--bg2); border-top: 1px solid var(--border-lt); }
+        .history-section h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 800; font-style: italic; color: var(--cream); margin-bottom: 4rem; }
         .history-list { list-style: none; max-width: 700px; }
-        .history-list li { display: flex; gap: 2.5rem; padding: 1.2rem 0; border-bottom: 1px solid var(--border-lt); font-size: .95rem; color: var(--muted); line-height: 1.8; }
-        .history-list li:last-child { border-bottom: none; }
-        .hy { min-width: 52px; font-family: 'Bodoni Moda', serif; font-size: 1rem; color: var(--gold); }
+        .history-list li { display: flex; gap: 2.5rem; padding: 1.2rem 0; border-bottom: 1px solid var(--border-lt); font-size: .95rem; color: var(--muted); line-height: 1.8; font-family: 'Nunito', sans-serif; }
+        .hy { min-width: 60px; font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--gold); font-weight: 700; font-style: italic; }
 
-        @media(max-width:900px){ .values-about .values-grid { grid-template-columns:1fr; } .vision-grid { grid-template-columns:1fr; gap:3rem; } }
+        @media(max-width:900px){ .vision-grid { grid-template-columns: 1fr; gap: 3rem; } }
     </style>
 </head>
 <body>
@@ -61,16 +85,15 @@
 <nav id="navbar">
     <div class="container nav-content">
         <a href="index.html" class="logo">
-            <svg class="logo-svg" viewBox="0 0 260 64" fill="none">
-                <rect x="0" y="6" width="260" height="38" fill="#D4A098" opacity="0.45"/>
-                <text x="6" y="36" font-family="Playfair Display,Georgia,serif" font-size="32" font-weight="700" letter-spacing="4" fill="#1A1614">GALLERY</text>
-                <text x="46" y="56" font-family="Raleway,sans-serif" font-size="9.5" letter-spacing="5" fill="#1A1614" opacity="0.7">FRAGRANCE JOURNAL</text>
+            <svg class="logo-svg" viewBox="0 0 190 52" fill="none">
+                <circle cx="10" cy="24" r="8" fill="#FF7BA3" opacity=".85"/>
+                <text x="26" y="36" font-family="Playfair Display,Georgia,serif" font-size="32" font-weight="800" font-style="italic" fill="#1E1E2E">ZEN</text>
+                <text x="27" y="49" font-family="Nunito,sans-serif" font-size="7.5" letter-spacing="3.5" fill="#FF7BA3" font-weight="700">KEYRING STUDIO</text>
             </svg>
         </a>
         <ul class="nav-links">
             <li><a href="about.html" style="color:var(--gold)">About</a></li>
             <li><a href="shop.html">Shop</a></li>
-            <li><a href="services.html">Services</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
         <div id="navOverlay" class="nav-overlay"></div>
@@ -80,8 +103,8 @@
 
 <div class="page-hero">
     <span class="page-hero-eyebrow">Our Story</span>
-    <h1>About Gallery</h1>
-    <p>향으로 세상을 읽고, 향으로 세상을 담다</p>
+    <h1>About ZEN</h1>
+    <p>작은 것들에서 찾는 큰 행복</p>
 </div>
 
 <section class="brand-story">
@@ -89,46 +112,50 @@
         <div class="story-intro reveal">
             <span class="section-eyebrow">Brand Story</span>
             <h2>글자 넘어서 삶을 봅니다</h2>
-            <p>당신이라는 고유한 세계를 채우는 향의 철학</p>
+            <p>당신이라는 고유한 세계를 채우는 키링의 철학</p>
         </div>
         <div class="timeline">
+
             <div class="tl-item reveal">
                 <div class="tl-dot"></div>
                 <div class="tl-phase">Phase 01</div>
-                <div class="tl-brand">Odorable</div>
-                <div class="tl-sub">Odor + Adorable — 제품 중심의 향수 브랜드</div>
-                <p class="tl-desc">기존의 수많은 향수 브랜드들은 먼저 향을 세상에 내놓고, 소비자가 그 정해진 향에 자신을 끼워 맞추는 공급자 중심의 구조였습니다. 흔하고 규정된 향 속에서 나만의 고유한 색깔을 찾기란 불가능에 가까웠습니다.</p>
-                <div class="tl-lesson">"향에 사람을 맞추던 시대에서, 사람을 향에 담아내는 시대로."</div>
+                <div class="tl-brand">Dreaming</div>
+                <div class="tl-sub">꿈꾸는 것들의 시작</div>
+                <p class="tl-desc">기존의 수많은 굿즈 브랜드들은 먼저 디자인을 세상에 내놓고, 소비자가 그 정해진 패턴에 자신을 끼워 맞추는 공급자 중심의 구조였습니다. 흔하고 규정된 디자인 속에서 나만의 고유한 색깔을 찾기란 불가능에 가까웠습니다.</p>
+                <div class="tl-lesson">"디자인에 사람을 맞추던 시대에서, 사람을 디자인에 담아내는 시대로."</div>
             </div>
+
             <div class="tl-item reveal" style="transition-delay:.1s">
                 <div class="tl-dot"></div>
                 <div class="tl-phase">Phase 02</div>
-                <div class="tl-brand">Studio L'art</div>
-                <div class="tl-sub">L'art (예술) — 프라이빗 조향 아틀리에, 현재 운영 중</div>
-                <p class="tl-desc">관성을 깨고 1:1 방식으로 전환했습니다. 각자의 스타일과 생활 리듬을 먼저 듣고 향을 설계하는 과정에서 핵심 인사이트를 발견했습니다. 지금도 운영 중인 Studio L'art는 센로그 방법론의 출발점입니다.</p>
-                <div class="tl-lesson">"사람의 하루를 먼저 이해해야 한다."</div>
+                <div class="tl-brand">꿈꿀만두</div>
+                <div class="tl-sub">첫 번째 캐릭터 키링의 탄생</div>
+                <p class="tl-desc">관성을 깨고 직접 캐릭터를 만들기로 했습니다. 꿈을 꾸는 만두 — 꿈꿀만두. 귀엽고 포근한 이 캐릭터에서 ZEN의 철학이 시작됩니다. 각자의 일상 속 작은 기쁨을 먼저 듣고, 그것을 손에 쥘 수 있는 형태로 만드는 과정에서 핵심 인사이트를 발견했습니다.</p>
+                <div class="tl-lesson">"사람의 일상을 먼저 이해해야 한다."</div>
             </div>
+
             <div class="tl-item reveal" style="transition-delay:.2s">
-                <div class="tl-dot" style="background:var(--gold-lt)"></div>
+                <div class="tl-dot" style="background:var(--gold-lt); box-shadow:0 0 0 2px var(--gold-lt);"></div>
                 <div class="tl-phase">Phase 03 — Now</div>
-                <div class="tl-brand">Scent Log</div>
-                <div class="tl-sub">Scent + Log — 시간 기반 맞춤 향 설계 플랫폼</div>
-                <p class="tl-desc">한 사람의 인생을 향에 담아내는 일. 흔하고 정형화된 향수들 사이에서 길을 잃은 당신을 위해, 당신의 일상 속으로 깊숙이 들어갑니다. 당신의 착장과 무드, 그날의 분위기까지 모두 향의 성분이 됩니다.</p>
+                <div class="tl-brand">ZEN</div>
+                <div class="tl-sub">Keyring Studio — 일상 속 작은 행복을 만드는 공간</div>
+                <p class="tl-desc">한 사람의 일상을 키링에 담아내는 일. 흔하고 정형화된 굿즈들 사이에서 길을 잃은 당신을 위해, 당신의 일상 속으로 깊숙이 들어갑니다. 당신의 취향과 무드, 그날의 분위기까지 모두 디자인의 성분이 됩니다.</p>
                 <div class="tl-lesson">"당신의 일상을 지켜보는 시선, 그것이 우리의 전부입니다."</div>
             </div>
+
         </div>
     </div>
 </section>
 
-<section class="values-about">
+<section class="founder-section">
     <div class="container">
-        <div class="founder-wrap reveal" style="margin-left:auto;text-align:right;">
+        <div class="founder-wrap reveal">
             <span class="section-eyebrow" style="display:block;margin-bottom:1.2rem;">Founder</span>
-            <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;font-style:italic;color:var(--cream);margin-bottom:.4rem;">안애진</h2>
-            <p style="font-size:.78rem;letter-spacing:.2em;color:var(--gold);font-family:'Raleway',sans-serif;margin-bottom:2.4rem;">Founder & Director, Studio L'art</p>
-            <p style="font-size:1rem;color:var(--muted);line-height:2.1;max-width:660px;margin-bottom:1.6rem;">향수를 팔려던 사람이 결국 향을 설계하는 사람이 되었습니다. Odorable의 실패, Studio L'art의 1:1 조향 경험, 그 모든 과정이 센로그를 만들었습니다. 저는 향이 단순한 취향이 아니라 하루를 살아가는 방식이라고 믿습니다.</p>
-            <p style="font-size:1rem;color:var(--muted);line-height:2.1;max-width:660px;">향수 지식이 없어도 괜찮습니다. 당신의 하루 이야기를 들려주세요 — 나머지는 제가 설계합니다.</p>
-            <div style="width:40px;height:1px;background:var(--gold);margin-top:2.4rem;margin-left:auto;"></div>
+            <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;font-style:italic;color:var(--cream);margin-bottom:.4rem;">안애진</h2>
+            <p style="font-size:.78rem;letter-spacing:.15em;color:var(--gold);font-family:'Nunito',sans-serif;font-weight:700;margin-bottom:2.4rem;text-transform:uppercase;">Founder & Director, ZEN Studio</p>
+            <p style="font-size:1rem;color:var(--muted);line-height:2.1;max-width:660px;margin-bottom:1.6rem;">작은 것들의 가치를 믿는 사람입니다. 꿈꿀만두라는 첫 번째 캐릭터를 만들면서 깨달았습니다 — 사람들이 원하는 건 단순한 굿즈가 아니라, 자신만의 이야기가 담긴 물건이라는 것을.</p>
+            <p style="font-size:1rem;color:var(--muted);line-height:2.1;max-width:660px;">어떤 키링을 원하시는지 말씀해 주세요 — 나머지는 ZEN이 만들어드립니다.</p>
+            <div style="width:40px;height:2px;background:var(--gold);margin-top:2.4rem;margin-left:auto;border-radius:2px;"></div>
         </div>
     </div>
 </section>
@@ -137,14 +164,14 @@
     <div class="container">
         <div class="vision-grid">
             <div class="vision-text reveal">
-                <span class="section-eyebrow">Vision & Mission</span>
+                <span class="section-eyebrow">Vision</span>
                 <h2>Vision</h2>
-                <p style="margin-top:1.2rem">향수 산업의 진입 장벽을 낮춰 누구나 자신만의 향 정체성을 찾을 수 있게 하는 것. 그것이 센로그가 존재하는 이유입니다.</p>
+                <p style="margin-top:1.2rem">누구나 자신만의 고유한 취향을 가질 수 있도록. 흔하지 않고 나다운 것을 손에 쥘 수 있도록. 그것이 ZEN이 존재하는 이유입니다.</p>
             </div>
             <div class="vision-items reveal" style="transition-delay:.12s">
-                <div class="vision-item"><strong>Zero Barrier to Entry</strong><p>향수 지식이 없어도 됩니다 — 하루 루틴만 알려주시면 나만의 향이 완성됩니다.</p></div>
-                <div class="vision-item"><strong>Industry-First 3-Scent System</strong><p>오전·오후·저녁, 하루 전체를 설계하는 국내 유일의 3향 라이프스타일 시스템.</p></div>
-                <div class="vision-item"><strong>Sustainable by Design</strong><p>선주문 방식으로 재고 제로 — 구조적으로 지속 가능한 비즈니스 모델.</p></div>
+                <div class="vision-item"><strong>Original Characters</strong><p>모든 캐릭터는 ZEN이 직접 개발합니다. 어디서도 볼 수 없는 ZEN만의 세계관.</p></div>
+                <div class="vision-item"><strong>Small Batch Production</strong><p>대량생산 없이 소량으로만 제작해 소장 가치를 높이고 특별함을 유지합니다.</p></div>
+                <div class="vision-item"><strong>Everyday Joy</strong><p>매일 쓰는 물건에서 찾는 작은 행복. 일상이 특별해지는 순간을 만들어갑니다.</p></div>
             </div>
         </div>
     </div>
@@ -155,10 +182,10 @@
         <span class="section-eyebrow reveal">History</span>
         <h2 class="reveal">주요 연혁</h2>
         <ul class="history-list">
-            <li class="reveal"><span class="hy">2024.02</span>갤러리 브랜드 기획 시작 · 시간 기반 향 진단 프레임워크 설계</li>
-            <li class="reveal" style="transition-delay:.05s"><span class="hy">2024.06</span>센로그 플랫폼 구조 확립 · 전국 스튜디오 파트너십 네트워크 구축</li>
-            <li class="reveal" style="transition-delay:.1s"><span class="hy">2024.11</span>Dusk 사전예약 오픈 · 1인 1개 한정 선주문 모델 도입</li>
-            <li class="reveal" style="transition-delay:.15s"><span class="hy">2025</span>갤러리 론칭</li>
+            <li class="reveal"><span class="hy">2024.02</span>ZEN 브랜드 기획 시작 · 첫 번째 캐릭터 설계</li>
+            <li class="reveal" style="transition-delay:.05s"><span class="hy">2024.06</span>꿈꿀만두 캐릭터 개발 완료 · 시제품 제작</li>
+            <li class="reveal" style="transition-delay:.1s"><span class="hy">2024.11</span>꿈꿀만두 키링 사전예약 오픈 · 한정 수량 완판</li>
+            <li class="reveal" style="transition-delay:.15s"><span class="hy">2025</span>ZEN 공식 론칭</li>
         </ul>
     </div>
 </section>
@@ -167,16 +194,28 @@
     <div class="container">
         <div class="footer-content">
             <div class="footer-main">
-                <div class="footer-logo"><svg viewBox="0 0 260 64" fill="none" style="height:44px;width:auto"><rect x="0" y="6" width="260" height="38" fill="#D4A098" opacity="0.35"/><text x="6" y="36" font-family="Playfair Display,Georgia,serif" font-size="32" font-weight="700" letter-spacing="4" fill="#F2EFE9">GALLERY</text><text x="46" y="56" font-family="Raleway,sans-serif" font-size="9.5" letter-spacing="5" fill="#F2EFE9" opacity="0.6">FRAGRANCE JOURNAL</text></svg></div>
-                <p>당신의 하루를 향으로 기록하는 플랫폼</p>
+                <div class="footer-logo">
+                    <svg viewBox="0 0 190 52" fill="none" style="height:44px;width:auto">
+                        <circle cx="10" cy="24" r="8" fill="#FF7BA3" opacity=".7"/>
+                        <text x="26" y="36" font-family="Playfair Display,Georgia,serif" font-size="32" font-weight="800" font-style="italic" fill="#FFFFFF">ZEN</text>
+                        <text x="27" y="49" font-family="Nunito,sans-serif" font-size="7.5" letter-spacing="3.5" fill="#FF7BA3" font-weight="700">KEYRING STUDIO</text>
+                    </svg>
+                </div>
+                <p>일상 속 작은 행복을 만드는<br>키링 스튜디오</p>
             </div>
-            <div class="footer-info"><h4>Studio L'art</h4><p>대표자: 안애진</p></div>
-            <div class="footer-contact"><h4>Contact</h4><p>Email: scentlog@gmail.com</p><p><a href="https://www.instagram.com/scentlog_official/" target="_blank" style="color:inherit">Instagram: @scentlog_official</a></p></div>
+            <div class="footer-info">
+                <h4>ZEN Studio</h4>
+                <p>대표자: 안애진</p>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact</h4>
+                <p>Email: scentlog@gmail.com</p>
+                <p><a href="https://www.instagram.com/dreaming_mandu/" target="_blank" style="color:inherit">Instagram: @dreaming_mandu</a></p>
+            </div>
         </div>
-        <div class="footer-copy">&copy; 2026 GALLERY. All Rights Reserved.</div>
+        <div class="footer-copy">&copy; 2026 ZEN Keyring Studio. All Rights Reserved.</div>
     </div>
 </footer>
 <script src="main.js"></script>
 </body>
 </html>
-

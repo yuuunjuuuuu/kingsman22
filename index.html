@@ -1,422 +1,128 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery | 일상을 향에 담다</title>
+    <title>ZEN — Keyring Studio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
     <style>
-        /* ── 폰트 전체 교체 ── */
-        h1, h2, h3, h4, .serif {
-            font-family: 'Playfair Display', Georgia, serif;
-        }
+        nav { background: rgba(255,255,255,0); }
 
-        /* ── HERO CLEAN ── */
-        .hero-clean {
-            background: url('scentlog1.png') center/cover no-repeat;
-            min-height: 100vh;
-            display: flex; align-items: center; justify-content: center;
+        /* HERO */
+        .hero-wrap {
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
             text-align: center; position: relative; overflow: hidden;
+            background: linear-gradient(135deg, #fff5f8 0%, #ffe8f0 55%, #f3eeff 100%);
         }
-        .hero-clean::before {
-            content: '';
-            position: absolute; inset: 0;
-            background: rgba(250, 246, 241, 0.58);
-            pointer-events: none;
+        .hero-wrap::before {
+            content: ''; position: absolute; top: -15%; right: -5%;
+            width: 55%; height: 80%;
+            background: radial-gradient(ellipse, rgba(255,123,163,.22) 0%, transparent 70%);
+            filter: blur(50px);
         }
-        .hero-clean::after { display: none; }
-        .hero-clean-inner {
-            position: relative; z-index: 1;
-            padding: 0 2rem;
-            animation: heroFadeUp .9s .15s both;
+        .hero-wrap::after {
+            content: ''; position: absolute; bottom: -5%; left: -8%;
+            width: 45%; height: 60%;
+            background: radial-gradient(ellipse, rgba(180,140,255,.16) 0%, transparent 70%);
+            filter: blur(50px);
         }
+        .hero-inner { position: relative; z-index: 1; padding: 0 2rem; animation: heroFadeUp .9s .1s both; }
         .hero-eyebrow {
-            display: block;
-            font-family: 'Raleway', sans-serif;
-            font-size: .7rem; font-weight: 600;
-            letter-spacing: .5em; text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 2.2rem;
+            display: inline-block; font-family: 'Nunito', sans-serif; font-weight: 700;
+            font-size: .72rem; letter-spacing: .4em; text-transform: uppercase;
+            color: var(--gold); margin-bottom: 1.8rem;
+            background: rgba(255,123,163,.08); padding: .5rem 1.4rem; border-radius: 100px;
         }
-        .hero-clean-title {
-            font-family: 'Playfair Display', 'Noto Serif KR', serif;
-            line-height: 0.95; margin-bottom: 2rem;
+        .hero-title {
+            font-size: clamp(3.8rem, 9vw, 8.5rem); font-weight: 800; font-style: italic;
+            color: var(--cream); line-height: 1; margin-bottom: 1.6rem; letter-spacing: -.02em;
         }
-        .hero-en {
-            display: block;
-            font-size: clamp(3.5rem, 8vw, 8rem);
-            font-weight: 800; font-style: italic;
-            color: var(--cream);
-            letter-spacing: -.01em;
+        .hero-title span { display: block; }
+        .hero-title .accent { color: var(--gold); }
+        .hero-sub {
+            font-family: 'Nunito', sans-serif; font-size: clamp(.95rem, 1.4vw, 1.1rem);
+            font-weight: 500; color: var(--muted); line-height: 2;
+            max-width: 480px; margin: 0 auto 2.8rem;
         }
-        .hero-kr {
-            display: block;
-            font-size: clamp(2.8rem, 6.5vw, 6.5rem);
-            font-weight: 800;
-            color: var(--cream);
-            letter-spacing: -.01em;
-            font-style: italic;
-        }
-        .hero-clean-sub {
-            font-family: 'Raleway', sans-serif;
-            font-size: clamp(.9rem, 1.4vw, 1.05rem);
-            font-weight: 300; color: var(--muted);
-            line-height: 2.1; margin-bottom: 2.4rem;
-            letter-spacing: .03em;
-        }
-        .hero-clean-line {
-            width: 40px; height: 1px;
-            background: var(--gold);
-            margin: 0 auto 2.4rem;
-        }
-        .btn-hero-primary {
-            font-family: 'Raleway', sans-serif; font-weight: 600;
-            font-size: .75rem; letter-spacing: .2em; text-transform: uppercase;
-            padding: 1.1rem 2.8rem;
-            background: var(--cream); color: var(--bg);
-            border: none; cursor: pointer;
-            transition: background .3s, color .3s;
+        .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+        .btn-pink {
+            font-family: 'Nunito', sans-serif; font-weight: 800; font-size: .85rem;
+            letter-spacing: .06em; padding: 1rem 2.4rem;
+            background: var(--gold); color: #fff; border: none;
+            border-radius: 100px; cursor: pointer; transition: background .3s, transform .2s;
             text-decoration: none; display: inline-block;
         }
-        .btn-hero-primary:hover { background: var(--gold); color: #fff; }
-        .btn-hero-ghost {
-            font-family: 'Raleway', sans-serif; font-weight: 500;
-            font-size: .75rem; letter-spacing: .2em; text-transform: uppercase;
-            padding: 1.1rem 2rem;
-            background: transparent; color: var(--muted);
-            border: none; cursor: pointer; text-decoration: none;
-            display: inline-block;
-            transition: color .3s;
+        .btn-pink:hover { background: var(--gold-dk); transform: translateY(-2px); }
+        .btn-outline {
+            font-family: 'Nunito', sans-serif; font-weight: 700; font-size: .85rem;
+            letter-spacing: .06em; padding: 1rem 2.4rem;
+            background: transparent; color: var(--cream);
+            border: 2px solid rgba(30,30,46,.2); border-radius: 100px;
+            cursor: pointer; transition: border-color .3s, transform .2s;
+            text-decoration: none; display: inline-block;
         }
-        .btn-hero-ghost:hover { color: var(--cream); }
-        .hero-scroll-hint {
-            position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
-            display: flex; flex-direction: column; align-items: center; gap: .8rem;
-        }
-        .hero-scroll-hint span {
-            font-family: 'Raleway', sans-serif; font-size: .6rem;
-            font-weight: 500; letter-spacing: .35em; text-transform: uppercase;
-            color: var(--dim);
-        }
-        .scroll-bar {
-            width: 1px; height: 40px;
-            background: linear-gradient(to bottom, var(--gold), transparent);
-            animation: scrollPulse 2s ease-in-out infinite;
-        }
-        @keyframes scrollPulse { 0%,100%{opacity:1} 50%{opacity:.3} }
-
-        /* ── NAV ── */
-        .logo-text {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            font-size: 1.3rem;
-            letter-spacing: .18em;
-            color: var(--cream);
-            transition: color .3s;
-        }
-        nav { background: rgba(250,246,242,.80); backdrop-filter: blur(12px); }
-        nav.scrolled .logo-text { color: var(--cream); }
-        nav .nav-links a { font-weight: 500; letter-spacing: .14em; color: var(--muted); }
-
-        /* ── HERO ── */
-        .hero {
-            background: none;
-            height: 100vh; min-height: 700px;
-            position: relative;
-            display: flex; align-items: center; justify-content: center;
-            text-align: center; overflow: hidden;
-        }
-        .hero-bg {
-            position: absolute; inset: 0;
-            background-image: url('https://images.unsplash.com/photo-1616171046673-69c26cbef84d?w=1600&q=80');
-            background-size: cover; background-position: center;
-            transform: scale(1.05);
-            animation: heroZoom 8s ease-out forwards;
-        }
-        @keyframes heroZoom {
-            from { transform: scale(1.08); }
-            to   { transform: scale(1.0); }
-        }
-        .hero-overlay {
-            position: absolute; inset: 0;
-            background: linear-gradient(to bottom,
-                rgba(20,18,15,.55) 0%,
-                rgba(20,18,15,.3) 50%,
-                rgba(20,18,15,.7) 100%);
-        }
-        .hero-content {
-            position: relative; z-index: 2;
-            padding: 0 2rem;
-        }
-        .hero-eyebrow {
-            display: block;
-            font-family: 'Raleway', sans-serif;
-            font-size: .72rem; font-weight: 600;
-            letter-spacing: .45em; text-transform: uppercase;
-            color: rgba(255,255,255,.7);
-            margin-bottom: 1.4rem;
-            animation: fadeUp .9s .2s both;
-        }
-        .hero h1 {
-            font-size: clamp(4rem, 10vw, 9rem);
-            font-weight: 800;
-            color: #fff;
-            line-height: 1.0;
-            letter-spacing: -.01em;
-            margin-bottom: 1.8rem;
-            animation: fadeUp .9s .4s both;
-        }
-        .hero h1 em {
-            font-style: italic;
-            font-weight: 600;
-            color: rgba(255,255,255,.75);
-        }
-        .hero-sub {
-            font-family: 'Raleway', sans-serif;
-            font-size: clamp(1rem, 1.6vw, 1.15rem);
-            font-weight: 300;
-            color: rgba(255,255,255,.78);
-            line-height: 2;
-            margin-bottom: 3rem;
-            animation: fadeUp .9s .6s both;
-        }
-        .hero-btns {
-            display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
-            animation: fadeUp .9s .75s both;
-        }
-        .btn-hero-primary {
-            font-family: 'Raleway', sans-serif; font-weight: 600;
-            font-size: .78rem; letter-spacing: .2em; text-transform: uppercase;
-            padding: 1.1rem 2.8rem;
-            background: #fff; color: var(--cream);
-            border: none; cursor: pointer;
-            transition: background .3s, color .3s;
-            text-decoration: none;
-        }
-        .btn-hero-primary:hover { background: var(--gold); color: #fff; }
-        .btn-hero-outline {
-            font-family: 'Raleway', sans-serif; font-weight: 500;
-            font-size: .78rem; letter-spacing: .2em; text-transform: uppercase;
-            padding: 1.1rem 2.8rem;
-            background: transparent; color: #fff;
-            border: 1.5px solid rgba(255,255,255,.6); cursor: pointer;
-            transition: border-color .3s;
-            text-decoration: none;
-        }
-        .btn-hero-outline:hover { border-color: #fff; }
+        .btn-outline:hover { border-color: var(--cream); transform: translateY(-2px); }
         .hero-scroll-hint {
             position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
             display: flex; flex-direction: column; align-items: center; gap: .6rem;
-            animation: fadeUp .9s .95s both;
         }
-        .hero-scroll-hint span {
-            font-family: 'Raleway', sans-serif; font-size: .6rem;
-            font-weight: 500; letter-spacing: .35em; text-transform: uppercase;
-            color: rgba(255,255,255,.5);
-        }
-        .scroll-bar { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(255,255,255,.6), transparent); animation: scrollPulse 2s ease-in-out infinite; }
-        @keyframes scrollPulse { 0%,100%{opacity:1;transform:scaleY(1)} 50%{opacity:.35;transform:scaleY(.5)} }
+        .hero-scroll-hint span { font-size: .6rem; letter-spacing: .3em; text-transform: uppercase; color: var(--muted); }
 
-        /* ── MARQUEE ── */
-        .marquee-wrap {
-            background: var(--cream);
-            padding: 1.2rem 0;
-            overflow: hidden;
-            border-top: none;
-        }
-        .marquee-track {
-            display: flex;
-            white-space: nowrap;
-            animation: marqueeScroll 22s linear infinite;
-        }
-        .marquee-track span {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            font-size: 1rem;
-            letter-spacing: .25em;
-            text-transform: uppercase;
-            color: var(--bg);
-            padding: 0 2.5rem;
-            opacity: .85;
-        }
-        .marquee-track span.dot {
-            color: var(--gold); opacity: 1; padding: 0; font-size: .6rem;
-        }
-        @keyframes marqueeScroll {
-            from { transform: translateX(0); }
-            to   { transform: translateX(-50%); }
-        }
+        /* FEATURED */
+        .featured { padding: 8rem 0; background: var(--bg); }
+        .featured-header { text-align: center; margin-bottom: 4.5rem; }
+        .featured-header h2 { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 800; font-style: italic; color: var(--cream); margin-bottom: .8rem; }
+        .featured-header p { color: var(--muted); font-size: .98rem; }
+        .featured-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2.5rem; }
 
-        /* ── WHY 1 — 이미지 + 텍스트 ── */
-        .why-split {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: 80vh;
-        }
-        .why-img {
-            position: relative; overflow: hidden;
-        }
-        .why-img img {
-            width: 100%; height: 100%;
-            object-fit: cover;
-            transition: transform .8s ease-out;
-        }
-        .why-img:hover img { transform: scale(1.04); }
-        .why-img-overlay {
-            position: absolute; inset: 0;
-            background: linear-gradient(135deg, rgba(184,117,106,.2) 0%, transparent 60%);
-        }
-        .why-text-block {
-            display: flex; flex-direction: column; justify-content: center;
-            padding: 6rem 5rem;
-            background: var(--bg);
-        }
-        .why-text-block.right { background: var(--bg2); }
-        .why-num {
-            font-family: 'Playfair Display', serif;
-            font-size: 7rem; font-weight: 900;
-            color: rgba(184,117,106,.1);
-            line-height: 1;
-            margin-bottom: -1.5rem;
-        }
-        .why-label {
-            font-family: 'Raleway', sans-serif;
-            font-size: .7rem; font-weight: 600;
-            letter-spacing: .4em; text-transform: uppercase;
-            color: var(--gold); margin-bottom: 1.2rem;
-        }
-        .why-heading {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.2rem, 3.5vw, 3.4rem);
-            font-weight: 800;
-            color: #1A1614;
-            line-height: 1.15;
-            margin-bottom: 1.2rem;
-        }
-        .why-sub {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.1rem, 1.8vw, 1.4rem);
-            font-weight: 600;
-            font-style: italic;
-            color: #3A3530;
-            line-height: 1.5;
-            margin-bottom: 1.6rem;
-        }
-        .why-body {
-            font-family: 'Raleway', sans-serif;
-            font-size: .97rem; font-weight: 400;
-            color: #5A5450; line-height: 2.1;
-        }
-        .why-line {
-            width: 0; height: 2px; background: var(--gold);
-            margin: 1.8rem 0;
-            transition: width .9s cubic-bezier(.16,1,.3,1) .3s;
-        }
-        .slide-left.active .why-line,
-        .slide-right.active .why-line { width: 52px; }
+        /* BRAND STRIP */
+        .brand-strip { padding: 7rem 0; background: var(--bg2); }
+        .brand-strip-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+        .brand-strip-text h2 { font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 800; font-style: italic; color: var(--cream); margin-bottom: 1.4rem; line-height: 1.2; }
+        .brand-strip-text p { color: var(--muted); line-height: 2.1; font-size: .98rem; margin-bottom: 2rem; }
+        .brand-values { display: flex; flex-direction: column; gap: 1.2rem; }
+        .brand-value-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1.4rem 1.6rem; background: var(--bg); border-radius: 16px; box-shadow: 0 2px 10px rgba(255,123,163,.07); }
+        .bv-icon { font-size: 1.6rem; flex-shrink: 0; margin-top: .1rem; }
+        .bv-text strong { display: block; font-weight: 800; font-size: .95rem; color: var(--cream); margin-bottom: .3rem; }
+        .bv-text span { font-size: .85rem; color: var(--muted); line-height: 1.7; }
 
-        /* ── FULL BLEED QUOTE ── */
-        .full-quote {
-            position: relative; min-height: 55vh;
-            display: flex; align-items: center; justify-content: center;
-            text-align: center; overflow: hidden;
+        /* IG SECTION */
+        .ig-section { padding: 7rem 0; background: var(--bg3); text-align: center; }
+        .ig-section h2 { font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 800; font-style: italic; color: var(--cream); margin-bottom: 1rem; }
+        .ig-section p { color: var(--muted); font-size: .98rem; margin-bottom: 2.5rem; line-height: 2; }
+        .ig-handle {
+            display: inline-flex; align-items: center; gap: .8rem;
+            font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.1rem;
+            color: var(--gold); text-decoration: none;
+            border: 2px solid var(--gold); padding: 1rem 2.5rem; border-radius: 100px;
+            transition: background .3s, color .3s;
         }
-        .full-quote-bg {
-            position: absolute; inset: 0;
-            background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80');
-            background-size: cover; background-position: center 40%;
-        }
-        .full-quote-overlay {
-            position: absolute; inset: 0;
-            background: rgba(20,18,15,.72);
-        }
-        .full-quote-content {
-            position: relative; z-index: 1;
-            padding: 4rem 2rem;
-        }
-        .full-quote-text {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(1.8rem, 4vw, 3.5rem);
-            font-weight: 700; font-style: italic;
-            color: #fff;
-            line-height: 1.45;
-            max-width: 760px; margin: 0 auto 1.4rem;
-        }
-        .full-quote-attr {
-            font-family: 'Raleway', sans-serif;
-            font-size: .75rem; font-weight: 500;
-            letter-spacing: .3em; text-transform: uppercase;
-            color: rgba(255,255,255,.5);
-        }
+        .ig-handle:hover { background: var(--gold); color: #fff; }
 
-        /* ── ANIMATIONS ── */
-        .slide-left  { opacity:0; transform:translateX(-50px); transition:opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); }
-        .slide-right { opacity:0; transform:translateX(50px);  transition:opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); }
-        .slide-up    { opacity:0; transform:translateY(40px);  transition:opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); }
-        .slide-img   { opacity:0; transform:scale(1.04);        transition:opacity 1s ease-out, transform 1s ease-out; }
-        .slide-left.active, .slide-right.active, .slide-up.active { opacity:1; transform:none; }
-        .slide-img.active { opacity:1; transform:scale(1); }
-
-        @keyframes fadeUp { from{opacity:0;transform:translateY(36px)} to{opacity:1;transform:none} }
-
-        /* ── RESPONSIVE ── */
         @media(max-width:900px){
-            .why-split { grid-template-columns:1fr; }
-            .why-img { min-height: 45vw; }
-            .why-text-block { padding: 4rem 2rem; }
-            .why-num { font-size: 5rem; }
-            .full-quote-text { font-size: clamp(1.5rem, 5vw, 2.5rem); }
+            .featured-grid { grid-template-columns: repeat(2,1fr); gap: 1.6rem; }
+            .brand-strip-inner { grid-template-columns: 1fr; gap: 3rem; }
         }
-
-        /* ── WORLD SECTION ── */
-        .world-section { background: var(--bg); padding: 9rem 0 10rem; }
-
-        .world-intro { text-align: center; max-width: 560px; margin: 0 auto 6.5rem; }
-        .world-eyebrow { display: block; font-family: 'Raleway', sans-serif; font-size: .68rem; letter-spacing: .45em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.4rem; }
-        .world-intro h2 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 4vw, 3.6rem); font-weight: 700; font-style: italic; color: var(--cream); margin-bottom: 1.4rem; line-height: 1.2; }
-        .world-intro p { font-family: 'Raleway', sans-serif; font-size: 1rem; color: var(--muted); line-height: 2.2; }
-
-        .world-moments { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; align-items: start; }
-        .moment-card:nth-child(2) { padding-top: 4rem; }
-
-        .moment-img-wrap { position: relative; overflow: hidden; aspect-ratio: 2/3; margin-bottom: 1.8rem; }
-        .moment-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
-        .moment-card:hover .moment-img-wrap img { transform: scale(1.04); }
-
-        .moment-time { position: absolute; bottom: 1.2rem; left: 1.2rem; font-family: 'Raleway', sans-serif; font-size: .58rem; letter-spacing: .32em; text-transform: uppercase; color: rgba(242,239,233,.92); background: rgba(26,22,20,.48); padding: .38rem .8rem; backdrop-filter: blur(6px); }
-
-        .moment-text h3 { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; font-style: italic; color: var(--cream); line-height: 1.45; margin-bottom: .8rem; }
-        .moment-text p { font-family: 'Raleway', sans-serif; font-size: .88rem; color: var(--muted); line-height: 2.1; }
-
-        .world-cta { text-align: center; margin-top: 6.5rem; }
-        .world-cta-link { font-family: 'Raleway', sans-serif; font-size: .75rem; letter-spacing: .22em; text-transform: uppercase; color: var(--cream); text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: .3rem; transition: color .3s; }
-        .world-cta-link:hover { color: var(--gold); }
-
-        @media(max-width:900px) {
-            .world-moments { grid-template-columns: 1fr; gap: 4rem; }
-            .moment-card:nth-child(2) { padding-top: 0; }
-        }
+        @media(max-width:560px){ .featured-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav id="navbar">
     <div class="container nav-content">
         <a href="index.html" class="logo">
-            <svg class="logo-svg" viewBox="0 0 260 64" fill="none">
-                <rect x="0" y="6" width="260" height="38" fill="#D4A098" opacity="0.45"/>
-                <text x="6" y="36" font-family="Playfair Display,Georgia,serif" font-size="32" font-weight="700" letter-spacing="4" fill="#1A1614">GALLERY</text>
-                <text x="46" y="56" font-family="Raleway,sans-serif" font-size="9.5" letter-spacing="5" fill="#1A1614" opacity="0.7">FRAGRANCE JOURNAL</text>
+            <svg class="logo-svg" viewBox="0 0 190 52" fill="none">
+                <circle cx="10" cy="24" r="8" fill="#FF7BA3" opacity=".85"/>
+                <text x="26" y="36" font-family="Playfair Display,Georgia,serif" font-size="32" font-weight="800" font-style="italic" fill="#1E1E2E">ZEN</text>
+                <text x="27" y="49" font-family="Nunito,sans-serif" font-size="7.5" letter-spacing="3.5" fill="#FF7BA3" font-weight="700">KEYRING STUDIO</text>
             </svg>
         </a>
         <ul class="nav-links">
             <li><a href="about.html">About</a></li>
             <li><a href="shop.html">Shop</a></li>
-            <li><a href="services.html">Services</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
         <div id="navOverlay" class="nav-overlay"></div>
@@ -425,65 +131,162 @@
 </nav>
 
 <!-- HERO -->
-<header class="hero hero-clean">
-    <div class="hero-clean-inner">
-        <span class="hero-eyebrow">Fragrance Journal · Est. 2025</span>
-
-        <h1 class="hero-clean-title">
-            <span class="hero-en">Log Your</span>
-            <span class="hero-kr">Everyday Scent</span>
+<header class="hero-wrap">
+    <div class="hero-inner">
+        <span class="hero-eyebrow">✦ ZEN Keyring Studio ✦</span>
+        <h1 class="hero-title">
+            <span>Hold What</span>
+            <span class="accent">You Love</span>
         </h1>
-
-        <p class="hero-clean-sub">
-            Your daily routine, translated into scent.<br>
-            오전 · 오후 · 저녁, 시간대별로 설계된 나만의 향기 시나리오.
+        <p class="hero-sub">
+            일상 속 작은 행복을 손에 쥐어드립니다.<br>
+            ZEN의 키링이 당신의 하루와 함께합니다.
         </p>
-
-        <div class="hero-clean-line"></div>
-
         <div class="hero-btns">
-            <a href="services.html#diagnosis" class="btn-hero-primary">Start Diagnosis — 무료 진단</a>
-            <a href="shop.html" class="btn-hero-ghost">View Collection →</a>
+            <a href="shop.html" class="btn-pink">컬렉션 보기 →</a>
+            <a href="about.html" class="btn-outline">브랜드 스토리</a>
         </div>
     </div>
-
     <div class="hero-scroll-hint">
         <div class="scroll-bar"></div>
         <span>Scroll</span>
     </div>
 </header>
 
-<!-- FOOTER -->
+<!-- FEATURED PRODUCTS -->
+<section class="featured">
+    <div class="container">
+        <div class="featured-header reveal">
+            <span class="section-eyebrow">New Arrivals</span>
+            <h2>지금 만나볼 수 있는 ZEN</h2>
+            <p>하나하나 정성껏 만든 키링들을 소개합니다</p>
+        </div>
+        <div class="featured-grid">
+
+            <div class="product-card slide-up">
+                <div class="product-img-wrap">
+                    <span class="product-badge badge-new">NEW</span>
+                    <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8D0,#FFD0B0);">🥟</div>
+                </div>
+                <div class="product-info">
+                    <span class="product-time">꿈꿀만두</span>
+                    <div class="product-name">Dreaming Mandu</div>
+                    <p class="product-notes">귀엽고 포근한 만두 캐릭터 키링<br>당신의 가방을 특별하게</p>
+                    <p class="product-price">₩ 18,000</p>
+                </div>
+            </div>
+
+            <div class="product-card slide-up" style="transition-delay:.12s">
+                <div class="product-img-wrap">
+                    <div class="product-placeholder" style="background:linear-gradient(135deg,#E8F0FF,#CCE0FF);">⭐</div>
+                </div>
+                <div class="product-info">
+                    <span class="product-time">구름 별</span>
+                    <div class="product-name">Cloud Star</div>
+                    <p class="product-notes">맑은 날 하늘을 닮은 키링<br>반짝이는 별 모양 참 장식</p>
+                    <p class="product-price">₩ 16,000</p>
+                </div>
+            </div>
+
+            <div class="product-card slide-up" style="transition-delay:.24s">
+                <div class="product-img-wrap">
+                    <span class="product-badge badge-coming">Coming Soon</span>
+                    <div class="product-placeholder" style="background:linear-gradient(135deg,#F0E8FF,#E0D0FF);">🐰</div>
+                </div>
+                <div class="product-info">
+                    <span class="product-time">달빛 토끼</span>
+                    <div class="product-name">Moon Bunny</div>
+                    <p class="product-notes">조용한 밤을 닮은 토끼 키링<br>출시 예정</p>
+                    <p class="coming-price">Coming Soon →</p>
+                </div>
+            </div>
+
+        </div>
+        <div style="text-align:center; margin-top:3.5rem;">
+            <a href="shop.html" class="btn-pink reveal">전체 컬렉션 보기</a>
+        </div>
+    </div>
+</section>
+
+<!-- BRAND STRIP -->
+<section class="brand-strip">
+    <div class="container">
+        <div class="brand-strip-inner">
+            <div class="slide-left">
+                <span class="section-eyebrow">Why ZEN</span>
+                <h2>작은 것들이<br>만드는 세계</h2>
+                <p>ZEN은 일상의 작은 부분에서 기쁨을 찾습니다. 매일 손에 드는 가방, 지갑, 열쇠고리 — 그 작은 것들이 당신의 하루를 특별하게 만든다고 믿습니다.</p>
+                <a href="about.html" class="btn-outline">더 알아보기</a>
+            </div>
+            <div class="brand-values slide-right">
+                <div class="brand-value-item">
+                    <span class="bv-icon">🎨</span>
+                    <div class="bv-text">
+                        <strong>직접 디자인, 직접 제작</strong>
+                        <span>모든 키링은 ZEN이 처음부터 끝까지 직접 디자인하고 제작합니다.</span>
+                    </div>
+                </div>
+                <div class="brand-value-item">
+                    <span class="bv-icon">✨</span>
+                    <div class="bv-text">
+                        <strong>한정 수량, 소장 가치</strong>
+                        <span>대량생산 없이 소량으로만 제작해 희소성을 높입니다.</span>
+                    </div>
+                </div>
+                <div class="brand-value-item">
+                    <span class="bv-icon">💌</span>
+                    <div class="bv-text">
+                        <strong>정성껏 포장</strong>
+                        <span>선물하기 좋은 감성적인 패키징으로 특별한 순간을 완성합니다.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section class="ig-section">
+    <div class="container">
+        <div class="reveal">
+            <span class="section-eyebrow">Instagram</span>
+            <h2>꿈꿀만두를 팔로우하세요</h2>
+            <p>신상품 소식, 비하인드 컷, 이벤트 정보를<br>인스타그램에서 가장 먼저 확인하세요.</p>
+            <a href="https://www.instagram.com/dreaming_mandu/" target="_blank" class="ig-handle">
+                <span>📷</span>
+                @dreaming_mandu
+            </a>
+        </div>
+    </div>
+</section>
+
 <footer>
     <div class="container">
         <div class="footer-content">
             <div class="footer-main">
                 <div class="footer-logo">
-                    <svg viewBox="0 0 260 64" fill="none" style="height:44px;width:auto">
-                        <rect x="0" y="6" width="260" height="38" fill="#B8C4B0" opacity="0.35"/>
-                        <text x="6" y="36" font-family="Playfair Display,Georgia,serif" font-size="32" font-weight="700" letter-spacing="4" fill="#F2EFE9">GALLERY</text>
-                        <text x="46" y="56" font-family="Raleway,sans-serif" font-size="9.5" letter-spacing="5" fill="#F2EFE9" opacity="0.6">FRAGRANCE JOURNAL</text>
+                    <svg viewBox="0 0 190 52" fill="none" style="height:44px;width:auto">
+                        <circle cx="10" cy="24" r="8" fill="#FF7BA3" opacity=".7"/>
+                        <text x="26" y="36" font-family="Playfair Display,Georgia,serif" font-size="32" font-weight="800" font-style="italic" fill="#FFFFFF">ZEN</text>
+                        <text x="27" y="49" font-family="Nunito,sans-serif" font-size="7.5" letter-spacing="3.5" fill="#FF7BA3" font-weight="700">KEYRING STUDIO</text>
                     </svg>
                 </div>
-                <p>당신의 하루를 향으로 기록하는 플랫폼</p>
+                <p>일상 속 작은 행복을 만드는<br>키링 스튜디오</p>
             </div>
             <div class="footer-info">
-                <h4>Studio L'art</h4>
+                <h4>ZEN Studio</h4>
                 <p>대표자: 안애진</p>
-                
-                
             </div>
             <div class="footer-contact">
-                <h4>CONTACT</h4>
+                <h4>Contact</h4>
                 <p>Email: scentlog@gmail.com</p>
-                <p><a href="https://www.instagram.com/scentlog_official/" target="_blank" style="color:inherit">Instagram: @scentlog_official</a></p>
+                <p><a href="https://www.instagram.com/dreaming_mandu/" target="_blank" style="color:inherit">Instagram: @dreaming_mandu</a></p>
             </div>
         </div>
-        <div class="footer-copy">&copy; 2026 GALLERY. All Rights Reserved.</div>
+        <div class="footer-copy">&copy; 2026 ZEN Keyring Studio. All Rights Reserved.</div>
     </div>
 </footer>
 
 <script src="main.js"></script>
 </body>
 </html>
-
