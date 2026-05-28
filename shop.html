@@ -9,54 +9,60 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
     <style>
-.page-hero {
-            padding: 10rem 0 5rem;
+        .page-hero {
+            padding: 8rem 0 4rem;
             background: linear-gradient(160deg, #FFF0F5 0%, #FFE4EF 60%, #F8E8FF 100%);
             text-align: center; position: relative; overflow: hidden;
         }
         .page-hero::before {
             content: ''; position: absolute; top: -20%; right: -5%;
             width: 50%; height: 80%;
-            background: radial-gradient(ellipse, rgba(255,123,163,.18) 0%, transparent 70%);
+            background: radial-gradient(ellipse, rgba(255,123,172,.18) 0%, transparent 70%);
             filter: blur(40px);
         }
         .page-hero-eyebrow {
             display: block; font-size: .72rem; letter-spacing: .4em; text-transform: uppercase;
-            color: var(--gold); margin-bottom: 1.2rem; font-family: 'Nunito', sans-serif; font-weight: 700;
+            color: var(--pink); margin-bottom: 1.2rem; font-weight: 700;
         }
         .page-hero h1 {
             font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 6vw, 5rem);
-            font-weight: 800; font-style: italic; color: var(--cream); letter-spacing: -.01em;
+            font-weight: 800; font-style: italic; color: var(--text); letter-spacing: -.01em;
         }
         .page-hero p {
-            font-size: 1rem; color: var(--muted); margin-top: 1.2rem;
-            letter-spacing: .02em; font-family: 'Nunito', sans-serif; font-weight: 500;
+            font-size: 1rem; color: var(--muted); margin-top: 1.2rem; font-weight: 500;
         }
 
         /* FILTER TABS */
-        .filter-bar { padding: 3rem 0 2rem; background: var(--bg); border-bottom: 1px solid var(--border-lt); }
+        .filter-bar { padding: 2.5rem 0 2rem; background: var(--bg); border-bottom: 1px solid var(--border); }
         .filter-tabs { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
         .filter-tab {
-            font-family: 'Nunito', sans-serif; font-weight: 700; font-size: .8rem;
-            letter-spacing: .1em; text-transform: uppercase; padding: .7rem 1.8rem;
-            border-radius: 100px; border: 2px solid var(--border);
+            font-weight: 700; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase;
+            padding: .7rem 1.8rem; border-radius: 100px; border: 2px solid var(--border);
             color: var(--muted); cursor: pointer; transition: all .25s; background: var(--bg);
         }
-        .filter-tab:hover { border-color: var(--gold); color: var(--gold); }
-        .filter-tab.active { background: var(--gold); color: #fff; border-color: var(--gold); }
+        .filter-tab:hover { border-color: var(--pink); color: var(--pink); }
+        .filter-tab.active { background: var(--pink); color: #fff; border-color: var(--pink); }
 
         /* SHOP SECTION */
-        .shop-section { padding: 6rem 0 10rem; background: var(--bg); }
+        .shop-section { padding: 5rem 0 8rem; background: var(--bg); }
 
-        /* CATEGORY LABEL */
-        .cat-label {
-            font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.4rem);
-            font-weight: 800; font-style: italic; color: var(--cream);
-            margin-bottom: 2.5rem; padding-top: 1rem;
+        /* GROUP LABEL */
+        .group-label {
+            font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 3vw, 2rem);
+            font-weight: 800; font-style: italic; color: var(--text);
+            margin-bottom: 2rem; padding-top: .5rem;
         }
-        .cat-label span { color: var(--gold); }
+        .group-label span { color: var(--pink); }
 
-        .section-divider { border: none; border-top: 1px solid var(--border-lt); margin: 5rem 0; }
+        .shop-group { margin-bottom: 5rem; }
+        .section-divider { border: none; border-top: 1px solid var(--border); margin: 4rem 0; }
+
+        /* 빈 결과 */
+        .empty-msg {
+            display: none; text-align: center; padding: 4rem 0;
+            color: var(--muted); font-size: .95rem;
+        }
+        .empty-msg.visible { display: block; }
     </style>
 </head>
 <body>
@@ -65,9 +71,9 @@
     <div class="container nav-content">
         <a href="index.html" class="logo">
             <svg class="logo-svg" viewBox="0 0 190 52" fill="none">
-                <circle cx="10" cy="24" r="8" fill="#FF7BA3" opacity=".85"/>
-                <text x="26" y="36" font-family="Playfair Display,Georgia,serif" font-size="32" font-weight="800" font-style="italic" fill="#1E1E2E">ZEN</text>
-                <text x="27" y="49" font-family="Nunito,sans-serif" font-size="7.5" letter-spacing="3.5" fill="#FF7BA3" font-weight="700">KEYRING STUDIO</text>
+                <circle cx="10" cy="24" r="8" fill="#FF7BAC" opacity=".85"/>
+                <text x="26" y="36" font-family="Playfair Display,Georgia,serif" font-size="32" font-weight="800" font-style="italic" fill="#1A1A1A">ZEN</text>
+                <text x="27" y="49" font-family="Nunito,sans-serif" font-size="7.5" letter-spacing="3.5" fill="#FF7BAC" font-weight="700">KEYRING STUDIO</text>
             </svg>
         </a>
         <ul class="nav-links" id="navLinks">
@@ -97,10 +103,10 @@
 <div class="filter-bar">
     <div class="container">
         <div class="filter-tabs">
-            <button class="filter-tab active">ALL</button>
-            <button class="filter-tab">키링</button>
-            <button class="filter-tab">굿즈</button>
-            <button class="filter-tab">SALE</button>
+            <button class="filter-tab active" data-filter="all">ALL</button>
+            <button class="filter-tab" data-filter="keyring">키링</button>
+            <button class="filter-tab" data-filter="goods">굿즈</button>
+            <button class="filter-tab" data-filter="sale">SALE</button>
         </div>
     </div>
 </div>
@@ -108,120 +114,128 @@
 <section class="shop-section">
     <div class="container">
 
-        <!-- 키링 -->
-        <h2 class="cat-label reveal">키링 <span>Keyrings</span></h2>
-        <div class="shop-grid">
+        <!-- 키링 그룹 -->
+        <div class="shop-group" data-group="keyring">
+            <h2 class="group-label reveal">키링 <span>Keyrings</span></h2>
+            <div class="product-grid">
 
-            <div class="product-card reveal">
-                <div class="product-img-wrap">
-                    <span class="product-badge badge-new">NEW</span>
-                    <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8D0,#FFD0B0);">🥟</div>
+                <div class="product-card reveal" data-tags="keyring new">
+                    <div class="product-img-wrap">
+                        <span class="product-badge badge-new">NEW</span>
+                        <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8D0,#FFD0B0);">🥟</div>
+                        <button class="heart-btn" aria-label="찜하기">♡</button>
+                    </div>
+                    <span class="product-brand">꿈꿀만두</span>
+                    <div class="product-name">꿈꿀만두 키링</div>
+                    <div class="product-price-row">
+                        <span class="price-sale">₩18,000</span>
+                    </div>
                 </div>
-                <div class="product-info">
-                    <span class="product-time">ZEN 산하 브랜드</span>
-                    <div class="product-name">꿈꿀만두</div>
-                    <p class="product-notes">ZEN의 첫 번째 서브 브랜드 키링<br>귀엽고 포근한 만두 캐릭터</p>
-                    <p class="product-price">₩ 18,000</p>
+
+                <div class="product-card reveal" style="transition-delay:.08s" data-tags="keyring">
+                    <div class="product-img-wrap">
+                        <div class="product-placeholder" style="background:linear-gradient(135deg,#E8F0FF,#CCE0FF);">⭐</div>
+                        <button class="heart-btn" aria-label="찜하기">♡</button>
+                    </div>
+                    <span class="product-brand">ZEN</span>
+                    <div class="product-name">Cloud Star 키링</div>
+                    <div class="product-price-row">
+                        <span class="price-sale">₩16,000</span>
+                    </div>
                 </div>
+
+                <div class="product-card reveal" style="transition-delay:.16s" data-tags="keyring">
+                    <div class="product-img-wrap">
+                        <div class="product-placeholder" style="background:linear-gradient(135deg,#E8FFE8,#C2F5CA);">🐻</div>
+                        <button class="heart-btn" aria-label="찜하기">♡</button>
+                    </div>
+                    <span class="product-brand">ZEN</span>
+                    <div class="product-name">Spring Bear 키링</div>
+                    <div class="product-price-row">
+                        <span class="price-sale">₩17,000</span>
+                    </div>
+                </div>
+
+                <div class="product-card reveal" style="transition-delay:.24s" data-tags="keyring">
+                    <div class="product-img-wrap">
+                        <span class="product-badge badge-coming">Coming Soon</span>
+                        <div class="product-placeholder" style="background:linear-gradient(135deg,#F0E8FF,#E0D0FF);">🐰</div>
+                        <button class="heart-btn" aria-label="찜하기">♡</button>
+                    </div>
+                    <span class="product-brand">ZEN</span>
+                    <div class="product-name">Moon Bunny 키링</div>
+                    <div class="product-price-row">
+                        <span class="price-coming">Coming Soon</span>
+                    </div>
+                </div>
+
+                <div class="product-card reveal" style="transition-delay:.32s" data-tags="keyring">
+                    <div class="product-img-wrap">
+                        <span class="product-badge badge-coming">Coming Soon</span>
+                        <div class="product-placeholder" style="background:linear-gradient(135deg,#FFF8D0,#FFE8A0);">🍋</div>
+                        <button class="heart-btn" aria-label="찜하기">♡</button>
+                    </div>
+                    <span class="product-brand">ZEN</span>
+                    <div class="product-name">Lemon Drop 키링</div>
+                    <div class="product-price-row">
+                        <span class="price-coming">Coming Soon</span>
+                    </div>
+                </div>
+
             </div>
-
-            <div class="product-card reveal" style="transition-delay:.08s">
-                <div class="product-img-wrap">
-                    <div class="product-placeholder" style="background:linear-gradient(135deg,#E8F0FF,#CCE0FF);">⭐</div>
-                </div>
-                <div class="product-info">
-                    <span class="product-time">구름 별</span>
-                    <div class="product-name">Cloud Star</div>
-                    <p class="product-notes">맑은 날 하늘을 닮은 키링<br>반짝이는 별 모양 참 장식</p>
-                    <p class="product-price">₩ 16,000</p>
-                </div>
-            </div>
-
-            <div class="product-card reveal" style="transition-delay:.16s">
-                <div class="product-img-wrap">
-                    <div class="product-placeholder" style="background:linear-gradient(135deg,#E8FFE8,#C2F5CA);">🐻</div>
-                </div>
-                <div class="product-info">
-                    <span class="product-time">봄날의 곰</span>
-                    <div class="product-name">Spring Bear</div>
-                    <p class="product-notes">포근한 봄날을 닮은 곰 키링<br>파스텔 그린 컬러</p>
-                    <p class="product-price">₩ 17,000</p>
-                </div>
-            </div>
-
-            <div class="product-card coming reveal" style="transition-delay:.24s">
-                <div class="product-img-wrap">
-                    <span class="product-badge badge-coming">Coming Soon</span>
-                    <div class="product-placeholder" style="background:linear-gradient(135deg,#F0E8FF,#E0D0FF);">🐰</div>
-                </div>
-                <div class="product-info">
-                    <span class="product-time">달빛 토끼</span>
-                    <div class="product-name">Moon Bunny</div>
-                    <p class="product-notes">조용한 밤하늘을 닮은 토끼 키링<br>라벤더 컬러, 출시 예정</p>
-                    <p class="coming-price">Coming Soon →</p>
-                </div>
-            </div>
-
-            <div class="product-card coming reveal" style="transition-delay:.32s">
-                <div class="product-img-wrap">
-                    <span class="product-badge badge-coming">Coming Soon</span>
-                    <div class="product-placeholder" style="background:linear-gradient(135deg,#FFF8D0,#FFE8A0);">🍋</div>
-                </div>
-                <div class="product-info">
-                    <span class="product-time">레몬 드롭</span>
-                    <div class="product-name">Lemon Drop</div>
-                    <p class="product-notes">상큼하고 귀여운 레몬 키링<br>여름 한정 출시 예정</p>
-                    <p class="coming-price">Coming Soon →</p>
-                </div>
-            </div>
-
         </div>
 
-        <hr class="section-divider">
+        <hr class="section-divider" id="dividerGoods">
 
-        <!-- 굿즈 -->
-        <h2 class="cat-label reveal">굿즈 <span>Goods</span></h2>
-        <div class="shop-grid">
+        <!-- 굿즈 그룹 -->
+        <div class="shop-group" data-group="goods">
+            <h2 class="group-label reveal">굿즈 <span>Goods</span></h2>
+            <div class="product-grid">
 
-            <div class="product-card reveal">
-                <div class="product-img-wrap">
-                    <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8F0,#FFD0E0);">🩷</div>
-                </div>
-                <div class="product-info">
-                    <span class="product-time">스티커 팩</span>
+                <div class="product-card reveal" data-tags="goods best">
+                    <div class="product-img-wrap">
+                        <span class="product-badge badge-best">BEST</span>
+                        <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8F0,#FFD0E0);">🩷</div>
+                        <button class="heart-btn" aria-label="찜하기">♡</button>
+                    </div>
+                    <span class="product-brand">ZEN</span>
                     <div class="product-name">ZEN Sticker Pack</div>
-                    <p class="product-notes">꿈꿀만두 외 ZEN 캐릭터 스티커<br>20매 구성</p>
-                    <p class="product-price">₩ 5,000</p>
+                    <div class="product-price-row">
+                        <span class="price-sale">₩5,000</span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="product-card coming reveal" style="transition-delay:.1s">
-                <div class="product-img-wrap">
-                    <span class="product-badge badge-coming">Coming Soon</span>
-                    <div class="product-placeholder" style="background:linear-gradient(135deg,#F0F4FF,#E0E8FF);">📓</div>
-                </div>
-                <div class="product-info">
-                    <span class="product-time">미니 노트</span>
+                <div class="product-card reveal" style="transition-delay:.1s" data-tags="goods">
+                    <div class="product-img-wrap">
+                        <span class="product-badge badge-coming">Coming Soon</span>
+                        <div class="product-placeholder" style="background:linear-gradient(135deg,#F0F4FF,#E0E8FF);">📓</div>
+                        <button class="heart-btn" aria-label="찜하기">♡</button>
+                    </div>
+                    <span class="product-brand">ZEN</span>
                     <div class="product-name">ZEN Mini Note</div>
-                    <p class="product-notes">캐릭터 일러스트 커버 미니 노트<br>출시 예정</p>
-                    <p class="coming-price">Coming Soon →</p>
+                    <div class="product-price-row">
+                        <span class="price-coming">Coming Soon</span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="product-card coming reveal" style="transition-delay:.2s">
-                <div class="product-img-wrap">
-                    <span class="product-badge badge-coming">Coming Soon</span>
-                    <div class="product-placeholder" style="background:linear-gradient(135deg,#E8FFF4,#C0F0D8);">🛍️</div>
-                </div>
-                <div class="product-info">
-                    <span class="product-time">캐릭터 파우치</span>
+                <div class="product-card reveal" style="transition-delay:.2s" data-tags="goods">
+                    <div class="product-img-wrap">
+                        <span class="product-badge badge-coming">Coming Soon</span>
+                        <div class="product-placeholder" style="background:linear-gradient(135deg,#E8FFF4,#C0F0D8);">🛍️</div>
+                        <button class="heart-btn" aria-label="찜하기">♡</button>
+                    </div>
+                    <span class="product-brand">ZEN</span>
                     <div class="product-name">Mandu Pouch</div>
-                    <p class="product-notes">꿈꿀만두 캐릭터 파우치<br>출시 예정</p>
-                    <p class="coming-price">Coming Soon →</p>
+                    <div class="product-price-row">
+                        <span class="price-coming">Coming Soon</span>
+                    </div>
                 </div>
-            </div>
 
+            </div>
         </div>
+
+        <div class="empty-msg" id="emptyMsg">해당하는 상품이 없습니다</div>
+
     </div>
 </section>
 
@@ -231,9 +245,9 @@
             <div class="footer-main">
                 <div class="footer-logo">
                     <svg viewBox="0 0 190 52" fill="none" style="height:44px;width:auto">
-                        <circle cx="10" cy="24" r="8" fill="#FF7BA3" opacity=".7"/>
+                        <circle cx="10" cy="24" r="8" fill="#FF7BAC" opacity=".7"/>
                         <text x="26" y="36" font-family="Playfair Display,Georgia,serif" font-size="32" font-weight="800" font-style="italic" fill="#FFFFFF">ZEN</text>
-                        <text x="27" y="49" font-family="Nunito,sans-serif" font-size="7.5" letter-spacing="3.5" fill="#FF7BA3" font-weight="700">KEYRING STUDIO</text>
+                        <text x="27" y="49" font-family="Nunito,sans-serif" font-size="7.5" letter-spacing="3.5" fill="#FF7BAC" font-weight="700">KEYRING STUDIO</text>
                     </svg>
                 </div>
                 <p>일상 속 작은 행복을 만드는<br>키링 스튜디오</p>
@@ -253,5 +267,63 @@
 </footer>
 
 <script src="main.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const tabs      = document.querySelectorAll('.filter-tab');
+        const groups    = document.querySelectorAll('.shop-group');
+        const cards     = document.querySelectorAll('.product-card');
+        const divider   = document.getElementById('dividerGoods');
+        const emptyMsg  = document.getElementById('emptyMsg');
+
+        function applyFilter(filter) {
+            emptyMsg.classList.remove('visible');
+
+            if (filter === 'all') {
+                groups.forEach(g => g.style.display = '');
+                cards.forEach(c => c.style.display = '');
+                divider.style.display = '';
+                return;
+            }
+
+            // 카드 필터링
+            let anyVisible = false;
+            cards.forEach(c => {
+                const tags = c.dataset.tags || '';
+                const show = tags.includes(filter);
+                c.style.display = show ? '' : 'none';
+                if (show) anyVisible = true;
+            });
+
+            // 빈 그룹 숨기기
+            groups.forEach(g => {
+                const hasVisible = [...g.querySelectorAll('.product-card')].some(c => c.style.display !== 'none');
+                g.style.display = hasVisible ? '' : 'none';
+            });
+
+            // 구분선: 두 그룹 모두 보일 때만 표시
+            const visibleGroups = [...groups].filter(g => g.style.display !== 'none');
+            divider.style.display = visibleGroups.length > 1 ? '' : 'none';
+
+            if (!anyVisible) emptyMsg.classList.add('visible');
+        }
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                applyFilter(tab.dataset.filter);
+            });
+        });
+
+        // Heart button toggle
+        document.querySelectorAll('.heart-btn').forEach(btn => {
+            btn.addEventListener('click', e => {
+                e.stopPropagation();
+                btn.textContent = btn.textContent === '♡' ? '♥' : '♡';
+                btn.style.color = btn.textContent === '♥' ? 'var(--pink)' : '';
+            });
+        });
+    });
+</script>
 </body>
 </html>
