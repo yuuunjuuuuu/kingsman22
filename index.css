@@ -160,6 +160,7 @@ nav {
 .price-original { font-size: .78rem; color: var(--dim); text-decoration: line-through; }
 .price-pct { font-size: .75rem; font-weight: 800; color: var(--pink); }
 .price-coming { font-size: .8rem; font-weight: 700; color: var(--muted); }
+.price-soldout { font-size: .8rem; font-weight: 700; color: var(--dim); letter-spacing: .05em; }
 .product-card.disabled { pointer-events: none; opacity: .7; }
 
 /* ── MARKET BANNER ── */
