@@ -102,14 +102,86 @@
         }
         .ig-handle:hover { background: var(--gold); color: #fff; }
 
+        /* NOTICE BAR */
+        .notice-bar {
+            background: var(--gold); color: #fff;
+            text-align: center; padding: .72rem 1rem;
+            font-family: 'Nunito', sans-serif; font-size: .82rem; font-weight: 700;
+            letter-spacing: .04em; position: relative; z-index: 1002;
+        }
+        .notice-bar a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+        .notice-bar a:hover { opacity: .8; }
+
+        /* MARKET SECTION */
+        .market-section {
+            background: var(--cream); padding: 7rem 0;
+            text-align: center; position: relative; overflow: hidden;
+        }
+        .market-section::before {
+            content: ''; position: absolute; top: -30%; left: -10%;
+            width: 60%; height: 120%;
+            background: radial-gradient(ellipse, rgba(255,123,163,.12) 0%, transparent 65%);
+            filter: blur(60px);
+        }
+        .market-inner { position: relative; z-index: 1; }
+        .market-tag {
+            display: inline-block; background: var(--gold); color: #fff;
+            font-family: 'Nunito', sans-serif; font-weight: 800; font-size: .72rem;
+            letter-spacing: .25em; text-transform: uppercase;
+            padding: .5rem 1.4rem; border-radius: 100px; margin-bottom: 2rem;
+        }
+        .market-title {
+            font-family: 'Playfair Display', serif; font-weight: 800; font-style: italic;
+            font-size: clamp(3rem, 7vw, 6.5rem); color: #fff;
+            line-height: 1; margin-bottom: 1rem; letter-spacing: -.02em;
+        }
+        .market-title span { color: var(--gold); }
+        .market-sub {
+            font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 500;
+            color: rgba(255,255,255,.65); line-height: 2; max-width: 520px;
+            margin: 0 auto 3rem;
+        }
+        .market-details {
+            display: inline-flex; gap: 2.5rem; flex-wrap: wrap; justify-content: center;
+            margin-bottom: 3rem;
+        }
+        .market-detail-item {
+            text-align: left; padding: 1.4rem 2rem;
+            background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+            border-radius: 16px; min-width: 160px;
+        }
+        .market-detail-item .label {
+            font-family: 'Nunito', sans-serif; font-size: .65rem; font-weight: 700;
+            letter-spacing: .3em; text-transform: uppercase; color: var(--gold);
+            display: block; margin-bottom: .4rem;
+        }
+        .market-detail-item .value {
+            font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700;
+            color: #fff; font-style: italic;
+        }
+        .market-cta {
+            display: inline-flex; align-items: center; gap: .8rem;
+            font-family: 'Nunito', sans-serif; font-weight: 800; font-size: .9rem;
+            color: #fff; border: 2px solid rgba(255,255,255,.4); padding: 1rem 2.5rem;
+            border-radius: 100px; transition: border-color .3s, background .3s;
+            text-decoration: none;
+        }
+        .market-cta:hover { border-color: var(--gold); background: var(--gold); }
+
         @media(max-width:900px){
             .featured-grid { grid-template-columns: repeat(2,1fr); gap: 1.6rem; }
             .brand-strip-inner { grid-template-columns: 1fr; gap: 3rem; }
+            .market-details { gap: 1rem; }
         }
         @media(max-width:560px){ .featured-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
+
+<!-- NOTICE BAR -->
+<div class="notice-bar">
+    🎪 스쿱 마켓 참가 예정 — 일정은 <a href="https://www.instagram.com/dreaming_mandu/" target="_blank">@dreaming_mandu</a> 인스타그램에서 가장 먼저 공개됩니다 ✨
+</div>
 
 <nav id="navbar">
     <div class="container nav-content">
@@ -241,6 +313,38 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</section>
+
+<!-- SCOOP MARKET -->
+<section class="market-section">
+    <div class="container">
+        <div class="market-inner reveal">
+            <span class="market-tag">🎪 Upcoming Event</span>
+            <h2 class="market-title">Scoop<br><span>Market</span></h2>
+            <p class="market-sub">
+                ZEN이 스쿱 마켓에 찾아갑니다.<br>
+                꿈꿀만두 키링을 직접 만나볼 수 있는 특별한 자리.<br>
+                현장에서만 만날 수 있는 한정 굿즈도 준비 중입니다.
+            </p>
+            <div class="market-details">
+                <div class="market-detail-item">
+                    <span class="label">Date</span>
+                    <span class="value">일정 공개 예정</span>
+                </div>
+                <div class="market-detail-item">
+                    <span class="label">Location</span>
+                    <span class="value">장소 공개 예정</span>
+                </div>
+                <div class="market-detail-item">
+                    <span class="label">Brand</span>
+                    <span class="value">꿈꿀만두 × ZEN</span>
+                </div>
+            </div>
+            <a href="https://www.instagram.com/dreaming_mandu/" target="_blank" class="market-cta">
+                📷 &nbsp;@dreaming_mandu에서 소식 받기
+            </a>
         </div>
     </div>
 </section>
