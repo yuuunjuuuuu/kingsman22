@@ -1,617 +1,1048 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop — ZEN</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="index.css">
-    <style>
-        .page-hero {
-            padding: 8rem 0 4rem;
-            background: linear-gradient(160deg, #FFF0F5 0%, #FFE4EF 60%, #F8E8FF 100%);
-            text-align: center; position: relative; overflow: hidden;
-        }
-        .page-hero::before {
-            content: ''; position: absolute; top: -20%; right: -5%;
-            width: 50%; height: 80%;
-            background: radial-gradient(ellipse, rgba(255,123,172,.18) 0%, transparent 70%);
-            filter: blur(40px);
-        }
-        .page-hero-eyebrow { display: block; font-size: .72rem; letter-spacing: .4em; text-transform: uppercase; color: var(--pink); margin-bottom: 1.2rem; font-weight: 700; }
-        .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 800; font-style: italic; color: var(--text); letter-spacing: -.01em; }
-        .page-hero p { font-size: 1rem; color: var(--muted); margin-top: 1.2rem; font-weight: 500; }
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shop — ZEN</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="index.css" rel="stylesheet"/>
+<style>
+    .page-hero {
+        padding: 8rem 0 4rem;
+        background: linear-gradient(160deg, #FFF0F5 0%, #FFE4EF 60%, #F8E8FF 100%);
+        text-align: center; position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+        content: ''; position: absolute; top: -20%; right: -5%;
+        width: 50%; height: 80%;
+        background: radial-gradient(ellipse, rgba(255,123,172,.18) 0%, transparent 70%);
+        filter: blur(40px);
+    }
+    .page-hero-eyebrow { display: block; font-size: .72rem; letter-spacing: .4em; text-transform: uppercase; color: var(--pink); margin-bottom: 1.2rem; font-weight: 700; }
+    .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 800; font-style: italic; color: var(--text); letter-spacing: -.01em; }
+    .page-hero p { font-size: 1rem; color: var(--muted); margin-top: 1.2rem; font-weight: 500; }
 
-        .filter-bar { background: var(--bg); border-bottom: 1px solid var(--border); overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
-        .filter-bar::-webkit-scrollbar { display: none; }
-        .filter-bar-inner { display: inline-flex; padding: 0 1rem; }
-        .filter-tab { display: inline-block; padding: 1rem 1.4rem; font-weight: 700; font-size: .76rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); border-bottom: 2px solid transparent; cursor: pointer; transition: color .2s, border-color .2s; white-space: nowrap; background: none; border-top: none; border-left: none; border-right: none; }
-        .filter-tab:hover { color: var(--text); }
-        .filter-tab.active { color: var(--pink); border-bottom-color: var(--pink); }
+    .filter-bar { background: var(--bg); border-bottom: 1px solid var(--border); overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .filter-bar::-webkit-scrollbar { display: none; }
+    .filter-bar-inner { display: inline-flex; padding: 0 1rem; }
+    .filter-tab { display: inline-block; padding: 1rem 1.4rem; font-weight: 700; font-size: .76rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); border-bottom: 2px solid transparent; cursor: pointer; transition: color .2s, border-color .2s; white-space: nowrap; background: none; border-top: none; border-left: none; border-right: none; }
+    .filter-tab:hover { color: var(--text); }
+    .filter-tab.active { color: var(--pink); border-bottom-color: var(--pink); }
 
-        .shop-section { padding: 5rem 0 8rem; background: var(--bg); }
-        .shop-group { margin-bottom: 5rem; }
-        .group-label { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; font-style: italic; color: var(--text); margin-bottom: 2rem; }
-        .group-label span { color: var(--pink); }
-        .section-divider { border: none; border-top: 1px solid var(--border); margin: 4rem 0; }
-        .empty-msg { display: none; text-align: center; padding: 4rem 0; color: var(--muted); font-size: .95rem; }
-        .empty-msg.visible { display: block; }
-    </style>
+    .shop-section { padding: 5rem 0 8rem; background: var(--bg); }
+    .shop-group { margin-bottom: 5rem; }
+    .group-label { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; font-style: italic; color: var(--text); margin-bottom: 2rem; }
+    .group-label span { color: var(--pink); }
+    .section-divider { border: none; border-top: 1px solid var(--border); margin: 4rem 0; }
+    .empty-msg { display: none; text-align: center; padding: 4rem 0; color: var(--muted); font-size: .95rem; }
+    .empty-msg.visible { display: block; }
+    .product-placeholder { background: linear-gradient(135deg, #FFF0F5 0%, #FFE4EF 60%, #F8E8FF 100%); }
+    .product-card { cursor: pointer; }
+
+    /* Cart icon badge */
+    .cart-icon-wrap { position: relative; display: inline-flex; }
+    .cart-badge {
+        position: absolute; top: -6px; right: -8px;
+        background: var(--pink); color: #fff;
+        font-size: .6rem; font-weight: 800;
+        width: 16px; height: 16px; border-radius: 50%;
+        display: none; align-items: center; justify-content: center;
+    }
+
+    /* ── Cart Drawer ── */
+    .cart-drawer {
+        position: fixed; top: 0; right: 0; bottom: 0; width: min(400px, 100vw);
+        background: #fff; z-index: 1100; box-shadow: -4px 0 30px rgba(0,0,0,.12);
+        display: flex; flex-direction: column;
+        transform: translateX(100%); transition: transform .3s cubic-bezier(.4,0,.2,1);
+    }
+    .cart-drawer.open { transform: translateX(0); }
+    .cart-backdrop {
+        position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 1099;
+        opacity: 0; visibility: hidden; transition: opacity .3s, visibility .3s;
+    }
+    .cart-backdrop.open { opacity: 1; visibility: visible; }
+    .cart-drawer-head {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 1.4rem 1.6rem; border-bottom: 1px solid var(--border); flex-shrink: 0;
+    }
+    .cart-drawer-head h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 800; font-style: italic; }
+    .cart-drawer-close {
+        width: 34px; height: 34px; border-radius: 50%; border: none;
+        background: var(--border); font-size: 1rem; cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        color: var(--text); transition: background .2s, color .2s;
+    }
+    .cart-drawer-close:hover { background: var(--pink); color: #fff; }
+    .cart-list { flex: 1; overflow-y: auto; padding: 1rem 1.6rem; }
+    .cart-empty { text-align: center; color: var(--muted); font-size: .9rem; padding: 3rem 0; }
+    .cart-item {
+        display: flex; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--border);
+    }
+    .cart-item:last-child { border-bottom: none; }
+    .cart-item-img {
+        width: 72px; height: 72px; border-radius: 10px; overflow: hidden; flex-shrink: 0;
+        background: linear-gradient(135deg, #FFF0F5, #FFE4EF);
+    }
+    .cart-item-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .cart-item-info { flex: 1; display: flex; flex-direction: column; gap: .3rem; }
+    .cart-item-brand { font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--pink); }
+    .cart-item-name { font-size: .88rem; font-weight: 700; color: var(--text); }
+    .cart-item-price { font-size: .88rem; font-weight: 800; color: var(--text); }
+    .cart-item-controls { display: flex; align-items: center; gap: .5rem; margin-top: .2rem; }
+    .cqty-btn {
+        width: 26px; height: 26px; border-radius: 50%; border: 1px solid var(--border);
+        background: none; cursor: pointer; font-size: .9rem; font-weight: 700;
+        display: flex; align-items: center; justify-content: center;
+        transition: border-color .2s, color .2s;
+    }
+    .cqty-btn:hover { border-color: var(--pink); color: var(--pink); }
+    .cqty-val { font-size: .88rem; font-weight: 700; min-width: 20px; text-align: center; }
+    .cart-remove-btn {
+        margin-left: auto; font-size: .7rem; color: var(--muted); background: none;
+        border: none; cursor: pointer; text-decoration: underline;
+    }
+    .cart-remove-btn:hover { color: var(--pink); }
+    .cart-drawer-foot {
+        padding: 1.2rem 1.6rem; border-top: 1px solid var(--border); flex-shrink: 0;
+        display: flex; flex-direction: column; gap: .8rem;
+    }
+    .cart-total-row { display: flex; justify-content: space-between; align-items: center; font-weight: 800; font-size: 1rem; }
+    .cart-total-row span:last-child { font-size: 1.15rem; color: var(--pink); }
+    .cart-order-btn {
+        display: block; text-align: center; background: var(--pink); color: #fff;
+        border: none; border-radius: 100px; padding: .9rem; font-weight: 800;
+        font-size: .9rem; letter-spacing: .04em; cursor: pointer;
+        text-decoration: none; transition: opacity .2s;
+    }
+    .cart-order-btn:hover { opacity: .85; }
+    .cart-order-note { text-align: center; font-size: .72rem; color: var(--muted); }
+
+    /* ── Product Modal ── */
+    .product-modal {
+        position: fixed; inset: 0; z-index: 1000;
+        display: flex; align-items: center; justify-content: center; padding: 1rem;
+        opacity: 0; visibility: hidden; transition: opacity .25s, visibility .25s;
+    }
+    .product-modal.open { opacity: 1; visibility: visible; }
+    .modal-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.48); cursor: pointer; }
+    .modal-content {
+        position: relative; background: #fff; border-radius: 20px;
+        width: min(860px, calc(100vw - 2rem)); max-height: calc(100vh - 2rem);
+        overflow-y: auto; padding: 2.5rem;
+        display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; z-index: 1;
+    }
+    @media (max-width: 620px) {
+        .modal-content { grid-template-columns: 1fr; padding: 1.4rem; gap: 1.4rem; }
+    }
+    .modal-close {
+        position: absolute; top: 1rem; right: 1rem;
+        width: 36px; height: 36px; border-radius: 50%;
+        border: none; background: var(--border); font-size: 1.05rem;
+        cursor: pointer; display: flex; align-items: center; justify-content: center;
+        color: var(--text); z-index: 2; transition: background .2s, color .2s;
+    }
+    .modal-close:hover { background: var(--pink); color: #fff; }
+    .modal-gallery { display: flex; flex-direction: column; gap: .8rem; }
+    .modal-main-wrap {
+        aspect-ratio: 1; border-radius: 14px; overflow: hidden;
+        background: linear-gradient(135deg, #FFF0F5 0%, #FFE4EF 60%, #F8E8FF 100%);
+    }
+    .modal-main-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .modal-thumbs { display: flex; gap: .6rem; }
+    .modal-thumb {
+        width: 72px; height: 72px; border-radius: 8px; overflow: hidden;
+        cursor: pointer; border: 2px solid var(--border); flex-shrink: 0;
+        transition: border-color .2s; background: linear-gradient(135deg, #FFF0F5, #FFE4EF);
+    }
+    .modal-thumb.active { border-color: var(--pink); }
+    .modal-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .modal-info { display: flex; flex-direction: column; gap: .9rem; padding-top: .25rem; }
+    .modal-brand-tag { font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--pink); }
+    .modal-name-text { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 800; color: var(--text); line-height: 1.25; }
+    .modal-divider { border: none; border-top: 1px solid var(--border); }
+    .modal-price-tag { font-size: 1.25rem; font-weight: 800; color: var(--text); }
+    .modal-price-tag.is-soldout { color: var(--muted); font-size: .88rem; letter-spacing: .1em; text-transform: uppercase; }
+    .modal-desc-para { font-size: .9rem; line-height: 1.78; color: var(--muted); }
+    /* Qty selector */
+    .qty-row { display: flex; align-items: center; gap: .8rem; }
+    .qty-label { font-size: .78rem; font-weight: 700; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; margin-right: .2rem; }
+    .qty-btn {
+        width: 32px; height: 32px; border-radius: 50%;
+        border: 1.5px solid var(--border); background: none; cursor: pointer;
+        font-size: 1.1rem; font-weight: 700; color: var(--text);
+        display: flex; align-items: center; justify-content: center;
+        transition: border-color .2s, color .2s;
+    }
+    .qty-btn:hover { border-color: var(--pink); color: var(--pink); }
+    .qty-val { font-size: 1rem; font-weight: 800; min-width: 28px; text-align: center; }
+    /* Action buttons */
+    .modal-btn-row { display: flex; gap: .7rem; }
+    .modal-cart-btn {
+        flex: 1; border: 1.5px solid var(--pink); background: none; color: var(--pink);
+        border-radius: 100px; padding: .8rem; font-weight: 800; font-size: .85rem;
+        letter-spacing: .03em; cursor: pointer; transition: background .2s, color .2s;
+    }
+    .modal-cart-btn:hover { background: var(--pink); color: #fff; }
+    .modal-buy-btn {
+        flex: 1; background: var(--pink); color: #fff; border: none;
+        border-radius: 100px; padding: .8rem; font-weight: 800; font-size: .85rem;
+        letter-spacing: .03em; cursor: pointer; transition: opacity .2s;
+    }
+    .modal-buy-btn:hover { opacity: .85; }
+    .modal-soldout-tag {
+        display: block; text-align: center; color: var(--muted);
+        font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+        padding: .9rem 2rem; border: 1px solid var(--border); border-radius: 100px;
+    }
+
+    /* Toast */
+    .toast {
+        position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(20px);
+        background: #1A1A1A; color: #fff; border-radius: 100px;
+        padding: .7rem 1.4rem; font-size: .85rem; font-weight: 600;
+        opacity: 0; transition: opacity .25s, transform .25s; z-index: 2000; white-space: nowrap;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
 </head>
 <body>
 
 <nav id="navbar">
-    <div class="container nav-content">
-        <a href="index.html" class="logo">
-            <svg class="logo-svg" viewBox="0 0 190 52" fill="none">
-                <circle cx="10" cy="24" r="8" fill="#FF7BAC" opacity=".85"/>
-                <text x="26" y="36" font-family="Playfair Display,Georgia,serif" font-size="32" font-weight="800" font-style="italic" fill="#1A1A1A">ZEN</text>
-                <text x="27" y="49" font-family="Nunito,sans-serif" font-size="7.5" letter-spacing="3.5" fill="#FF7BAC" font-weight="700">KEYRING STUDIO</text>
-            </svg>
-        </a>
-        <ul class="nav-links" id="navLinks">
-            <li><a href="about.html">About</a></li>
-            <li><a href="shop.html" style="color:var(--pink)">Shop</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-        <div class="nav-icons">
-            <a href="https://www.instagram.com/dreaming_mandu/" target="_blank" class="nav-icon-btn" aria-label="인스타그램">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/></svg>
-            </a>
-            <a href="contact.html" class="nav-icon-btn" aria-label="문의">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            </a>
-        </div>
-        <div id="navOverlay" class="nav-overlay"></div>
-        <button class="nav-hamburger" id="navHamburger" aria-label="메뉴"><span></span><span></span><span></span></button>
-    </div>
+<div class="container nav-content">
+<a class="logo" href="index.html">
+<svg class="logo-svg" fill="none" viewbox="0 0 190 52">
+<circle cx="10" cy="24" fill="#FF7BAC" opacity=".85" r="8"></circle>
+<text fill="#1A1A1A" font-family="Playfair Display,Georgia,serif" font-size="32" font-style="italic" font-weight="800" x="26" y="36">ZEN</text>
+<text fill="#FF7BAC" font-family="Nunito,sans-serif" font-size="7.5" font-weight="700" letter-spacing="3.5" x="27" y="49">KEYRING STUDIO</text>
+</svg>
+</a>
+<ul class="nav-links" id="navLinks">
+<li><a href="about.html">About</a></li>
+<li><a href="shop.html" style="color:var(--pink)">Shop</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+<div class="nav-icons">
+<a aria-label="인스타그램" class="nav-icon-btn" href="https://www.instagram.com/dreaming_mandu/" target="_blank">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="18"><rect height="20" rx="5" width="20" x="2" y="2"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" fill="currentColor" r=".8" stroke="none"></circle></svg>
+</a>
+<button aria-label="장바구니" class="nav-icon-btn cart-icon-wrap" id="cartToggle">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="18"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" x2="21" y1="6" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+<span class="cart-badge" id="cartBadge">0</span>
+</button>
+</div>
+<div class="nav-overlay" id="navOverlay"></div>
+<button aria-label="메뉴" class="nav-hamburger" id="navHamburger"><span></span><span></span><span></span></button>
+</div>
 </nav>
 
 <div class="page-hero">
-    <span class="page-hero-eyebrow">✦ ZEN Collection</span>
-    <h1>Shop</h1>
-    <p>하나하나 정성껏 만든 키링과 굿즈를 만나보세요</p>
+<span class="page-hero-eyebrow">✦ ZEN Collection</span>
+<h1>Shop</h1>
+<p>하나하나 정성껏 만든 키링과 굿즈를 만나보세요</p>
 </div>
 
 <div class="filter-bar">
-    <div class="filter-bar-inner">
-        <button class="filter-tab active" data-filter="all">ALL</button>
-        <button class="filter-tab" data-filter="phonecase">PHONE CASE</button>
-        <button class="filter-tab" data-filter="smarttok">SMART TOK</button>
-        <button class="filter-tab" data-filter="magsafe">MAGSAFE</button>
-        <button class="filter-tab" data-filter="digital">DIGITAL</button>
-        <button class="filter-tab" data-filter="ipad">IPAD / MACBOOK</button>
-        <button class="filter-tab" data-filter="pouch">POUCH / BAG</button>
-        <button class="filter-tab" data-filter="keyring">KEY RING</button>
-        <button class="filter-tab" data-filter="goods">GOODS</button>
-        <button class="filter-tab" data-filter="life">LIFE</button>
-        <button class="filter-tab" data-filter="stationery">STATIONERY</button>
-    </div>
+<div class="filter-bar-inner">
+<button class="filter-tab active" data-filter="all">ALL</button>
+<button class="filter-tab" data-filter="phonecase">PHONE CASE</button>
+<button class="filter-tab" data-filter="smarttok">SMART TOK</button>
+<button class="filter-tab" data-filter="magsafe">MAGSAFE</button>
+<button class="filter-tab" data-filter="digital">DIGITAL</button>
+<button class="filter-tab" data-filter="ipad">IPAD / MACBOOK</button>
+<button class="filter-tab" data-filter="pouch">POUCH / BAG</button>
+<button class="filter-tab" data-filter="keyring">KEY RING</button>
+<button class="filter-tab" data-filter="goods">GOODS</button>
+<button class="filter-tab" data-filter="life">LIFE</button>
+<button class="filter-tab" data-filter="stationery">STATIONERY</button>
+</div>
 </div>
 
 <section class="shop-section">
-    <div class="container">
+<div class="container">
 
-        <!-- PHONE CASE -->
-        <div class="shop-group" data-group="phonecase">
-            <h2 class="group-label reveal">Phone Case <span>폰케이스</span></h2>
-            <div class="product-grid">
-                <div class="product-card disabled reveal" data-tags="phonecase">
-                    <div class="product-img-wrap">
-                        <span class="product-badge badge-soldout">SOLD OUT</span>
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8D0,#FFD0B0);">🥟</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">꿈꿀만두</span>
-                    <div class="product-name">꿈꿀만두 폰케이스 A</div>
-                    <div class="product-price-row"><span class="price-soldout">SOLD OUT</span></div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:.07s" data-tags="phonecase">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#FFD0E8,#FFC0D8);">🥟</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">꿈꿀만두</span>
-                    <div class="product-name">꿈꿀만두 폰케이스 B</div>
-                    <div class="product-price-row"><span class="price-sale">₩32,000</span></div>
-                </div>
-                <div class="product-card disabled reveal" style="transition-delay:.14s" data-tags="phonecase">
-                    <div class="product-img-wrap">
-                        <span class="product-badge badge-soldout">SOLD OUT</span>
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#F0E8FF,#E0D8FF);">✨</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">ZEN Original</span>
-                    <div class="product-name">ZEN Original 폰케이스 A</div>
-                    <div class="product-price-row"><span class="price-soldout">SOLD OUT</span></div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:.21s" data-tags="phonecase">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#E8E0FF,#D8D0FF);">✨</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">ZEN Original</span>
-                    <div class="product-name">ZEN Original 폰케이스 B</div>
-                    <div class="product-price-row"><span class="price-sale">₩30,000</span></div>
-                </div>
-            </div>
-        </div>
-        <hr class="section-divider">
+<!-- PHONE CASE -->
+<div class="shop-group" data-group="phonecase">
+<h2 class="group-label reveal">Phone Case <span>폰케이스</span></h2>
+<div class="product-grid">
+<div class="product-card reveal" data-tags="phonecase"
+     data-name="꿈꿀만두 폰케이스" data-brand="꿈꿀만두" data-price="₩32,000"
+     data-desc="꿈꿀만두 캐릭터가 담긴 폰케이스. 소중한 폰을 귀엽게 보호해요.">
+<div class="product-img-wrap">
+<div class="product-placeholder"></div>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">꿈꿀만두</span>
+<div class="product-name">꿈꿀만두 폰케이스</div>
+<div class="product-price-row"><span class="price-sale">₩32,000</span></div>
+</div>
+<div class="product-card reveal" data-tags="phonecase" style="transition-delay:.1s"
+     data-name="ZEN Original 폰케이스" data-brand="ZEN Original" data-price="₩30,000" data-soldout="true"
+     data-desc="ZEN 오리지널 캐릭터 폰케이스.">
+<div class="product-img-wrap">
+<span class="product-badge badge-soldout">SOLD OUT</span>
+<div class="product-placeholder"></div>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">ZEN Original</span>
+<div class="product-name">ZEN Original 폰케이스</div>
+<div class="product-price-row"><span class="price-soldout">SOLD OUT</span></div>
+</div>
+</div>
+</div>
+<hr class="section-divider"/>
 
-        <!-- SMART TOK -->
-        <div class="shop-group" data-group="smarttok">
-            <h2 class="group-label reveal">Smart Tok <span>스마트톡</span></h2>
-            <div class="product-grid">
-                <div class="product-card disabled reveal" data-tags="smarttok">
-                    <div class="product-img-wrap">
-                        <span class="product-badge badge-soldout">SOLD OUT</span>
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8D0,#FFD0B0);">🥟</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">꿈꿀만두</span>
-                    <div class="product-name">꿈꿀만두 스마트톡 A</div>
-                    <div class="product-price-row"><span class="price-soldout">SOLD OUT</span></div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:.07s" data-tags="smarttok">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#FFD0E8,#FFC0D8);">🥟</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">꿈꿀만두</span>
-                    <div class="product-name">꿈꿀만두 스마트톡 B</div>
-                    <div class="product-price-row"><span class="price-sale">₩18,000</span></div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:.14s" data-tags="smarttok">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#D0E8FF,#C0D8FF);">✨</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">ZEN Original</span>
-                    <div class="product-name">ZEN Original 스마트톡 A</div>
-                    <div class="product-price-row"><span class="price-sale">₩16,000</span></div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:.21s" data-tags="smarttok">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#C0D8FF,#B0C8FF);">✨</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">ZEN Original</span>
-                    <div class="product-name">ZEN Original 스마트톡 B</div>
-                    <div class="product-price-row"><span class="price-sale">₩16,000</span></div>
-                </div>
-            </div>
-        </div>
-        <hr class="section-divider">
+<!-- SMART TOK -->
+<div class="shop-group" data-group="smarttok">
+<h2 class="group-label reveal">Smart Tok <span>그립톡</span></h2>
+<div class="product-grid">
+<div class="product-card reveal" data-tags="smarttok"
+     data-name="꿈꿀만두 그립톡" data-brand="꿈꿀만두" data-price="₩18,000"
+     data-img1="images/그립톡만두1.jpg" data-img2="images/그립톡만두2.jpg"
+     data-desc="스마트폰을 더 안전하게, 더 귀엽게. 꿈꿀만두 그립톡으로 일상에 특별함을 더해보세요.">
+<div class="product-img-wrap">
+<img alt="꿈꿀만두 그립톡" src="images/그립톡만두1.jpg"/>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">꿈꿀만두</span>
+<div class="product-name">꿈꿀만두 그립톡</div>
+<div class="product-price-row"><span class="price-sale">₩18,000</span></div>
+</div>
+<div class="product-card reveal" data-tags="smarttok" style="transition-delay:.1s"
+     data-name="ZEN Original 스마트톡" data-brand="ZEN Original" data-price="₩16,000"
+     data-desc="ZEN 오리지널 캐릭터 스마트톡.">
+<div class="product-img-wrap">
+<div class="product-placeholder"></div>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">ZEN Original</span>
+<div class="product-name">ZEN Original 스마트톡</div>
+<div class="product-price-row"><span class="price-sale">₩16,000</span></div>
+</div>
+</div>
+</div>
+<hr class="section-divider"/>
 
-        <!-- MAGSAFE -->
-        <div class="shop-group" data-group="magsafe">
-            <h2 class="group-label reveal">MagSafe <span>맥세이프</span></h2>
-            <div class="product-grid">
-                <div class="product-card disabled reveal" data-tags="magsafe">
-                    <div class="product-img-wrap">
-                        <span class="product-badge badge-soldout">SOLD OUT</span>
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8D0,#FFD0B0);">🥟</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">꿈꿀만두</span>
-                    <div class="product-name">꿈꿀만두 맥세이프 A</div>
-                    <div class="product-price-row"><span class="price-soldout">SOLD OUT</span></div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:.07s" data-tags="magsafe">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#FFD0E8,#FFC0D8);">🥟</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">꿈꿀만두</span>
-                    <div class="product-name">꿈꿀만두 맥세이프 B</div>
-                    <div class="product-price-row"><span class="price-sale">₩28,000</span></div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:.14s" data-tags="magsafe">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#E8D0FF,#D8C0FF);">✨</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">ZEN Original</span>
-                    <div class="product-name">ZEN Original 맥세이프 A</div>
-                    <div class="product-price-row"><span class="price-sale">₩26,000</span></div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:.21s" data-tags="magsafe">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#D8C0FF,#C8B0FF);">✨</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">ZEN Original</span>
-                    <div class="product-name">ZEN Original 맥세이프 B</div>
-                    <div class="product-price-row"><span class="price-sale">₩26,000</span></div>
-                </div>
-            </div>
-        </div>
-        <hr class="section-divider">
+<!-- MAGSAFE -->
+<div class="shop-group" data-group="magsafe">
+<h2 class="group-label reveal">MagSafe <span>맥세이프</span></h2>
+<div class="product-grid">
+<div class="product-card reveal" data-tags="magsafe"
+     data-name="꿈꿀만두 맥세이프" data-brand="꿈꿀만두" data-price="₩28,000"
+     data-img1="images/맥세이프충전기1.jpg" data-img2="images/맥세이프충전기2.jpg"
+     data-desc="무선 충전을 더 감각있게. 꿈꿀만두 캐릭터가 담긴 맥세이프 충전기예요.">
+<div class="product-img-wrap">
+<img alt="꿈꿀만두 맥세이프" src="images/맥세이프충전기1.jpg"/>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">꿈꿀만두</span>
+<div class="product-name">꿈꿀만두 맥세이프</div>
+<div class="product-price-row"><span class="price-sale">₩28,000</span></div>
+</div>
+<div class="product-card reveal" data-tags="magsafe" style="transition-delay:.1s"
+     data-name="ZEN Original 맥세이프" data-brand="ZEN Original" data-price="₩26,000"
+     data-desc="ZEN 오리지널 캐릭터 맥세이프 충전기.">
+<div class="product-img-wrap">
+<div class="product-placeholder"></div>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">ZEN Original</span>
+<div class="product-name">ZEN Original 맥세이프</div>
+<div class="product-price-row"><span class="price-sale">₩26,000</span></div>
+</div>
+</div>
+</div>
+<hr class="section-divider"/>
 
-        <!-- DIGITAL -->
-        <div class="shop-group" data-group="digital">
-            <h2 class="group-label reveal">Digital <span>디지털</span></h2>
-            <div class="product-grid">
-                <div class="product-card disabled reveal" data-tags="digital">
-                    <div class="product-img-wrap">
-                        <span class="product-badge badge-soldout">SOLD OUT</span>
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8D0,#FFD0B0);">🥟</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">꿈꿀만두</span>
-                    <div class="product-name">꿈꿀만두 디지털 굿즈 A</div>
-                    <div class="product-price-row"><span class="price-soldout">SOLD OUT</span></div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:.07s" data-tags="digital">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#FFD0E8,#FFC0D8);">🥟</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">꿈꿀만두</span>
-                    <div class="product-name">꿈꿀만두 디지털 굿즈 B</div>
-                    <div class="product-price-row"><span class="price-sale">₩9,000</span></div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:.14s" data-tags="digital">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#C8F0FF,#B0E0FF);">✨</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">ZEN Original</span>
-                    <div class="product-name">ZEN Original 디지털 굿즈 A</div>
-                    <div class="product-price-row"><span class="price-sale">₩8,000</span></div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:.21s" data-tags="digital">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#B0E0FF,#A0D0FF);">✨</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">ZEN Original</span>
-                    <div class="product-name">ZEN Original 디지털 굿즈 B</div>
-                    <div class="product-price-row"><span class="price-sale">₩8,000</span></div>
-                </div>
-            </div>
-        </div>
-        <hr class="section-divider">
+<!-- DIGITAL -->
+<div class="shop-group" data-group="digital">
+<h2 class="group-label reveal">Digital <span>디지털</span></h2>
+<div class="product-grid">
+<div class="product-card reveal" data-tags="digital"
+     data-name="꿈꿀만두 디지털 굿즈" data-brand="꿈꿀만두" data-price="₩9,000"
+     data-desc="다운로드 즉시 사용 가능한 꿈꿀만두 디지털 굿즈. 배경화면, 스티커 등이 포함됩니다.">
+<div class="product-img-wrap">
+<div class="product-placeholder"></div>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">꿈꿀만두</span>
+<div class="product-name">꿈꿀만두 디지털 굿즈</div>
+<div class="product-price-row"><span class="price-sale">₩9,000</span></div>
+</div>
+<div class="product-card reveal" data-tags="digital" style="transition-delay:.1s"
+     data-name="ZEN Original 디지털 굿즈" data-brand="ZEN Original" data-price="₩8,000"
+     data-desc="ZEN 오리지널 캐릭터 디지털 굿즈.">
+<div class="product-img-wrap">
+<div class="product-placeholder"></div>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">ZEN Original</span>
+<div class="product-name">ZEN Original 디지털 굿즈</div>
+<div class="product-price-row"><span class="price-sale">₩8,000</span></div>
+</div>
+</div>
+</div>
+<hr class="section-divider"/>
 
-        <!-- IPAD/MACBOOK -->
-        <div class="shop-group" data-group="ipad">
-            <h2 class="group-label reveal">iPad / MacBook <span>케이스</span></h2>
-            <div class="product-grid">
-                <div class="product-card reveal" data-tags="ipad">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8D0,#FFD0B0);">🥟</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">꿈꿀만두</span>
-                    <div class="product-name">꿈꿀만두 아이패드 케이스 A</div>
-                    <div class="product-price-row"><span class="price-sale">₩52,000</span></div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:.07s" data-tags="ipad">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#FFD0E8,#FFC0D8);">🥟</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">꿈꿀만두</span>
-                    <div class="product-name">꿈꿀만두 맥북 케이스 A</div>
-                    <div class="product-price-row"><span class="price-sale">₩55,000</span></div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:.14s" data-tags="ipad">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#E0F0E8,#C8E8D8);">✨</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">ZEN Original</span>
-                    <div class="product-name">ZEN Original 아이패드 케이스 A</div>
-                    <div class="product-price-row"><span class="price-sale">₩48,000</span></div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:.21s" data-tags="ipad">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#C8E8D8,#B8D8C8);">✨</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">ZEN Original</span>
-                    <div class="product-name">ZEN Original 맥북 케이스 A</div>
-                    <div class="product-price-row"><span class="price-sale">₩50,000</span></div>
-                </div>
-            </div>
-        </div>
-        <hr class="section-divider">
+<!-- IPAD/MACBOOK -->
+<div class="shop-group" data-group="ipad">
+<h2 class="group-label reveal">iPad / MacBook <span>케이스</span></h2>
+<div class="product-grid">
+<div class="product-card reveal" data-tags="ipad"
+     data-name="꿈꿀만두 아이패드 케이스" data-brand="꿈꿀만두" data-price="₩52,000"
+     data-desc="아이패드를 꿈꿀만두와 함께. 귀여운 캐릭터로 특별하게 꾸며보세요.">
+<div class="product-img-wrap">
+<div class="product-placeholder"></div>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">꿈꿀만두</span>
+<div class="product-name">꿈꿀만두 아이패드 케이스</div>
+<div class="product-price-row"><span class="price-sale">₩52,000</span></div>
+</div>
+<div class="product-card reveal" data-tags="ipad" style="transition-delay:.07s"
+     data-name="꿈꿀만두 맥북 케이스" data-brand="꿈꿀만두" data-price="₩55,000"
+     data-img1="images/노트북케이스1.jpg" data-img2="images/노트북케이스2.jpg"
+     data-desc="맥북을 꿈꿀만두로 귀엽게 꾸며보세요. 세상에 하나뿐인 맥북 케이스.">
+<div class="product-img-wrap">
+<img alt="꿈꿀만두 맥북 케이스" src="images/노트북케이스1.jpg"/>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">꿈꿀만두</span>
+<div class="product-name">꿈꿀만두 맥북 케이스</div>
+<div class="product-price-row"><span class="price-sale">₩55,000</span></div>
+</div>
+<div class="product-card reveal" data-tags="ipad" style="transition-delay:.14s"
+     data-name="ZEN Original 아이패드 케이스" data-brand="ZEN Original" data-price="₩48,000"
+     data-desc="ZEN 오리지널 캐릭터 아이패드 케이스.">
+<div class="product-img-wrap">
+<div class="product-placeholder"></div>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">ZEN Original</span>
+<div class="product-name">ZEN Original 아이패드 케이스</div>
+<div class="product-price-row"><span class="price-sale">₩48,000</span></div>
+</div>
+<div class="product-card reveal" data-tags="ipad" style="transition-delay:.21s"
+     data-name="ZEN Original 맥북 케이스" data-brand="ZEN Original" data-price="₩50,000"
+     data-desc="ZEN 오리지널 캐릭터 맥북 케이스.">
+<div class="product-img-wrap">
+<div class="product-placeholder"></div>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">ZEN Original</span>
+<div class="product-name">ZEN Original 맥북 케이스</div>
+<div class="product-price-row"><span class="price-sale">₩50,000</span></div>
+</div>
+</div>
+</div>
+<hr class="section-divider"/>
 
-        <!-- POUCH/BAG -->
-        <div class="shop-group" data-group="pouch">
-            <h2 class="group-label reveal">Pouch / Bag <span>파우치 · 가방</span></h2>
-            <div class="product-grid">
-                <div class="product-card disabled reveal" data-tags="pouch">
-                    <div class="product-img-wrap">
-                        <span class="product-badge badge-soldout">SOLD OUT</span>
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8D0,#FFD0B0);">🥟</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">꿈꿀만두</span>
-                    <div class="product-name">꿈꿀만두 파우치 A</div>
-                    <div class="product-price-row"><span class="price-soldout">SOLD OUT</span></div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:.07s" data-tags="pouch">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#FFD0E8,#FFC0D8);">🥟</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">꿈꿀만두</span>
-                    <div class="product-name">꿈꿀만두 파우치 B</div>
-                    <div class="product-price-row"><span class="price-sale">₩28,000</span></div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:.14s" data-tags="pouch">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#FFF0D0,#FFE8B0);">✨</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">ZEN Original</span>
-                    <div class="product-name">ZEN Original 파우치 A</div>
-                    <div class="product-price-row"><span class="price-sale">₩25,000</span></div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:.21s" data-tags="pouch">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8B0,#FFD8A0);">✨</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">ZEN Original</span>
-                    <div class="product-name">ZEN Original 파우치 B</div>
-                    <div class="product-price-row"><span class="price-sale">₩25,000</span></div>
-                </div>
-            </div>
-        </div>
-        <hr class="section-divider">
+<!-- POUCH/BAG -->
+<div class="shop-group" data-group="pouch">
+<h2 class="group-label reveal">Pouch / Bag <span>파우치 · 가방</span></h2>
+<div class="product-grid">
+<div class="product-card reveal" data-tags="pouch"
+     data-name="꿈꿀만두 파우치" data-brand="꿈꿀만두" data-price="₩28,000"
+     data-img1="images/파우치1.jpg" data-img2="images/파우치2.jpg"
+     data-desc="작고 귀여운 꿈꿀만두 파우치. 소중한 물건을 담아보세요.">
+<div class="product-img-wrap">
+<img alt="꿈꿀만두 파우치" src="images/파우치1.jpg"/>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">꿈꿀만두</span>
+<div class="product-name">꿈꿀만두 파우치</div>
+<div class="product-price-row"><span class="price-sale">₩28,000</span></div>
+</div>
+<div class="product-card reveal" data-tags="pouch" style="transition-delay:.07s"
+     data-name="꿈꿀만두 토트백" data-brand="꿈꿀만두" data-price="₩38,000"
+     data-img1="images/토터백1.jpg" data-img2="images/토터백2.jpg"
+     data-desc="꿈꿀만두 캐릭터 토트백. 든든한 용량으로 일상을 함께해요.">
+<div class="product-img-wrap">
+<img alt="꿈꿀만두 토트백" src="images/토터백1.jpg"/>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">꿈꿀만두</span>
+<div class="product-name">꿈꿀만두 토트백</div>
+<div class="product-price-row"><span class="price-sale">₩38,000</span></div>
+</div>
+<div class="product-card reveal" data-tags="pouch" style="transition-delay:.14s"
+     data-name="ZEN Original 파우치" data-brand="ZEN Original" data-price="₩25,000"
+     data-desc="ZEN 오리지널 캐릭터 파우치.">
+<div class="product-img-wrap">
+<div class="product-placeholder"></div>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">ZEN Original</span>
+<div class="product-name">ZEN Original 파우치</div>
+<div class="product-price-row"><span class="price-sale">₩25,000</span></div>
+</div>
+</div>
+</div>
+<hr class="section-divider"/>
 
-        <!-- KEY RING -->
-        <div class="shop-group" data-group="keyring">
-            <h2 class="group-label reveal">Key Ring <span>키링</span></h2>
-            <div class="product-grid">
-                <div class="product-card reveal" data-tags="keyring new">
-                    <div class="product-img-wrap">
-                        <span class="product-badge badge-new">NEW</span>
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8D0,#FFD0B0);">🥟</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">꿈꿀만두</span>
-                    <div class="product-name">꿈꿀만두 키링</div>
-                    <div class="product-price-row"><span class="price-sale">₩18,000</span></div>
-                </div>
-                <div class="product-card disabled reveal" style="transition-delay:.07s" data-tags="keyring">
-                    <div class="product-img-wrap">
-                        <span class="product-badge badge-soldout">SOLD OUT</span>
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#E8F0FF,#CCE0FF);">⭐</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">ZEN</span>
-                    <div class="product-name">Cloud Star 키링</div>
-                    <div class="product-price-row"><span class="price-soldout">SOLD OUT</span></div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:.14s" data-tags="keyring">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#E8FFE8,#C2F5CA);">🐻</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">ZEN</span>
-                    <div class="product-name">Spring Bear 키링</div>
-                    <div class="product-price-row"><span class="price-sale">₩17,000</span></div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:.21s" data-tags="keyring">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#F0E8FF,#E0D0FF);">🐰</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">ZEN</span>
-                    <div class="product-name">Moon Bunny 키링</div>
-                    <div class="product-price-row"><span class="price-sale">₩17,000</span></div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:.28s" data-tags="keyring">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#FFF8D0,#FFE8A0);">🍋</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">ZEN</span>
-                    <div class="product-name">Lemon Drop 키링</div>
-                    <div class="product-price-row"><span class="price-sale">₩16,000</span></div>
-                </div>
-            </div>
-        </div>
-        <hr class="section-divider">
+<!-- KEY RING -->
+<div class="shop-group" data-group="keyring">
+<h2 class="group-label reveal">Key Ring <span>키링</span></h2>
+<div class="product-grid">
+<div class="product-card reveal" data-tags="keyring new"
+     data-name="꿈꿀만두 키링" data-brand="꿈꿀만두" data-price="₩18,000"
+     data-img1="images/키링1.jpg" data-img2="images/키링2.jpg"
+     data-desc="꿈꿀만두 캐릭터 키링. 가방에 달면 어디서나 시선을 끌어요.">
+<div class="product-img-wrap">
+<span class="product-badge badge-new">NEW</span>
+<img alt="꿈꿀만두 키링" src="images/키링1.jpg"/>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">꿈꿀만두</span>
+<div class="product-name">꿈꿀만두 키링</div>
+<div class="product-price-row"><span class="price-sale">₩18,000</span></div>
+</div>
+<div class="product-card reveal" data-tags="keyring new" style="transition-delay:.035s"
+     data-name="꿈꿀만두 키링 A" data-brand="꿈꿀만두" data-price="₩18,000"
+     data-img1="images/키링A.jpg"
+     data-desc="꿈꿀만두 캐릭터 키링. 가방에 달면 어디서나 시선을 끌어요.">
+<div class="product-img-wrap">
+<span class="product-badge badge-new">NEW</span>
+<img alt="꿈꿀만두 키링 A" src="images/키링A.jpg"/>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">꿈꿀만두</span>
+<div class="product-name">꿈꿀만두 키링 A</div>
+<div class="product-price-row"><span class="price-sale">₩18,000</span></div>
+</div>
+<div class="product-card disabled reveal" data-tags="keyring" style="transition-delay:.07s"
+     data-name="Cloud Star 키링" data-brand="ZEN" data-price="₩17,000" data-soldout="true"
+     data-desc="구름과 별이 만난 감성 키링. 밤하늘을 품고 다녀보세요.">
+<div class="product-img-wrap">
+<span class="product-badge badge-soldout">SOLD OUT</span>
+<div class="product-placeholder"></div>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">ZEN</span>
+<div class="product-name">Cloud Star 키링</div>
+<div class="product-price-row"><span class="price-soldout">SOLD OUT</span></div>
+</div>
+<div class="product-card reveal" data-tags="keyring" style="transition-delay:.14s"
+     data-name="Spring Bear 키링" data-brand="ZEN" data-price="₩17,000"
+     data-desc="봄날의 따뜻함을 담은 곰 키링. 포근한 하루를 선물해요.">
+<div class="product-img-wrap">
+<div class="product-placeholder"></div>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">ZEN</span>
+<div class="product-name">Spring Bear 키링</div>
+<div class="product-price-row"><span class="price-sale">₩17,000</span></div>
+</div>
+<div class="product-card reveal" data-tags="keyring" style="transition-delay:.21s"
+     data-name="Moon Bunny 키링" data-brand="ZEN" data-price="₩17,000"
+     data-desc="달빛 아래 귀여운 토끼 키링. 매일 밤을 특별하게 만들어요.">
+<div class="product-img-wrap">
+<div class="product-placeholder"></div>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">ZEN</span>
+<div class="product-name">Moon Bunny 키링</div>
+<div class="product-price-row"><span class="price-sale">₩17,000</span></div>
+</div>
+<div class="product-card reveal" data-tags="keyring" style="transition-delay:.28s"
+     data-name="Lemon Drop 키링" data-brand="ZEN" data-price="₩16,000"
+     data-desc="상큼한 레몬 드롭 키링. 기분 좋은 하루를 시작해보세요.">
+<div class="product-img-wrap">
+<div class="product-placeholder"></div>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">ZEN</span>
+<div class="product-name">Lemon Drop 키링</div>
+<div class="product-price-row"><span class="price-sale">₩16,000</span></div>
+</div>
+</div>
+</div>
+<hr class="section-divider"/>
 
-        <!-- GOODS -->
-        <div class="shop-group" data-group="goods">
-            <h2 class="group-label reveal">Goods <span>굿즈</span></h2>
-            <div class="product-grid">
-                <div class="product-card disabled reveal" data-tags="goods best">
-                    <div class="product-img-wrap">
-                        <span class="product-badge badge-soldout">SOLD OUT</span>
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8F0,#FFD0E0);">🩷</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">ZEN</span>
-                    <div class="product-name">ZEN Sticker Pack</div>
-                    <div class="product-price-row"><span class="price-soldout">SOLD OUT</span></div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:.1s" data-tags="goods">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#F0F4FF,#E0E8FF);">📓</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">ZEN</span>
-                    <div class="product-name">ZEN Mini Note</div>
-                    <div class="product-price-row"><span class="price-sale">₩8,000</span></div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:.2s" data-tags="goods">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#E8FFF4,#C0F0D8);">🛍️</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">ZEN</span>
-                    <div class="product-name">Mandu Pouch</div>
-                    <div class="product-price-row"><span class="price-sale">₩22,000</span></div>
-                </div>
-            </div>
-        </div>
-        <hr class="section-divider">
+<!-- GOODS -->
+<div class="shop-group" data-group="goods">
+<h2 class="group-label reveal">Goods <span>굿즈</span></h2>
+<div class="product-grid">
+<div class="product-card reveal" data-tags="goods new"
+     data-name="꿈꿀만두 에어팟 케이스" data-brand="꿈꿀만두" data-price="₩25,000"
+     data-img1="images/에어팟1.jpg" data-img2="images/에어팟2.jpg"
+     data-desc="귀여운 꿈꿀만두 에어팟 케이스. 소중한 에어팟을 보호하며 귀엽게 꾸며보세요.">
+<div class="product-img-wrap">
+<span class="product-badge badge-new">NEW</span>
+<img alt="꿈꿀만두 에어팟 케이스" src="images/에어팟1.jpg"/>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">꿈꿀만두</span>
+<div class="product-name">꿈꿀만두 에어팟 케이스</div>
+<div class="product-price-row"><span class="price-sale">₩25,000</span></div>
+</div>
+<div class="product-card reveal" data-tags="goods" style="transition-delay:.1s"
+     data-name="꿈꿀만두 인형" data-brand="꿈꿀만두" data-price="₩45,000"
+     data-img1="images/인형1.jpg" data-img2="images/인형2.jpg"
+     data-desc="꿈꿀만두 캐릭터 인형. 책상 위에 올려두면 하루가 귀여워져요.">
+<div class="product-img-wrap">
+<img alt="꿈꿀만두 인형" src="images/인형1.jpg"/>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">꿈꿀만두</span>
+<div class="product-name">꿈꿀만두 인형</div>
+<div class="product-price-row"><span class="price-sale">₩45,000</span></div>
+</div>
+<div class="product-card reveal" data-tags="goods" style="transition-delay:.15s"
+     data-name="꿈꿀만두 컵" data-brand="꿈꿀만두" data-price="₩28,000"
+     data-img1="images/컵1.jpg" data-img2="images/컵2.jpg"
+     data-desc="꿈꿀만두 캐릭터 컵. 매일 마시는 커피 한 잔이 더 특별해져요.">
+<div class="product-img-wrap">
+<img alt="꿈꿀만두 컵" src="images/컵1.jpg"/>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">꿈꿀만두</span>
+<div class="product-name">꿈꿀만두 컵</div>
+<div class="product-price-row"><span class="price-sale">₩28,000</span></div>
+</div>
+<div class="product-card disabled reveal" data-tags="goods best" style="transition-delay:.2s"
+     data-name="ZEN Sticker Pack" data-brand="ZEN" data-price="₩6,000" data-soldout="true"
+     data-desc="ZEN 캐릭터들의 감성 스티커 팩. 다이어리, 노트 등 어디에나 활용해보세요.">
+<div class="product-img-wrap">
+<span class="product-badge badge-soldout">SOLD OUT</span>
+<div class="product-placeholder"></div>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">ZEN</span>
+<div class="product-name">ZEN Sticker Pack</div>
+<div class="product-price-row"><span class="price-soldout">SOLD OUT</span></div>
+</div>
+<div class="product-card reveal" data-tags="goods" style="transition-delay:.2s"
+     data-name="ZEN Mini Note" data-brand="ZEN" data-price="₩8,000"
+     data-desc="ZEN 캐릭터로 꾸민 미니 노트. 일상의 소소한 기록을 남겨보세요.">
+<div class="product-img-wrap">
+<div class="product-placeholder"></div>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">ZEN</span>
+<div class="product-name">ZEN Mini Note</div>
+<div class="product-price-row"><span class="price-sale">₩8,000</span></div>
+</div>
+<div class="product-card reveal" data-tags="goods" style="transition-delay:.3s"
+     data-name="Mandu Pouch" data-brand="ZEN" data-price="₩22,000"
+     data-desc="만두를 닮은 귀여운 파우치. 보는 것만으로도 귀여워요.">
+<div class="product-img-wrap">
+<div class="product-placeholder"></div>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">ZEN</span>
+<div class="product-name">Mandu Pouch</div>
+<div class="product-price-row"><span class="price-sale">₩22,000</span></div>
+</div>
+</div>
+</div>
+<hr class="section-divider"/>
 
-        <!-- LIFE -->
-        <div class="shop-group" data-group="life">
-            <h2 class="group-label reveal">Life <span>라이프</span></h2>
-            <div class="product-grid">
-                <div class="product-card disabled reveal" data-tags="life">
-                    <div class="product-img-wrap">
-                        <span class="product-badge badge-soldout">SOLD OUT</span>
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8D0,#FFD0B0);">🥟</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">꿈꿀만두</span>
-                    <div class="product-name">꿈꿀만두 라이프 굿즈 A</div>
-                    <div class="product-price-row"><span class="price-soldout">SOLD OUT</span></div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:.07s" data-tags="life">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#FFD0E8,#FFC0D8);">🥟</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">꿈꿀만두</span>
-                    <div class="product-name">꿈꿀만두 라이프 굿즈 B</div>
-                    <div class="product-price-row"><span class="price-sale">₩15,000</span></div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:.14s" data-tags="life">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#D8F0D8,#C0E8C0);">✨</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">ZEN Original</span>
-                    <div class="product-name">ZEN Original 라이프 굿즈 A</div>
-                    <div class="product-price-row"><span class="price-sale">₩13,000</span></div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:.21s" data-tags="life">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#C0E8C0,#B0D8B0);">✨</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">ZEN Original</span>
-                    <div class="product-name">ZEN Original 라이프 굿즈 B</div>
-                    <div class="product-price-row"><span class="price-sale">₩13,000</span></div>
-                </div>
-            </div>
-        </div>
-        <hr class="section-divider">
+<!-- LIFE -->
+<div class="shop-group" data-group="life">
+<h2 class="group-label reveal">Life <span>라이프</span></h2>
+<div class="product-grid">
+<div class="product-card reveal" data-tags="life"
+     data-name="꿈꿀만두 라이프 굿즈" data-brand="꿈꿀만두" data-price="₩15,000"
+     data-desc="일상을 더 특별하게. 꿈꿀만두 라이프 굿즈 컬렉션.">
+<div class="product-img-wrap">
+<div class="product-placeholder"></div>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">꿈꿀만두</span>
+<div class="product-name">꿈꿀만두 라이프 굿즈</div>
+<div class="product-price-row"><span class="price-sale">₩15,000</span></div>
+</div>
+<div class="product-card reveal" data-tags="life" style="transition-delay:.1s"
+     data-name="ZEN Original 라이프 굿즈" data-brand="ZEN Original" data-price="₩13,000"
+     data-desc="ZEN 오리지널 캐릭터 라이프 굿즈.">
+<div class="product-img-wrap">
+<div class="product-placeholder"></div>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">ZEN Original</span>
+<div class="product-name">ZEN Original 라이프 굿즈</div>
+<div class="product-price-row"><span class="price-sale">₩13,000</span></div>
+</div>
+</div>
+</div>
+<hr class="section-divider"/>
 
-        <!-- STATIONERY -->
-        <div class="shop-group" data-group="stationery">
-            <h2 class="group-label reveal">Stationery <span>스테이셔너리</span></h2>
-            <div class="product-grid">
-                <div class="product-card disabled reveal" data-tags="stationery">
-                    <div class="product-img-wrap">
-                        <span class="product-badge badge-soldout">SOLD OUT</span>
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8D0,#FFD0B0);">🥟</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">꿈꿀만두</span>
-                    <div class="product-name">꿈꿀만두 스티커 A</div>
-                    <div class="product-price-row"><span class="price-soldout">SOLD OUT</span></div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:.07s" data-tags="stationery">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#FFD0E8,#FFC0D8);">🥟</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">꿈꿀만두</span>
-                    <div class="product-name">꿈꿀만두 엽서 A</div>
-                    <div class="product-price-row"><span class="price-sale">₩6,000</span></div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:.14s" data-tags="stationery">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#FFF8D0,#FFEE90);">✨</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">ZEN Original</span>
-                    <div class="product-name">ZEN Original 스티커 A</div>
-                    <div class="product-price-row"><span class="price-sale">₩5,000</span></div>
-                </div>
-                <div class="product-card reveal" style="transition-delay:.21s" data-tags="stationery">
-                    <div class="product-img-wrap">
-                        <div class="product-placeholder" style="background:linear-gradient(135deg,#FFEE90,#FFE060);">✨</div>
-                        <button class="heart-btn" aria-label="찜하기">♡</button>
-                    </div>
-                    <span class="product-brand">ZEN Original</span>
-                    <div class="product-name">ZEN Original 엽서 A</div>
-                    <div class="product-price-row"><span class="price-sale">₩5,000</span></div>
-                </div>
-            </div>
-        </div>
+<!-- STATIONERY -->
+<div class="shop-group" data-group="stationery">
+<h2 class="group-label reveal">Stationery <span>스테이셔너리</span></h2>
+<div class="product-grid">
+<div class="product-card reveal" data-tags="stationery"
+     data-name="꿈꿀만두 스티커" data-brand="꿈꿀만두" data-price="₩6,000"
+     data-desc="꿈꿀만두 캐릭터 스티커. 다이어리, 노트, 어디에나 붙여보세요!">
+<div class="product-img-wrap">
+<div class="product-placeholder"></div>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">꿈꿀만두</span>
+<div class="product-name">꿈꿀만두 스티커</div>
+<div class="product-price-row"><span class="price-sale">₩6,000</span></div>
+</div>
+<div class="product-card reveal" data-tags="stationery" style="transition-delay:.07s"
+     data-name="꿈꿀만두 엽서" data-brand="꿈꿀만두" data-price="₩6,000"
+     data-desc="감성적인 꿈꿀만두 엽서. 소중한 사람에게 특별한 마음을 전해보세요.">
+<div class="product-img-wrap">
+<div class="product-placeholder"></div>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">꿈꿀만두</span>
+<div class="product-name">꿈꿀만두 엽서</div>
+<div class="product-price-row"><span class="price-sale">₩6,000</span></div>
+</div>
+<div class="product-card reveal" data-tags="stationery" style="transition-delay:.14s"
+     data-name="ZEN Original 스티커" data-brand="ZEN Original" data-price="₩5,000"
+     data-desc="ZEN 오리지널 캐릭터 스티커.">
+<div class="product-img-wrap">
+<div class="product-placeholder"></div>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">ZEN Original</span>
+<div class="product-name">ZEN Original 스티커</div>
+<div class="product-price-row"><span class="price-sale">₩5,000</span></div>
+</div>
+<div class="product-card reveal" data-tags="stationery" style="transition-delay:.21s"
+     data-name="ZEN Original 엽서" data-brand="ZEN Original" data-price="₩5,000"
+     data-desc="ZEN 오리지널 캐릭터 엽서.">
+<div class="product-img-wrap">
+<div class="product-placeholder"></div>
+<button aria-label="찜하기" class="heart-btn">♡</button>
+</div>
+<span class="product-brand">ZEN Original</span>
+<div class="product-name">ZEN Original 엽서</div>
+<div class="product-price-row"><span class="price-sale">₩5,000</span></div>
+</div>
+</div>
+</div>
 
-        <div class="empty-msg" id="emptyMsg">해당하는 상품이 없습니다</div>
-
-    </div>
+<div class="empty-msg" id="emptyMsg">해당하는 상품이 없습니다</div>
+</div>
 </section>
 
+<!-- Product Detail Modal -->
+<div class="product-modal" id="productModal">
+<div class="modal-overlay" id="modalOverlay"></div>
+<div class="modal-content">
+<button class="modal-close" id="modalClose" aria-label="닫기">✕</button>
+<div class="modal-gallery">
+<div class="modal-main-wrap" id="modalMainWrap">
+<img id="modalMainImg" src="" alt="" style="display:none"/>
+</div>
+<div class="modal-thumbs" id="modalThumbs"></div>
+</div>
+<div class="modal-info">
+<span class="modal-brand-tag" id="modalBrand"></span>
+<h2 class="modal-name-text" id="modalName"></h2>
+<hr class="modal-divider"/>
+<div class="modal-price-tag" id="modalPrice"></div>
+<p class="modal-desc-para" id="modalDesc"></p>
+<hr class="modal-divider"/>
+<div id="modalAction"></div>
+</div>
+</div>
+</div>
+
+<!-- Cart Drawer -->
+<div class="cart-backdrop" id="cartBackdrop"></div>
+<div class="cart-drawer" id="cartDrawer">
+<div class="cart-drawer-head">
+<h3>장바구니</h3>
+<button class="cart-drawer-close" id="cartClose" aria-label="닫기">✕</button>
+</div>
+<div class="cart-list" id="cartList"></div>
+<div class="cart-drawer-foot" id="cartFoot">
+<div class="cart-total-row" id="cartTotalRow"></div>
+<a class="cart-order-btn" href="contact.html">구매하기 →</a>
+<p class="cart-order-note">상품당 최대 2개까지 구매 가능합니다.</p>
+</div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
 <footer>
-    <div class="container">
-        <div class="footer-content">
-            <div class="footer-main">
-                <div class="footer-logo">
-                    <svg viewBox="0 0 190 52" fill="none" style="height:44px;width:auto">
-                        <circle cx="10" cy="24" r="8" fill="#FF7BAC" opacity=".7"/>
-                        <text x="26" y="36" font-family="Playfair Display,Georgia,serif" font-size="32" font-weight="800" font-style="italic" fill="#FFFFFF">ZEN</text>
-                        <text x="27" y="49" font-family="Nunito,sans-serif" font-size="7.5" letter-spacing="3.5" fill="#FF7BAC" font-weight="700">KEYRING STUDIO</text>
-                    </svg>
-                </div>
-                <p>일상 속 작은 행복을 만드는<br>키링 스튜디오</p>
-            </div>
-            <div class="footer-info">
-                <h4>ZEN Studio</h4>
-                <p>대표자: 안애진</p>
-            </div>
-            <div class="footer-contact">
-                <h4>Contact</h4>
-                <p>Email: scentlog@gmail.com</p>
-                <p><a href="https://www.instagram.com/dreaming_mandu/" target="_blank" style="color:inherit">Instagram: @dreaming_mandu</a></p>
-            </div>
-        </div>
-        <div class="footer-copy">&copy; 2026 ZEN Keyring Studio. All Rights Reserved.</div>
-    </div>
+<div class="container">
+<div class="footer-content">
+<div class="footer-main">
+<div class="footer-logo">
+<svg fill="none" style="height:44px;width:auto" viewbox="0 0 190 52">
+<circle cx="10" cy="24" fill="#FF7BAC" opacity=".7" r="8"></circle>
+<text fill="#FFFFFF" font-family="Playfair Display,Georgia,serif" font-size="32" font-style="italic" font-weight="800" x="26" y="36">ZEN</text>
+<text fill="#FF7BAC" font-family="Nunito,sans-serif" font-size="7.5" font-weight="700" letter-spacing="3.5" x="27" y="49">KEYRING STUDIO</text>
+</svg>
+</div>
+<p>일상 속 작은 행복을 만드는<br/>키링 스튜디오</p>
+</div>
+<div class="footer-info">
+<h4>ZEN Studio</h4>
+<p>대표자: 안애진</p>
+</div>
+<div class="footer-contact">
+<h4>Contact</h4>
+<p>Email: scentlog@gmail.com</p>
+<p><a href="https://www.instagram.com/dreaming_mandu/" style="color:inherit" target="_blank">Instagram: @dreaming_mandu</a></p>
+</div>
+</div>
+<div class="footer-copy">© 2026 ZEN Keyring Studio. All Rights Reserved.</div>
+</div>
 </footer>
 
 <script src="main.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const tabs     = document.querySelectorAll('.filter-tab');
-        const groups   = document.querySelectorAll('.shop-group');
-        const dividers = document.querySelectorAll('.section-divider');
-        const emptyMsg = document.getElementById('emptyMsg');
+document.addEventListener('DOMContentLoaded', () => {
 
-        function applyFilter(filter) {
-            emptyMsg.classList.remove('visible');
-            if (filter === 'all') {
-                groups.forEach(g => g.style.display = '');
-                dividers.forEach(d => d.style.display = '');
-                return;
-            }
-            groups.forEach(g => { g.style.display = g.dataset.group === filter ? '' : 'none'; });
-            dividers.forEach(d => d.style.display = 'none');
-            if (![...groups].some(g => g.style.display !== 'none')) emptyMsg.classList.add('visible');
+    // ── Filter tabs ──
+    const tabs     = document.querySelectorAll('.filter-tab');
+    const groups   = document.querySelectorAll('.shop-group');
+    const dividers = document.querySelectorAll('.section-divider');
+    const emptyMsg = document.getElementById('emptyMsg');
+
+    function applyFilter(filter) {
+        emptyMsg.classList.remove('visible');
+        if (filter === 'all') {
+            groups.forEach(g => g.style.display = '');
+            dividers.forEach(d => d.style.display = '');
+            return;
         }
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                tabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                applyFilter(tab.dataset.filter);
-            });
-        });
-
-        document.querySelectorAll('.heart-btn').forEach(btn => {
-            btn.addEventListener('click', e => {
-                e.stopPropagation();
-                btn.textContent = btn.textContent === '♡' ? '♥' : '♡';
-                btn.style.color = btn.textContent === '♥' ? 'var(--pink)' : '';
-            });
+        groups.forEach(g => { g.style.display = g.dataset.group === filter ? '' : 'none'; });
+        dividers.forEach(d => d.style.display = 'none');
+        if (![...groups].some(g => g.style.display !== 'none')) emptyMsg.classList.add('visible');
+    }
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            applyFilter(tab.dataset.filter);
         });
     });
+
+    // ── Heart button ──
+    document.querySelectorAll('.heart-btn').forEach(btn => {
+        btn.addEventListener('click', e => {
+            e.stopPropagation();
+            btn.textContent = btn.textContent === '♡' ? '♥' : '♡';
+            btn.style.color = btn.textContent === '♥' ? 'var(--pink)' : '';
+        });
+    });
+
+    // ── Cart ──
+    let cart = JSON.parse(localStorage.getItem('zen-cart') || '[]');
+
+    function saveCart() { localStorage.setItem('zen-cart', JSON.stringify(cart)); }
+
+    function getCartCount() { return cart.reduce((s, i) => s + i.qty, 0); }
+
+    function updateBadge() {
+        const badge = document.getElementById('cartBadge');
+        const count = getCartCount();
+        badge.textContent = count;
+        badge.style.display = count > 0 ? 'flex' : 'none';
+    }
+
+    function addToCart(name, brand, price, img) {
+        const id = name;
+        const existing = cart.find(c => c.id === id);
+        const qty = parseInt(document.getElementById('modalQty').textContent) || 1;
+        if (existing) { existing.qty = Math.min(2, existing.qty + qty); }
+        else { cart.push({ id, name, brand, price, img, qty: Math.min(2, qty) }); }
+        saveCart();
+        updateBadge();
+        renderCartList();
+    }
+
+    function removeFromCart(id) {
+        cart = cart.filter(c => c.id !== id);
+        saveCart();
+        updateBadge();
+        renderCartList();
+    }
+
+    function changeCartQty(id, delta) {
+        const item = cart.find(c => c.id === id);
+        if (!item) return;
+        item.qty = Math.min(2, Math.max(1, item.qty + delta));
+        saveCart();
+        updateBadge();
+        renderCartList();
+    }
+
+    function renderCartList() {
+        const list    = document.getElementById('cartList');
+        const foot    = document.getElementById('cartFoot');
+        const totRow  = document.getElementById('cartTotalRow');
+        if (cart.length === 0) {
+            list.innerHTML = '<p class="cart-empty">장바구니가 비어있어요 🛒</p>';
+            totRow.innerHTML = '';
+            foot.style.display = 'none';
+            return;
+        }
+        foot.style.display = 'flex';
+        let total = 0;
+        list.innerHTML = cart.map(item => {
+            const p = parseInt(item.price.replace(/[^\d]/g, ''));
+            total += p * item.qty;
+            return `
+            <div class="cart-item">
+              <div class="cart-item-img">${item.img ? `<img src="${item.img}" alt="${item.name}">` : ''}</div>
+              <div class="cart-item-info">
+                <div class="cart-item-brand">${item.brand}</div>
+                <div class="cart-item-name">${item.name}</div>
+                <div class="cart-item-price">₩${(p * item.qty).toLocaleString()}</div>
+                <div class="cart-item-controls">
+                  <button class="cqty-btn" onclick="changeCartQty('${item.id}',-1)">−</button>
+                  <span class="cqty-val">${item.qty}</span>
+                  <button class="cqty-btn" onclick="changeCartQty('${item.id}',1)">+</button>
+                  <button class="cart-remove-btn" onclick="removeFromCart('${item.id}')">삭제</button>
+                </div>
+              </div>
+            </div>`;
+        }).join('');
+        totRow.innerHTML = `<span>총 금액</span><span>₩${total.toLocaleString()}</span>`;
+    }
+
+    // expose to inline onclick
+    window.removeFromCart  = removeFromCart;
+    window.changeCartQty   = changeCartQty;
+
+    // Cart drawer open/close
+    function openCart() {
+        renderCartList();
+        document.getElementById('cartDrawer').classList.add('open');
+        document.getElementById('cartBackdrop').classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeCart() {
+        document.getElementById('cartDrawer').classList.remove('open');
+        document.getElementById('cartBackdrop').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+    document.getElementById('cartToggle').addEventListener('click', openCart);
+    document.getElementById('cartClose').addEventListener('click', closeCart);
+    document.getElementById('cartBackdrop').addEventListener('click', closeCart);
+
+    // Toast
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 2200);
+    }
+
+    // ── Modal ──
+    const modal      = document.getElementById('productModal');
+    const overlay    = document.getElementById('modalOverlay');
+    const closeBtn   = document.getElementById('modalClose');
+    const modalBrand = document.getElementById('modalBrand');
+    const modalName  = document.getElementById('modalName');
+    const modalPrice = document.getElementById('modalPrice');
+    const modalDesc  = document.getElementById('modalDesc');
+    const modalAction= document.getElementById('modalAction');
+    const mainImg    = document.getElementById('modalMainImg');
+    const thumbsEl   = document.getElementById('modalThumbs');
+
+    let currentCard = null;
+
+    function openModal(card) {
+        currentCard = card;
+        const name    = card.dataset.name    || '';
+        const brand   = card.dataset.brand   || '';
+        const price   = card.dataset.price   || '';
+        const desc    = card.dataset.desc    || '';
+        const soldout = card.dataset.soldout === 'true';
+        const img1    = card.dataset.img1    || '';
+        const img2    = card.dataset.img2    || '';
+
+        modalBrand.textContent = brand;
+        modalName.textContent  = name;
+        modalDesc.textContent  = desc;
+        modalPrice.className   = 'modal-price-tag' + (soldout ? ' is-soldout' : '');
+        modalPrice.textContent = soldout ? 'SOLD OUT' : price;
+
+        if (soldout) {
+            modalAction.innerHTML = '<span class="modal-soldout-tag">현재 품절된 상품입니다</span>';
+        } else {
+            modalAction.innerHTML = `
+              <div class="qty-row">
+                <span class="qty-label">수량</span>
+                <button class="qty-btn" id="qtyMinus">−</button>
+                <span class="qty-val" id="modalQty">1</span>
+                <button class="qty-btn" id="qtyPlus">+</button>
+              </div>
+              <div class="modal-btn-row">
+                <button class="modal-cart-btn" id="modalCartBtn">장바구니 담기</button>
+                <button class="modal-buy-btn" id="modalBuyBtn">구매하기</button>
+              </div>`;
+
+            document.getElementById('qtyMinus').addEventListener('click', () => {
+                const el = document.getElementById('modalQty');
+                el.textContent = Math.max(1, parseInt(el.textContent) - 1);
+            });
+            document.getElementById('qtyPlus').addEventListener('click', () => {
+                const el = document.getElementById('modalQty');
+                el.textContent = Math.min(2, parseInt(el.textContent) + 1);
+            });
+            document.getElementById('modalCartBtn').addEventListener('click', () => {
+                addToCart(name, brand, price, img1);
+                showToast('장바구니에 담았어요!');
+            });
+            document.getElementById('modalBuyBtn').addEventListener('click', () => {
+                addToCart(name, brand, price, img1);
+                closeModal();
+                openCart();
+            });
+        }
+
+        // Gallery
+        thumbsEl.innerHTML = '';
+        const imgs = [img1, img2].filter(Boolean);
+        if (imgs.length === 0) {
+            mainImg.style.display = 'none';
+        } else {
+            mainImg.src = imgs[0]; mainImg.alt = name; mainImg.style.display = 'block';
+            imgs.forEach((src, i) => {
+                const thumb = document.createElement('div');
+                thumb.className = 'modal-thumb' + (i === 0 ? ' active' : '');
+                const tImg = document.createElement('img');
+                tImg.src = src; tImg.alt = name + ' ' + (i + 1);
+                thumb.appendChild(tImg);
+                thumb.addEventListener('click', () => {
+                    mainImg.src = src; mainImg.style.display = 'block';
+                    thumbsEl.querySelectorAll('.modal-thumb').forEach(t => t.classList.remove('active'));
+                    thumb.classList.add('active');
+                });
+                thumbsEl.appendChild(thumb);
+            });
+        }
+
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.product-card').forEach(card => {
+        card.addEventListener('click', e => {
+            if (e.target.closest('.heart-btn')) return;
+            openModal(card);
+        });
+    });
+    overlay.addEventListener('click', closeModal);
+    closeBtn.addEventListener('click', closeModal);
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeCart(); } });
+
+    // init
+    updateBadge();
+    renderCartList();
+});
 </script>
 </body>
 </html>
