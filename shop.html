@@ -20,46 +20,22 @@
             background: radial-gradient(ellipse, rgba(255,123,172,.18) 0%, transparent 70%);
             filter: blur(40px);
         }
-        .page-hero-eyebrow {
-            display: block; font-size: .72rem; letter-spacing: .4em; text-transform: uppercase;
-            color: var(--pink); margin-bottom: 1.2rem; font-weight: 700;
-        }
-        .page-hero h1 {
-            font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 6vw, 5rem);
-            font-weight: 800; font-style: italic; color: var(--text); letter-spacing: -.01em;
-        }
+        .page-hero-eyebrow { display: block; font-size: .72rem; letter-spacing: .4em; text-transform: uppercase; color: var(--pink); margin-bottom: 1.2rem; font-weight: 700; }
+        .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 800; font-style: italic; color: var(--text); letter-spacing: -.01em; }
         .page-hero p { font-size: 1rem; color: var(--muted); margin-top: 1.2rem; font-weight: 500; }
 
-        /* FILTER BAR — 가로 스크롤 */
-        .filter-bar {
-            background: var(--bg); border-bottom: 1px solid var(--border);
-            overflow-x: auto; white-space: nowrap;
-            -webkit-overflow-scrolling: touch; scrollbar-width: none;
-        }
+        .filter-bar { background: var(--bg); border-bottom: 1px solid var(--border); overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
         .filter-bar::-webkit-scrollbar { display: none; }
         .filter-bar-inner { display: inline-flex; padding: 0 1rem; }
-        .filter-tab {
-            display: inline-block; padding: 1rem 1.4rem;
-            font-weight: 700; font-size: .76rem; letter-spacing: .08em; text-transform: uppercase;
-            color: var(--muted); border-bottom: 2px solid transparent;
-            cursor: pointer; transition: color .2s, border-color .2s; white-space: nowrap;
-            background: none; border-top: none; border-left: none; border-right: none;
-        }
+        .filter-tab { display: inline-block; padding: 1rem 1.4rem; font-weight: 700; font-size: .76rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); border-bottom: 2px solid transparent; cursor: pointer; transition: color .2s, border-color .2s; white-space: nowrap; background: none; border-top: none; border-left: none; border-right: none; }
         .filter-tab:hover { color: var(--text); }
         .filter-tab.active { color: var(--pink); border-bottom-color: var(--pink); }
 
-        /* SHOP SECTION */
         .shop-section { padding: 5rem 0 8rem; background: var(--bg); }
-
         .shop-group { margin-bottom: 5rem; }
-        .group-label {
-            font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 3vw, 2rem);
-            font-weight: 800; font-style: italic; color: var(--text);
-            margin-bottom: 2rem;
-        }
+        .group-label { font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; font-style: italic; color: var(--text); margin-bottom: 2rem; }
         .group-label span { color: var(--pink); }
         .section-divider { border: none; border-top: 1px solid var(--border); margin: 4rem 0; }
-
         .empty-msg { display: none; text-align: center; padding: 4rem 0; color: var(--muted); font-size: .95rem; }
         .empty-msg.visible { display: block; }
     </style>
@@ -99,10 +75,9 @@
     <p>하나하나 정성껏 만든 키링과 굿즈를 만나보세요</p>
 </div>
 
-<!-- FILTER TABS -->
 <div class="filter-bar">
     <div class="filter-bar-inner">
-        <button class="filter-tab active"  data-filter="all">ALL</button>
+        <button class="filter-tab active" data-filter="all">ALL</button>
         <button class="filter-tab" data-filter="phonecase">PHONE CASE</button>
         <button class="filter-tab" data-filter="smarttok">SMART TOK</button>
         <button class="filter-tab" data-filter="magsafe">MAGSAFE</button>
@@ -123,45 +98,43 @@
         <div class="shop-group" data-group="phonecase">
             <h2 class="group-label reveal">Phone Case <span>폰케이스</span></h2>
             <div class="product-grid">
-                <div class="product-card reveal" data-tags="phonecase">
+                <div class="product-card disabled reveal" data-tags="phonecase">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
+                        <span class="product-badge badge-soldout">SOLD OUT</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8D0,#FFD0B0);">🥟</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">꿈꿀만두</span>
                     <div class="product-name">꿈꿀만두 폰케이스 A</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-soldout">SOLD OUT</span></div>
                 </div>
                 <div class="product-card reveal" style="transition-delay:.07s" data-tags="phonecase">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#FFD0E8,#FFC0D8);">🥟</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">꿈꿀만두</span>
                     <div class="product-name">꿈꿀만두 폰케이스 B</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-sale">₩32,000</span></div>
                 </div>
-                <div class="product-card reveal" style="transition-delay:.14s" data-tags="phonecase">
+                <div class="product-card disabled reveal" style="transition-delay:.14s" data-tags="phonecase">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
+                        <span class="product-badge badge-soldout">SOLD OUT</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#F0E8FF,#E0D8FF);">✨</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">ZEN Original</span>
                     <div class="product-name">ZEN Original 폰케이스 A</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-soldout">SOLD OUT</span></div>
                 </div>
                 <div class="product-card reveal" style="transition-delay:.21s" data-tags="phonecase">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#E8E0FF,#D8D0FF);">✨</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">ZEN Original</span>
                     <div class="product-name">ZEN Original 폰케이스 B</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-sale">₩30,000</span></div>
                 </div>
             </div>
         </div>
@@ -171,45 +144,42 @@
         <div class="shop-group" data-group="smarttok">
             <h2 class="group-label reveal">Smart Tok <span>스마트톡</span></h2>
             <div class="product-grid">
-                <div class="product-card reveal" data-tags="smarttok">
+                <div class="product-card disabled reveal" data-tags="smarttok">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
+                        <span class="product-badge badge-soldout">SOLD OUT</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8D0,#FFD0B0);">🥟</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">꿈꿀만두</span>
                     <div class="product-name">꿈꿀만두 스마트톡 A</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-soldout">SOLD OUT</span></div>
                 </div>
                 <div class="product-card reveal" style="transition-delay:.07s" data-tags="smarttok">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#FFD0E8,#FFC0D8);">🥟</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">꿈꿀만두</span>
                     <div class="product-name">꿈꿀만두 스마트톡 B</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-sale">₩18,000</span></div>
                 </div>
                 <div class="product-card reveal" style="transition-delay:.14s" data-tags="smarttok">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#D0E8FF,#C0D8FF);">✨</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">ZEN Original</span>
                     <div class="product-name">ZEN Original 스마트톡 A</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-sale">₩16,000</span></div>
                 </div>
                 <div class="product-card reveal" style="transition-delay:.21s" data-tags="smarttok">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#C0D8FF,#B0C8FF);">✨</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">ZEN Original</span>
                     <div class="product-name">ZEN Original 스마트톡 B</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-sale">₩16,000</span></div>
                 </div>
             </div>
         </div>
@@ -219,45 +189,42 @@
         <div class="shop-group" data-group="magsafe">
             <h2 class="group-label reveal">MagSafe <span>맥세이프</span></h2>
             <div class="product-grid">
-                <div class="product-card reveal" data-tags="magsafe">
+                <div class="product-card disabled reveal" data-tags="magsafe">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
+                        <span class="product-badge badge-soldout">SOLD OUT</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8D0,#FFD0B0);">🥟</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">꿈꿀만두</span>
                     <div class="product-name">꿈꿀만두 맥세이프 A</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-soldout">SOLD OUT</span></div>
                 </div>
                 <div class="product-card reveal" style="transition-delay:.07s" data-tags="magsafe">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#FFD0E8,#FFC0D8);">🥟</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">꿈꿀만두</span>
                     <div class="product-name">꿈꿀만두 맥세이프 B</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-sale">₩28,000</span></div>
                 </div>
                 <div class="product-card reveal" style="transition-delay:.14s" data-tags="magsafe">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#E8D0FF,#D8C0FF);">✨</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">ZEN Original</span>
                     <div class="product-name">ZEN Original 맥세이프 A</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-sale">₩26,000</span></div>
                 </div>
                 <div class="product-card reveal" style="transition-delay:.21s" data-tags="magsafe">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#D8C0FF,#C8B0FF);">✨</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">ZEN Original</span>
                     <div class="product-name">ZEN Original 맥세이프 B</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-sale">₩26,000</span></div>
                 </div>
             </div>
         </div>
@@ -267,45 +234,42 @@
         <div class="shop-group" data-group="digital">
             <h2 class="group-label reveal">Digital <span>디지털</span></h2>
             <div class="product-grid">
-                <div class="product-card reveal" data-tags="digital">
+                <div class="product-card disabled reveal" data-tags="digital">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
+                        <span class="product-badge badge-soldout">SOLD OUT</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8D0,#FFD0B0);">🥟</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">꿈꿀만두</span>
                     <div class="product-name">꿈꿀만두 디지털 굿즈 A</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-soldout">SOLD OUT</span></div>
                 </div>
                 <div class="product-card reveal" style="transition-delay:.07s" data-tags="digital">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#FFD0E8,#FFC0D8);">🥟</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">꿈꿀만두</span>
                     <div class="product-name">꿈꿀만두 디지털 굿즈 B</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-sale">₩9,000</span></div>
                 </div>
                 <div class="product-card reveal" style="transition-delay:.14s" data-tags="digital">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#C8F0FF,#B0E0FF);">✨</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">ZEN Original</span>
                     <div class="product-name">ZEN Original 디지털 굿즈 A</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-sale">₩8,000</span></div>
                 </div>
                 <div class="product-card reveal" style="transition-delay:.21s" data-tags="digital">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#B0E0FF,#A0D0FF);">✨</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">ZEN Original</span>
                     <div class="product-name">ZEN Original 디지털 굿즈 B</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-sale">₩8,000</span></div>
                 </div>
             </div>
         </div>
@@ -317,43 +281,39 @@
             <div class="product-grid">
                 <div class="product-card reveal" data-tags="ipad">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8D0,#FFD0B0);">🥟</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">꿈꿀만두</span>
                     <div class="product-name">꿈꿀만두 아이패드 케이스 A</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-sale">₩52,000</span></div>
                 </div>
                 <div class="product-card reveal" style="transition-delay:.07s" data-tags="ipad">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#FFD0E8,#FFC0D8);">🥟</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">꿈꿀만두</span>
                     <div class="product-name">꿈꿀만두 맥북 케이스 A</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-sale">₩55,000</span></div>
                 </div>
                 <div class="product-card reveal" style="transition-delay:.14s" data-tags="ipad">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#E0F0E8,#C8E8D8);">✨</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">ZEN Original</span>
                     <div class="product-name">ZEN Original 아이패드 케이스 A</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-sale">₩48,000</span></div>
                 </div>
                 <div class="product-card reveal" style="transition-delay:.21s" data-tags="ipad">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#C8E8D8,#B8D8C8);">✨</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">ZEN Original</span>
                     <div class="product-name">ZEN Original 맥북 케이스 A</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-sale">₩50,000</span></div>
                 </div>
             </div>
         </div>
@@ -363,45 +323,42 @@
         <div class="shop-group" data-group="pouch">
             <h2 class="group-label reveal">Pouch / Bag <span>파우치 · 가방</span></h2>
             <div class="product-grid">
-                <div class="product-card reveal" data-tags="pouch">
+                <div class="product-card disabled reveal" data-tags="pouch">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
+                        <span class="product-badge badge-soldout">SOLD OUT</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8D0,#FFD0B0);">🥟</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">꿈꿀만두</span>
                     <div class="product-name">꿈꿀만두 파우치 A</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-soldout">SOLD OUT</span></div>
                 </div>
                 <div class="product-card reveal" style="transition-delay:.07s" data-tags="pouch">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#FFD0E8,#FFC0D8);">🥟</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">꿈꿀만두</span>
                     <div class="product-name">꿈꿀만두 파우치 B</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-sale">₩28,000</span></div>
                 </div>
                 <div class="product-card reveal" style="transition-delay:.14s" data-tags="pouch">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#FFF0D0,#FFE8B0);">✨</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">ZEN Original</span>
                     <div class="product-name">ZEN Original 파우치 A</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-sale">₩25,000</span></div>
                 </div>
                 <div class="product-card reveal" style="transition-delay:.21s" data-tags="pouch">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8B0,#FFD8A0);">✨</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">ZEN Original</span>
                     <div class="product-name">ZEN Original 파우치 B</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-sale">₩25,000</span></div>
                 </div>
             </div>
         </div>
@@ -442,23 +399,21 @@
                 </div>
                 <div class="product-card reveal" style="transition-delay:.21s" data-tags="keyring">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#F0E8FF,#E0D0FF);">🐰</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">ZEN</span>
                     <div class="product-name">Moon Bunny 키링</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-sale">₩17,000</span></div>
                 </div>
                 <div class="product-card reveal" style="transition-delay:.28s" data-tags="keyring">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#FFF8D0,#FFE8A0);">🍋</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">ZEN</span>
                     <div class="product-name">Lemon Drop 키링</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-sale">₩16,000</span></div>
                 </div>
             </div>
         </div>
@@ -480,23 +435,21 @@
                 </div>
                 <div class="product-card reveal" style="transition-delay:.1s" data-tags="goods">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#F0F4FF,#E0E8FF);">📓</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">ZEN</span>
                     <div class="product-name">ZEN Mini Note</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-sale">₩8,000</span></div>
                 </div>
                 <div class="product-card reveal" style="transition-delay:.2s" data-tags="goods">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#E8FFF4,#C0F0D8);">🛍️</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">ZEN</span>
                     <div class="product-name">Mandu Pouch</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-sale">₩22,000</span></div>
                 </div>
             </div>
         </div>
@@ -506,45 +459,42 @@
         <div class="shop-group" data-group="life">
             <h2 class="group-label reveal">Life <span>라이프</span></h2>
             <div class="product-grid">
-                <div class="product-card reveal" data-tags="life">
+                <div class="product-card disabled reveal" data-tags="life">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
+                        <span class="product-badge badge-soldout">SOLD OUT</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8D0,#FFD0B0);">🥟</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">꿈꿀만두</span>
                     <div class="product-name">꿈꿀만두 라이프 굿즈 A</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-soldout">SOLD OUT</span></div>
                 </div>
                 <div class="product-card reveal" style="transition-delay:.07s" data-tags="life">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#FFD0E8,#FFC0D8);">🥟</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">꿈꿀만두</span>
                     <div class="product-name">꿈꿀만두 라이프 굿즈 B</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-sale">₩15,000</span></div>
                 </div>
                 <div class="product-card reveal" style="transition-delay:.14s" data-tags="life">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#D8F0D8,#C0E8C0);">✨</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">ZEN Original</span>
                     <div class="product-name">ZEN Original 라이프 굿즈 A</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-sale">₩13,000</span></div>
                 </div>
                 <div class="product-card reveal" style="transition-delay:.21s" data-tags="life">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#C0E8C0,#B0D8B0);">✨</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">ZEN Original</span>
                     <div class="product-name">ZEN Original 라이프 굿즈 B</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-sale">₩13,000</span></div>
                 </div>
             </div>
         </div>
@@ -554,45 +504,42 @@
         <div class="shop-group" data-group="stationery">
             <h2 class="group-label reveal">Stationery <span>스테이셔너리</span></h2>
             <div class="product-grid">
-                <div class="product-card reveal" data-tags="stationery">
+                <div class="product-card disabled reveal" data-tags="stationery">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
+                        <span class="product-badge badge-soldout">SOLD OUT</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#FFE8D0,#FFD0B0);">🥟</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">꿈꿀만두</span>
                     <div class="product-name">꿈꿀만두 스티커 A</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-soldout">SOLD OUT</span></div>
                 </div>
                 <div class="product-card reveal" style="transition-delay:.07s" data-tags="stationery">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#FFD0E8,#FFC0D8);">🥟</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">꿈꿀만두</span>
                     <div class="product-name">꿈꿀만두 엽서 A</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-sale">₩6,000</span></div>
                 </div>
                 <div class="product-card reveal" style="transition-delay:.14s" data-tags="stationery">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#FFF8D0,#FFEE90);">✨</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">ZEN Original</span>
                     <div class="product-name">ZEN Original 스티커 A</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-sale">₩5,000</span></div>
                 </div>
                 <div class="product-card reveal" style="transition-delay:.21s" data-tags="stationery">
                     <div class="product-img-wrap">
-                        <span class="product-badge badge-coming">Coming Soon</span>
                         <div class="product-placeholder" style="background:linear-gradient(135deg,#FFEE90,#FFE060);">✨</div>
                         <button class="heart-btn" aria-label="찜하기">♡</button>
                     </div>
                     <span class="product-brand">ZEN Original</span>
                     <div class="product-name">ZEN Original 엽서 A</div>
-                    <div class="product-price-row"><span class="price-coming">Coming Soon</span></div>
+                    <div class="product-price-row"><span class="price-sale">₩5,000</span></div>
                 </div>
             </div>
         </div>
@@ -639,22 +586,14 @@
 
         function applyFilter(filter) {
             emptyMsg.classList.remove('visible');
-
             if (filter === 'all') {
                 groups.forEach(g => g.style.display = '');
                 dividers.forEach(d => d.style.display = '');
                 return;
             }
-
-            groups.forEach(g => {
-                g.style.display = g.dataset.group === filter ? '' : 'none';
-            });
-
-            // 구분선 모두 숨기기 (단일 카테고리 뷰에서는 불필요)
+            groups.forEach(g => { g.style.display = g.dataset.group === filter ? '' : 'none'; });
             dividers.forEach(d => d.style.display = 'none');
-
-            const anyVisible = [...groups].some(g => g.style.display !== 'none');
-            if (!anyVisible) emptyMsg.classList.add('visible');
+            if (![...groups].some(g => g.style.display !== 'none')) emptyMsg.classList.add('visible');
         }
 
         tabs.forEach(tab => {
@@ -665,7 +604,6 @@
             });
         });
 
-        // Heart toggle
         document.querySelectorAll('.heart-btn').forEach(btn => {
             btn.addEventListener('click', e => {
                 e.stopPropagation();
