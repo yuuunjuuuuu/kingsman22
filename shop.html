@@ -178,6 +178,7 @@
     }
     .qty-btn:hover { border-color: var(--pink); color: var(--pink); }
     .qty-val { font-size: 1rem; font-weight: 800; min-width: 28px; text-align: center; }
+    .qty-note { font-size: .72rem; color: var(--muted); margin-top: -.2rem; }
     /* Action buttons */
     .modal-btn-row { display: flex; gap: .7rem; }
     .modal-cart-btn {
@@ -974,6 +975,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <span class="qty-val" id="modalQty">1</span>
                 <button class="qty-btn" id="qtyPlus">+</button>
               </div>
+              <p class="qty-note">* 상품당 최대 2개까지 구매 가능합니다</p>
               <div class="modal-btn-row">
                 <button class="modal-cart-btn" id="modalCartBtn">장바구니 담기</button>
                 <button class="modal-buy-btn" id="modalBuyBtn">구매하기</button>
