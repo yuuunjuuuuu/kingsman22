@@ -267,11 +267,15 @@
         const sections = document.querySelectorAll('.home-section');
         const cards    = document.querySelectorAll('.product-card');
 
+        const banner = document.querySelector('.main-banner');
+
         function applyFilter(filter) {
             if (filter === 'all') {
+                banner.style.display = '';
                 sections.forEach(s => s.style.display = '');
                 cards.forEach(c => c.style.display = '');
             } else if (filter === 'new' || filter === 'best') {
+                banner.style.display = 'none';
                 sections.forEach(s => {
                     s.style.display = s.dataset.section === filter ? '' : 'none';
                 });
