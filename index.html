@@ -52,8 +52,6 @@
             <button class="cat-tab active">ALL</button>
             <button class="cat-tab">NEW</button>
             <button class="cat-tab">BEST</button>
-            <button class="cat-tab">키링</button>
-            <button class="cat-tab">굿즈</button>
             <button class="cat-tab">🎪 스쿱마켓</button>
         </div>
     </div>
@@ -272,30 +270,15 @@
         function applyFilter(filter) {
             if (filter === 'all') {
                 sections.forEach(s => s.style.display = '');
-                cards.forEach(c => { c.style.display = ''; c.style.opacity = ''; c.style.transform = ''; });
-
+                cards.forEach(c => c.style.display = '');
             } else if (filter === 'new' || filter === 'best') {
                 sections.forEach(s => {
                     s.style.display = s.dataset.section === filter ? '' : 'none';
                 });
-                cards.forEach(c => { c.style.display = ''; });
-
-            } else if (filter === '스쿱마켓' || filter.includes('스쿱')) {
-                document.querySelector('.market-banner').scrollIntoView({ behavior: 'smooth' });
+                cards.forEach(c => c.style.display = '');
+            } else if (filter.includes('스쿱')) {
+                document.querySelector('.scoop-section').scrollIntoView({ behavior: 'smooth' });
                 return;
-
-            } else {
-                // 키링 or 굿즈
-                sections.forEach(s => s.style.display = '');
-                cards.forEach(c => {
-                    const tags = c.dataset.tags || '';
-                    c.style.display = tags.includes(filter) ? '' : 'none';
-                });
-                // 빈 섹션 숨기기
-                sections.forEach(section => {
-                    const hasVisible = [...section.querySelectorAll('.product-card')].some(c => c.style.display !== 'none');
-                    section.style.display = hasVisible ? '' : 'none';
-                });
             }
         }
 
@@ -309,22 +292,6 @@
             });
         });
 
-        // Character filter click
-        document.querySelectorAll('.char-item').forEach(item => {
-            item.addEventListener('click', () => {
-                document.querySelectorAll('.char-item').forEach(i => i.classList.remove('active'));
-                item.classList.add('active');
-            });
-        });
-
-        // Heart button toggle
-        document.querySelectorAll('.heart-btn').forEach(btn => {
-            btn.addEventListener('click', e => {
-                e.stopPropagation();
-                btn.textContent = btn.textContent === '♡' ? '♥' : '♡';
-                btn.style.color = btn.textContent === '♥' ? 'var(--pink)' : '';
-            });
-        });
     });
 
     // ── Wishlist (shared localStorage with shop.html) ──
