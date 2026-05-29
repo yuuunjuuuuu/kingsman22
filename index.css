@@ -66,7 +66,7 @@ nav {
     background: #fff; border-bottom: 1px solid var(--border);
     z-index: 1000; padding: 0;
 }
-.nav-content { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.nav-content { display: flex; align-items: center; justify-content: space-between; height: 90px; }
 .logo { display: flex; align-items: center; }
 .logo-svg { height: 42px; width: auto; }
 .nav-icons { display: flex; align-items: center; gap: 1rem; }
