@@ -163,22 +163,91 @@ nav {
 .price-soldout { font-size: .8rem; font-weight: 700; color: var(--dim); letter-spacing: .05em; }
 .product-card.disabled { pointer-events: none; opacity: .7; }
 
-/* ── MARKET BANNER ── */
-.market-banner {
-    background: var(--text); padding: 4rem 2rem;
-    text-align: center; position: relative; overflow: hidden;
+/* ── SCOOP MARKET ── */
+.scoop-section {
+    position: relative; overflow: hidden;
+    background: linear-gradient(135deg, #d4f5a8 0%, #e8fad0 40%, #c8f098 100%);
+    padding: 5rem 1rem 4rem; text-align: center;
 }
-.market-banner::before { content: ''; position: absolute; left: -10%; top: -30%; width: 55%; height: 150%; background: radial-gradient(ellipse, rgba(90,186,255,.15) 0%, transparent 70%); filter: blur(50px); }
-.market-banner-inner { position: relative; z-index: 1; }
-.market-tag { display: inline-block; background: var(--pink); color: #fff; font-size: .68rem; font-weight: 800; letter-spacing: .25em; text-transform: uppercase; padding: .4rem 1.2rem; border-radius: 100px; margin-bottom: 1.4rem; }
-.market-title { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 6vw, 5rem); font-style: italic; font-weight: 800; color: #fff; line-height: 1.05; margin-bottom: .8rem; }
-.market-title span { color: var(--pink); }
-.market-sub { font-size: .9rem; color: rgba(255,255,255,.6); line-height: 1.9; max-width: 480px; margin: 0 auto 2rem; }
-.market-info-row { display: inline-flex; gap: 1.4rem; flex-wrap: wrap; justify-content: center; margin-bottom: 2rem; }
-.market-chip { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); border-radius: 100px; padding: .5rem 1.4rem; font-size: .78rem; color: rgba(255,255,255,.8); font-weight: 600; }
-.market-chip span { color: var(--pink); font-weight: 800; margin-right: .4rem; }
-.market-ig-btn { display: inline-flex; align-items: center; gap: .6rem; background: var(--pink); color: #fff; font-size: .8rem; font-weight: 800; padding: .9rem 2rem; border-radius: 100px; transition: background .2s; }
-.market-ig-btn:hover { background: var(--pink-dk); }
+/* 배경 버블 */
+.scoop-bg-bubble {
+    position: absolute; border-radius: 50%;
+    background: rgba(255,255,255,.25);
+}
+.scoop-bb1 { width: 220px; height: 220px; left: -60px; bottom: -40px; }
+.scoop-bb2 { width: 160px; height: 160px; right: -40px; top: 20px; }
+.scoop-bb3 { width: 100px; height: 100px; right: 15%; bottom: 10%; }
+
+/* 젤리빈 */
+.jbean {
+    position: absolute; border-radius: 50%;
+    opacity: .88;
+}
+.jb1  { width:14px; height:26px; background:#F7A8C4; top:8%;  left:18%; transform:rotate(30deg); }
+.jb2  { width:13px; height:24px; background:#A8D8F7; top:14%; left:42%; transform:rotate(-20deg); }
+.jb3  { width:12px; height:22px; background:#F7D9A8; top:6%;  left:62%; transform:rotate(50deg); }
+.jb4  { width:14px; height:25px; background:#A8F7C8; top:22%; right:12%; transform:rotate(-35deg); }
+.jb5  { width:13px; height:23px; background:#D4A8F7; top:32%; left:8%;  transform:rotate(15deg); }
+.jb6  { width:12px; height:22px; background:#F7A8A8; top:18%; right:28%; transform:rotate(60deg); }
+.jb7  { width:14px; height:26px; background:#A8F7F0; top:28%; left:55%; transform:rotate(-10deg); }
+
+/* 별 장식 */
+.sc-star {
+    position: absolute; line-height: 1; font-style: normal;
+}
+.sc-star-lg { font-size: 2.8rem; }
+.sc-star-md { font-size: 1.8rem; }
+.sc-star-sm { font-size: 1.2rem; }
+.sc-star-y  { color: #F7D94A; top: 38%; left: 5%; filter: drop-shadow(0 0 4px #F7D94A88); }
+.sc-star-g  { color: #7AE87A; bottom: 30%; left: 12%; filter: drop-shadow(0 0 3px #7AE87A88); }
+.sc-star-pk { color: #F766C0; top: 22%; right: 6%; filter: drop-shadow(0 0 4px #F766C088); }
+.sc-star-tl { color: #4AD4D4; bottom: 35%; right: 9%; filter: drop-shadow(0 0 3px #4AD4D488); }
+.sc-star-y2 { color: #F7C84A; bottom: 20%; left: 5%; }
+.sc-star-pk2{ color: #F766C0; top: 55%; right: 4%; }
+
+/* 메인 타원 */
+.scoop-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 1.6rem; }
+.scoop-oval {
+    background: linear-gradient(160deg, #74d7f0 0%, #3ab8dc 50%, #2aa0c8 100%);
+    border: 3px solid #1a1a1a;
+    border-radius: 50%;
+    padding: 2.8rem 4.5rem;
+    box-shadow: 4px 6px 0 #1a1a1a;
+}
+.scoop-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    font-weight: 800; font-style: italic;
+    color: #fff; line-height: 1.05;
+    text-shadow: 3px 3px 0 #1a1a1a, -1px -1px 0 #1a1a1a, 2px -1px 0 #1a1a1a, -1px 2px 0 #1a1a1a;
+}
+
+/* Coming Soon */
+.scoop-coming {
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    font-weight: 800; color: #3ab8dc;
+    letter-spacing: .02em;
+    font-family: 'Nunito', sans-serif;
+}
+
+/* 칩 */
+.scoop-chips { display: flex; gap: .8rem; flex-wrap: wrap; justify-content: center; }
+.scoop-chip {
+    background: rgba(255,255,255,.6); border: 1.5px solid rgba(0,0,0,.12);
+    border-radius: 100px; padding: .45rem 1.2rem;
+    font-size: .78rem; color: #333; font-weight: 600;
+    backdrop-filter: blur(4px);
+}
+.scoop-chip b { color: #2196a0; margin-right: .3rem; }
+
+/* 인스타 버튼 */
+.scoop-ig-btn {
+    display: inline-flex; align-items: center; gap: .6rem;
+    background: #1a1a1a; color: #fff;
+    font-size: .82rem; font-weight: 800; padding: .85rem 1.8rem;
+    border-radius: 100px; transition: background .2s;
+}
+.scoop-ig-btn:hover { background: #3ab8dc; }
 
 /* ── FOOTER ── */
 footer { padding: 3.5rem 0 2rem; background: var(--text); color: rgba(255,255,255,.55); font-size: .8rem; }
@@ -215,6 +284,7 @@ footer { padding: 3.5rem 0 2rem; background: var(--text); color: rgba(255,255,25
 }
 @media(max-width:560px) {
     .container { padding: 0 1rem; }
+    .scoop-oval { padding: 2rem 3rem; }
     .main-banner { padding: 2.8rem 0; }
     .banner-sub { font-size: .82rem; }
     .home-section { padding: 2.4rem 0; }
