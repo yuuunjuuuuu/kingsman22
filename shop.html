@@ -152,7 +152,7 @@
         .modal-name-text { font-size: 1.2rem; }
         .modal-price-tag { font-size: 1.1rem; }
         .modal-btn-row { flex-direction: column; }
-        .modal-cart-btn, .modal-buy-btn { width: 100%; justify-content: center; }
+        .modal-cart-btn, .modal-buy-btn, .modal-wish-btn { width: 100%; justify-content: center; }
         .cart-drawer { width: 100vw; }
         .filter-tab { padding: .9rem 1rem; font-size: .7rem; }
     }
@@ -222,6 +222,15 @@
         letter-spacing: .03em; cursor: pointer; transition: opacity .2s;
     }
     .modal-buy-btn:hover { opacity: .85; }
+    .modal-wish-btn {
+        width: 100%; border: 1.5px solid var(--border); background: none;
+        color: var(--muted); border-radius: 100px; padding: .7rem;
+        font-weight: 800; font-size: .85rem; cursor: pointer;
+        transition: border-color .2s, color .2s;
+        display: flex; align-items: center; justify-content: center; gap: .4rem;
+    }
+    .modal-wish-btn:hover { border-color: var(--pink); color: var(--pink); }
+    .modal-wish-btn.wished { border-color: var(--pink); color: var(--pink); background: var(--pink-bg); }
     .modal-soldout-tag {
         display: block; text-align: center; color: var(--muted);
         font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
@@ -1329,7 +1338,8 @@ document.addEventListener('DOMContentLoaded', () => {
               <div class="modal-btn-row">
                 <button class="modal-cart-btn" id="modalCartBtn">장바구니 담기</button>
                 <button class="modal-buy-btn" id="modalBuyBtn">구매하기</button>
-              </div>`;
+              </div>
+              <button class="modal-wish-btn" id="modalWishBtn">♡ &nbsp;찜하기</button>`;
 
             document.getElementById('qtyMinus').addEventListener('click', () => {
                 const el = document.getElementById('modalQty');
@@ -1359,6 +1369,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 addToCart(cartName, brand, price, img1);
                 closeModal();
                 openCart();
+            });
+
+            // 찜하기 버튼
+            const wishBtn = document.getElementById('modalWishBtn');
+            const isWished = wishlist.some(w => w.id === name);
+            if (isWished) {
+                wishBtn.textContent = '♥  찜 완료';
+                wishBtn.classList.add('wished');
+            }
+            wishBtn.addEventListener('click', () => {
+                const cardEl = currentCard;
+                const heartBtn = cardEl ? cardEl.querySelector('.heart-btn') : null;
+                toggleWish(cardEl, heartBtn || wishBtn);
+                const nowWished = wishlist.some(w => w.id === name);
+                wishBtn.textContent = nowWished ? '♥  찜 완료' : '♡  찜하기';
+                wishBtn.classList.toggle('wished', nowWished);
             });
         }
 
