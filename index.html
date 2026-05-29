@@ -69,10 +69,6 @@
     </div>
 </div>
 
-<!-- SALE BANNER (ALL 탭에서만 표시) -->
-<div id="homeSaleBanner" style="width:100%;overflow:hidden;line-height:0;">
-  <img src="images/세일베너.jpg" alt="Early Summer Sale" style="width:100%;display:block;max-height:280px;object-fit:cover;object-position:center;">
-</div>
 
 <!-- NEW ARRIVALS SECTION -->
 <section class="home-section" data-section="new">
@@ -316,18 +312,15 @@
         const sections = document.querySelectorAll('.home-section');
         const cards    = document.querySelectorAll('.product-card');
 
-        const banner     = document.querySelector('.main-banner');
-        const saleBanner = document.getElementById('homeSaleBanner');
+        const banner = document.querySelector('.main-banner');
 
         function applyFilter(filter) {
             if (filter === 'all') {
                 banner.style.display = '';
-                saleBanner.style.display = '';
                 sections.forEach(s => s.style.display = '');
                 cards.forEach(c => c.style.display = '');
             } else if (filter === 'new' || filter === 'best') {
                 banner.style.display = 'none';
-                saleBanner.style.display = 'none';
                 sections.forEach(s => {
                     s.style.display = s.dataset.section === filter ? '' : 'none';
                 });
