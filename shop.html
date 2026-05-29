@@ -221,6 +221,21 @@
     .qty-btn:hover { border-color: var(--pink); color: var(--pink); }
     .qty-val { font-size: 1rem; font-weight: 800; min-width: 28px; text-align: center; }
     .qty-note { font-size: .72rem; color: var(--muted); margin-top: -.2rem; }
+    /* Color selector */
+    .color-row { display: flex; flex-direction: column; gap: .5rem; }
+    .color-label { font-size: .78rem; font-weight: 700; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
+    .color-swatches { display: flex; gap: .5rem; flex-wrap: wrap; }
+    .color-swatch {
+        width: 32px; height: 32px; border-radius: 50%; cursor: pointer;
+        border: 2px solid transparent; transition: border-color .2s, transform .15s;
+        position: relative;
+    }
+    .color-swatch:hover { transform: scale(1.1); }
+    .color-swatch.selected { border-color: var(--pink); box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--pink); }
+    .color-swatch[data-color="검은색"] { background: #1a1a1a; }
+    .color-swatch[data-color="흰색"] { background: #ffffff; border: 2px solid #ddd; }
+    .color-swatch.selected[data-color="흰색"] { border-color: var(--pink); }
+    .color-selected-label { font-size: .8rem; color: var(--text); font-weight: 600; }
     /* Model selector */
     .model-row { display: flex; flex-direction: column; gap: .4rem; }
     .model-label { font-size: .78rem; font-weight: 700; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
@@ -880,6 +895,7 @@
 <div class="product-card reveal" data-tags="life new" style="transition-delay:.14s"
      data-name="꿈꿀만두 양말" data-brand="꿈꿀만두" data-price="₩4,000"
      data-img1="images/양말1.jpg" data-img2="images/양말2.jpg"
+     data-colors="검은색|흰색"
      data-desc="꿈꿀만두 캐릭터 양말. 발끝까지 귀엽게 완성해보세요! 부드러운 소재로 편안하게, 어디서나 시선을 사로잡는 포인트 아이템.">
 <div class="product-img-wrap">
 <span class="product-badge badge-new">NEW</span>
@@ -1330,6 +1346,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const img1    = card.dataset.img1    || '';
         const img2    = card.dataset.img2    || '';
         const models  = card.dataset.models  || '';
+        const colors  = card.dataset.colors  || '';
 
         modalBrand.textContent = brand;
         modalName.textContent  = name;
@@ -1341,6 +1358,13 @@ document.addEventListener('DOMContentLoaded', () => {
             modalAction.innerHTML = '<span class="modal-soldout-tag">현재 품절된 상품입니다</span>';
         } else {
             modalAction.innerHTML = `
+              ${colors ? `
+              <div class="color-row">
+                <span class="color-label">색상 선택 &nbsp;<span class="color-selected-label" id="colorSelectedLabel"></span></span>
+                <div class="color-swatches">
+                  ${colors.split('|').map(c => `<button type="button" class="color-swatch" data-color="${c}" title="${c}"></button>`).join('')}
+                </div>
+              </div>` : ''}
               ${models ? `
               <div class="model-row">
                 <span class="model-label">기종 선택</span>
@@ -1371,11 +1395,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 el.textContent = Math.min(2, parseInt(el.textContent) + 1);
             });
 
+            // 색상 스와치 이벤트
+            let selectedColor = '';
+            if (colors) {
+                document.querySelectorAll('.color-swatch').forEach(sw => {
+                    sw.addEventListener('click', () => {
+                        document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
+                        sw.classList.add('selected');
+                        selectedColor = sw.dataset.color;
+                        document.getElementById('colorSelectedLabel').textContent = selectedColor;
+                    });
+                });
+            }
+
             function getCartName() {
-                if (!models) return name;
-                const sel = document.getElementById('modelSelect');
-                if (!sel || !sel.value) return null;
-                return `${name} (${sel.value})`;
+                let suffix = '';
+                if (colors && !selectedColor) { showToast('색상을 선택해주세요!'); return null; }
+                if (colors) suffix += ` / ${selectedColor}`;
+                if (models) {
+                    const sel = document.getElementById('modelSelect');
+                    if (!sel || !sel.value) { showToast('기종을 선택해주세요!'); return null; }
+                    suffix += ` (${sel.value})`;
+                }
+                return name + suffix || name;
             }
 
             document.getElementById('modalCartBtn').addEventListener('click', () => {
