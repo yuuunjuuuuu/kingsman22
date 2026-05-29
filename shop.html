@@ -137,6 +137,25 @@
     @media (max-width: 620px) {
         .modal-content { grid-template-columns: 1fr; padding: 1.4rem; gap: 1.4rem; }
     }
+    @media (max-width: 480px) {
+        .page-hero { padding: 5rem 0 2.5rem; }
+        .shop-section { padding: 3rem 0 5rem; }
+        .shop-group { margin-bottom: 3rem; }
+        .modal-overlay { align-items: flex-end; padding: 0; }
+        .modal-content {
+            border-radius: 20px 20px 0 0; max-height: 92vh;
+            padding: 1.2rem; width: 100%; gap: 1rem;
+        }
+        .modal-close { top: .8rem; right: .8rem; }
+        .modal-thumbs-row { gap: .4rem; }
+        .modal-thumb { width: 46px; height: 46px; }
+        .modal-name-text { font-size: 1.2rem; }
+        .modal-price-tag { font-size: 1.1rem; }
+        .modal-btn-row { flex-direction: column; }
+        .modal-cart-btn, .modal-buy-btn { width: 100%; justify-content: center; }
+        .cart-drawer { width: 100vw; }
+        .filter-tab { padding: .9rem 1rem; font-size: .7rem; }
+    }
     .modal-close {
         position: absolute; top: 1rem; right: 1rem;
         width: 36px; height: 36px; border-radius: 50%;
