@@ -10,9 +10,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.15 });
+    }, { threshold: 0, rootMargin: '0px 0px 60px 0px' });
 
     animEls.forEach(el => observer.observe(el));
+
+    // 이미지 로드 전에 observer가 놓친 요소를 페이지 완전 로드 후 강제 활성화
+    window.addEventListener('load', () => {
+        animEls.forEach(el => {
+            if (!el.classList.contains('active')) {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    el.classList.add('active');
+                }
+            }
+        });
+    });
 
     // ── 네비바 스크롤 효과 ──
     const navbar = document.getElementById('navbar');
