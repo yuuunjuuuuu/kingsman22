@@ -243,7 +243,10 @@
             <div class="ml-modal-name" id="mlModalName"></div>
             <div class="ml-modal-price" id="mlModalPrice"></div>
             <div class="ml-modal-desc" id="mlModalDesc"></div>
-            <a href="https://www.instagram.com/zen_object/" target="_blank" class="ml-modal-contact">📩 인스타그램으로 구매 문의</a>
+            <div class="ml-modal-actions">
+                <button class="ml-wish-btn" id="mlWishBtn">♡ 찜하기</button>
+                <button class="ml-cart-btn" id="mlCartBtn">장바구니 담기</button>
+            </div>
         </div>
     </div>
 </div>
@@ -722,22 +725,46 @@
     });
 
     // MARKET LEFTOVERS MODAL
-    const mlOverlay = document.getElementById('mlModalOverlay');
-    const mlClose   = document.getElementById('mlModalClose');
+    const mlOverlay  = document.getElementById('mlModalOverlay');
+    const mlClose    = document.getElementById('mlModalClose');
+    const mlWishBtn  = document.getElementById('mlWishBtn');
+    const mlCartBtn  = document.getElementById('mlCartBtn');
+    let mlCurrentCard = null;
 
     document.querySelectorAll('.ml-card').forEach(card => {
         card.addEventListener('click', () => {
-            document.getElementById('mlModalImg').src   = card.dataset.img  || '';
-            document.getElementById('mlModalImg').alt   = card.dataset.name || '';
+            mlCurrentCard = card;
+            document.getElementById('mlModalImg').src         = card.dataset.img   || '';
+            document.getElementById('mlModalImg').alt         = card.dataset.name  || '';
             document.getElementById('mlModalName').textContent  = card.dataset.name  || '';
             document.getElementById('mlModalPrice').textContent = card.dataset.price || '';
             document.getElementById('mlModalDesc').textContent  = card.dataset.desc  || '';
-            mlOverlay.classList.add('open');
+            const wished = wishlist.some(w => w.id === card.dataset.name);
+            mlWishBtn.textContent = wished ? '♥ 찜완료' : '♡ 찜하기';
+            mlWishBtn.classList.toggle('active', wished);
+            mlOverlay.style.display = 'flex';
         });
     });
 
-    mlClose.addEventListener('click', () => mlOverlay.classList.remove('open'));
-    mlOverlay.addEventListener('click', e => { if (e.target === mlOverlay) mlOverlay.classList.remove('open'); });
+    mlWishBtn.addEventListener('click', () => {
+        if (!mlCurrentCard) return;
+        const name = mlCurrentCard.dataset.name;
+        const price = mlCurrentCard.dataset.price;
+        const img = mlCurrentCard.dataset.img;
+        toggleWish(name, name, '스쿱마켓', price, img);
+        const wished = wishlist.some(w => w.id === name);
+        mlWishBtn.textContent = wished ? '♥ 찜완료' : '♡ 찜하기';
+        mlWishBtn.classList.toggle('active', wished);
+    });
+
+    mlCartBtn.addEventListener('click', () => {
+        if (!mlCurrentCard) return;
+        addToCart(mlCurrentCard.dataset.name, '스쿱마켓', mlCurrentCard.dataset.price, mlCurrentCard.dataset.img);
+        mlOverlay.style.display = 'none';
+    });
+
+    mlClose.addEventListener('click', () => { mlOverlay.style.display = 'none'; });
+    mlOverlay.addEventListener('click', e => { if (e.target === mlOverlay) mlOverlay.style.display = 'none'; });
 </script>
 </body>
 </html>

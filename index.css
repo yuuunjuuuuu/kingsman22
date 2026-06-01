@@ -195,8 +195,11 @@ nav {
 .ml-modal-name { font-size: 1.1rem; font-weight: 800; color: var(--text); margin-bottom: .4rem; }
 .ml-modal-price { font-size: 1.3rem; font-weight: 800; color: #FF6B9D; margin-bottom: .8rem; }
 .ml-modal-desc { font-size: .88rem; color: var(--muted); line-height: 1.8; margin-bottom: 1.4rem; }
-.ml-modal-contact { display: block; text-align: center; background: #000; color: #fff; padding: .9rem; border-radius: 100px; font-size: .85rem; font-weight: 800; transition: background .2s; }
-.ml-modal-contact:hover { background: #FF6B9D; }
+.ml-modal-actions { display: flex; gap: .8rem; margin-top: 1rem; }
+.ml-wish-btn { flex: 0 0 auto; border: 1.5px solid #FF6B9D; background: none; color: #FF6B9D; border-radius: 100px; padding: .8rem 1.2rem; font-weight: 800; font-size: .85rem; cursor: pointer; transition: background .2s, color .2s; white-space: nowrap; }
+.ml-wish-btn:hover, .ml-wish-btn.active { background: #FF6B9D; color: #fff; }
+.ml-cart-btn { flex: 1; border: none; background: #000; color: #fff; border-radius: 100px; padding: .8rem; font-weight: 800; font-size: .85rem; cursor: pointer; transition: background .2s; }
+.ml-cart-btn:hover { background: #FF6B9D; }
 
 /* ── SCOOP MARKET ── */
 .scoop-section {
