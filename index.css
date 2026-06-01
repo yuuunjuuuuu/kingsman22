@@ -150,6 +150,32 @@ nav {
 .price-soldout { font-size: .8rem; font-weight: 700; color: var(--dim); letter-spacing: .05em; }
 .product-card.disabled { pointer-events: none; opacity: .7; }
 
+/* ── MARKET LEFTOVERS ── */
+.market-left-section {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, #FFF0F5 0%, #FFF8E1 50%, #F0F9FF 100%);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+}
+.market-left-head { max-width: 600px; margin: 0 auto; }
+.market-left-tag {
+    display: inline-block; background: #FF6B9D; color: #fff;
+    font-size: .72rem; font-weight: 800; letter-spacing: .15em;
+    padding: .35rem 1rem; border-radius: 100px; margin-bottom: 1.2rem;
+}
+.market-left-title {
+    font-family: 'Nunito', sans-serif; font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800; color: var(--text); margin-bottom: 1rem;
+}
+.market-left-sub { font-size: .92rem; color: var(--muted); line-height: 1.9; margin-bottom: 1.8rem; }
+.market-left-btn {
+    display: inline-block; background: var(--text); color: #fff;
+    font-size: .82rem; font-weight: 800; letter-spacing: .08em;
+    padding: .8rem 2rem; border-radius: 100px; transition: background .2s;
+}
+.market-left-btn:hover { background: #FF6B9D; }
+
 /* ── SCOOP MARKET ── */
 .scoop-section {
     position: relative; overflow: hidden;
